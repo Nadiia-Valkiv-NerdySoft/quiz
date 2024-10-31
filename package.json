@@ -1,5 +1,6 @@
 {
   "name": "quiz",
+  "type": "module",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +8,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
-    "lint:styles:fix": "stylelint \"src/**/*.{css,scss}\" --fix"
+    "lint:styles:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
+    "lint:eslint": "eslint .",
+    "lint:eslint:fix": "eslint . --fix"
   },
   "private": true,
   "dependencies": {
@@ -25,10 +28,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.10",
+    "@angular-eslint/eslint-plugin": "^18.4.0",
     "@angular/cli": "^18.2.10",
     "@angular/compiler-cli": "^18.2.0",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.13.0",
     "@types/jasmine": "~5.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.13.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-json": "^4.0.1",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
