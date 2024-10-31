@@ -1,0 +1,8 @@
+singleQuote: true
+trailingComma: all
+endOfLine: auto
+overrides:
+  [
+    { files: "*.ya?ml", options: { parser: yaml } },
+    { files: "*.html", options: { parser: angular } },
+  ]
