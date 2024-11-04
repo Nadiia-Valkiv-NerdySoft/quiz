@@ -1,0 +1,25 @@
+<header
+  class="flex justify-around space-x-8 p-2 bg-primary container items-center"
+>
+  <div class="logo ml-4">
+    <img src="assets/images/logo.svg" alt="Company Logo" />
+  </div>
+  <nav>
+    <ul class="flex ml-16 space-x-4">
+      @for (item of navItems; track $index) {
+        <li>
+          <a [routerLink]="item.link" class="text-bright">{{ item.label }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+  <div class="button-container">
+    <button class="text-bright" type="button">Button</button>
+    <button
+      class="text-bright bg-accent ml-4 px-4 py-2 rounded-md"
+      type="button"
+    >
+      Button
+    </button>
+  </div>
+</header>
