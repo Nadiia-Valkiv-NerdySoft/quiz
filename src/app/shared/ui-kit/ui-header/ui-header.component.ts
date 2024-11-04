@@ -6,7 +6,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './ui-header.component.html',
-  styleUrl: './ui-header.component.scss',
 })
 export class UiHeaderComponent {
   navItems = [

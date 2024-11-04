@@ -1,11 +1,11 @@
 <header
-  class="flex justify-around space-x-8 p-2 bg-primary container items-center"
+  class="w-full flex justify-around space-x-8 p-4 bg-primary items-center"
 >
-  <div class="logo ml-4">
+  <div>
     <img src="assets/images/logo.svg" alt="Company Logo" />
   </div>
   <nav>
-    <ul class="flex ml-16 space-x-4">
+    <ul class="flex space-x-4">
       @for (item of navItems; track $index) {
         <li>
           <a [routerLink]="item.link" class="text-bright">{{ item.label }}</a>
