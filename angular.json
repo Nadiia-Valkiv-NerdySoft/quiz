@@ -23,8 +23,8 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/assets", "src/favicon.ico"],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/assets"],
+            "styles": ["src/styles.scss", "src/styles/fonts.scss"],
             "scripts": []
           },
           "configurations": {
@@ -78,7 +78,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "src/styles/fonts.scss"],
             "scripts": []
           }
         }

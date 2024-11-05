@@ -15,9 +15,6 @@ module.exports = {
         shade: '#DBE2EA',
       },
     },
-    fontFamily: {
-      sans: ['IBM Plex Sans', 'ui-sans-serif', 'system-ui'],
-    },
     fontSize: {
       'h1-title': ['72px', { lineHeight: '86px', fontWeight: '600' }],
       'h3-title': ['56px', { lineHeight: '68px', fontWeight: '300' }],
