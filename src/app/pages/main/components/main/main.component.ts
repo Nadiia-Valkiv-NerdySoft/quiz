@@ -9,4 +9,8 @@ import { UiHeaderComponent } from '../../../../shared/ui-kit/ui-header/ui-header
   imports: [ UiButtonComponent, CommonModule, UiHeaderComponent ],
   templateUrl: './main.component.html',
 })
-export class MainComponent {}
+export class MainComponent {
+  handleButtonClick() {
+    alert('test button clicked');
+  }
+}
