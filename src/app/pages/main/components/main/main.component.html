@@ -1,12 +1,14 @@
+<quiz-ui-header />
 <div
   class="w-full h-[calc(100vh-4.75rem)] bg-primary flex flex-col items-center justify-center text-white"
 >
-  <div class="flex justify-center space-x-2">
-    <p>Make your</p>
-    <p>choice</p>
+  <div class="mb-8">
+    <span class="text-h1-title mr-2">Make your</span>
+    <span class="bg-warning text-primary text-h3-title"> choice </span>
+    <span class="text-error text-[72px]">.</span>
   </div>
 
-  <button class="text-bright bg-accent ml-4 px-4 py-2 rounded-md" type="button">
-    button
-  </button>
+  <quiz-ui-button route="/catalog" state="enabled">
+    Pass a Test
+  </quiz-ui-button>
 </div>

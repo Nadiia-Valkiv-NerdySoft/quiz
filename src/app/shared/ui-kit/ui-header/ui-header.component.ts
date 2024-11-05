@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UiButtonComponent } from '../ui-button/ui-button.component';
 
 @Component({
   selector: 'quiz-ui-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [ RouterLink, UiButtonComponent ],
   templateUrl: './ui-header.component.html',
 })
 export class UiHeaderComponent {
