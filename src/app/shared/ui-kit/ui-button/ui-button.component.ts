@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'quiz-ui-button',
@@ -9,12 +9,10 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './ui-button.component.html',
 })
 export class UiButtonComponent {
-  @Input() route: string = '';
-  @Output() buttonClick = new EventEmitter<void>();
-  private router = inject(Router);
+  route = input<string>('');
+  buttonClick = output<void>();
 
   onClick() {
     this.buttonClick.emit();
-    this.router.navigate([this.route]);
   }
 }
