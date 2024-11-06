@@ -1,0 +1,20 @@
+<header
+  class="flex w-full items-center justify-around space-x-8 bg-primary p-4"
+>
+  <div>
+    <img src="assets/images/logo.svg" alt="Company Logo" />
+  </div>
+  <nav>
+    <ul class="flex space-x-4">
+      @for (item of navItems; track $index) {
+        <li>
+          <a [routerLink]="item.link" class="text-bright">{{ item.label }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+  <div>
+    <quiz-ui-button route="/">Button 1</quiz-ui-button>
+    <quiz-ui-button route="/">Button 2</quiz-ui-button>
+  </div>
+</header>
