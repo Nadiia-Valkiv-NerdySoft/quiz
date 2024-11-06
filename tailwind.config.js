@@ -14,10 +14,9 @@ module.exports = {
         muted: '#7C9CBF',
         shade: '#DBE2EA',
       },
-    },
-    fontSize: {
-      h1: '72px',
-      h3: '56px',
+      fontSize: {
+        '6xl-plus': '56px',
+      },
     },
   },
   plugins: [],
