@@ -3,7 +3,6 @@ plugins:
   - stylelint-order
   - stylelint-scss
   - stylelint-no-unsupported-browser-features
-  - prettier-plugin-tailwindcss
 
 extends:
   - stylelint-config-standard-scss
