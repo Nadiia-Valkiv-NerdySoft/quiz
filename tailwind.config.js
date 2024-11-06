@@ -16,8 +16,8 @@ module.exports = {
       },
     },
     fontSize: {
-      'h1-title': ['72px', { lineHeight: '86px', fontWeight: '600' }],
-      'h3-title': ['56px', { lineHeight: '68px', fontWeight: '300' }],
+      h1: '72px',
+      h3: '56px',
     },
   },
   plugins: [],

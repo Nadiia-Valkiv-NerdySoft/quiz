@@ -9,8 +9,7 @@ describe('UiHeaderComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       imports: [UiHeaderComponent],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UiHeaderComponent);
     component = fixture.componentInstance;
