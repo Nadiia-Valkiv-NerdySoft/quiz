@@ -10,10 +10,10 @@ import { UiButtonComponent } from '../ui-button/ui-button.component';
 })
 export class UiHeaderComponent {
   navItems = [
-    { label: 'Home', link: '/home' },
-    { label: 'Catalog', link: '/catalog' },
-    { label: 'Item', link: '/item' },
-    { label: 'Item', link: '/item' },
-    { label: 'Item', link: '/item' },
+    { label: 'Home', link: 'home' },
+    { label: 'Catalog', link: 'catalog' },
+    { label: 'Quiz', link: 'quiz' },
+    { label: 'Statistics', link: 'statistics' },
+    { label: 'About', link: 'about' },
   ];
 }

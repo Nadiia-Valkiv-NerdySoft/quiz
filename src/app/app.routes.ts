@@ -1,8 +1,22 @@
 import { Routes } from '@angular/router';
-import { MainComponent } from './pages/main/components/main/main.component';
-import { CatalogComponent } from './pages/catalog/components/catalog/catalog.component';
 
 export const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'catalog', component: CatalogComponent },
+  {
+    path: '',
+    loadComponent: () => import('./pages/main/main.component').then(c => c.MainComponent),
+    pathMatch: 'full',
+  },
+  {
+    path: 'catalog',
+    loadComponent: () => import('./pages/catalog/catalog.component').then(c => c.CatalogComponent),
+  },
+  {
+    path: 'quiz',
+    loadComponent: () => import('./pages/quiz/quiz.component').then(c => c.QuizComponent),
+  },
+  {
+    path: 'statistics',
+    loadComponent: () => import('./pages/statistics/statistics.component').then(c => c.StatisticsComponent),
+  },
+  { path: '**', redirectTo: '' },
 ];
