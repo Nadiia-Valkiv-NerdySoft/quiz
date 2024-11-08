@@ -15,7 +15,8 @@ module.exports = {
         shade: '#DBE2EA',
       },
       fontSize: {
-        '6xl-plus': '56px',
+        '5xl-plus': '56px',
+        '6xl-plus': '64px',
       },
     },
   },

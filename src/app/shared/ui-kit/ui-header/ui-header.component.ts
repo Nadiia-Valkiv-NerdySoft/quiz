@@ -16,4 +16,6 @@ export class UiHeaderComponent {
     { label: 'Statistics', link: 'statistics' },
     { label: 'About', link: 'about' },
   ];
+
+  isMenuOpen = false;
 }
