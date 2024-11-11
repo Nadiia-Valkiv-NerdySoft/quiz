@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
+import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'quiz-ui-header',
   standalone: true,
-  imports: [ RouterLink, RouterLinkActive, UiButtonComponent ],
+  imports: [ RouterLink, RouterLinkActive, UiButtonComponent, SvgIconComponent ],
   templateUrl: './ui-header.component.html',
 })
 export class UiHeaderComponent {
+  isMenuOpen = signal(false);
+
   navItems = [
     { label: 'Home', link: 'home' },
     { label: 'Catalog', link: 'catalog' },
@@ -17,9 +20,11 @@ export class UiHeaderComponent {
     { label: 'About', link: 'about' },
   ];
 
-  isMenuOpen = false;
+  toggleMenu() {
+    this.isMenuOpen.update(open => !open);
+  }
 
   closeMenu() {
-    this.isMenuOpen = false;
+    this.isMenuOpen.set(false);
   }
 }

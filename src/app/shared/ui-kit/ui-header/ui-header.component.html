@@ -1,4 +1,4 @@
-<nav class="relative mx-5 flex items-center justify-between p-4">
+<nav class="relative flex items-center justify-between p-4 md:mx-5">
   <div class="flex items-center">
     <a [routerLink]="''"
       ><img
@@ -26,55 +26,30 @@
 
   <!-- Mobile Menu Button -->
   <button
-    class="z-10 text-white md:hidden"
-    (click)="isMenuOpen = !isMenuOpen"
+    class="z-10 md:hidden"
+    (click)="toggleMenu()"
     aria-label="Toggle menu"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      [class.hidden]="isMenuOpen"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      [class.hidden]="!isMenuOpen"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
+    <svg-icon
+      [src]="isMenuOpen() ? 'assets/icons/close.svg' : 'assets/icons/menu.svg'"
+      [svgClass]="'h-6 w-6 text-bright'"
+      [applyClass]="true"
+    ></svg-icon>
   </button>
 
   <!-- Mobile Menu -->
   <div
-    class="absolute right-5 top-7 max-w-fit rounded-sm bg-gray-500 md:hidden"
-    [class.hidden]="!isMenuOpen"
-    [class.block]="isMenuOpen"
+    class="absolute right-5 top-7 mr-0 rounded-sm bg-slate-700 md:hidden"
+    [class.hidden]="!isMenuOpen()"
+    [class.block]="isMenuOpen()"
   >
-    <div class="flex flex-col justify-end space-y-20 p-4">
+    <div class="flex flex-col justify-end p-2">
       <ul class="flex flex-col">
         @for (item of navItems; track $index) {
           <li>
             <a
               [routerLink]="item.link"
-              class="block py-2 text-bright hover:text-white"
+              class="block py-1 text-bright hover:text-white"
               (click)="closeMenu()"
             >
               {{ item.label }}
