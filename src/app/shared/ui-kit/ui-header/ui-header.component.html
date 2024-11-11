@@ -1,31 +1,32 @@
-<nav class="relative flex items-center justify-between p-4">
-  <!-- Logo -->
+<nav class="relative mx-5 flex items-center justify-between p-4">
   <div class="flex items-center">
-    <img class="mr-20" src="assets/images/logo.svg" alt="Company Logo" />
-
-    <!-- Desktop Navigation -->
-    <div class="hidden items-center space-x-8 md:flex">
-      <!-- Menu Items -->
-      <ul class="flex space-x-6">
-        @for (item of navItems; track $index) {
-          <li>
-            <a [routerLink]="item.link" class="text-bright hover:text-white">{{
-              item.label
-            }}</a>
-          </li>
-        }
-      </ul>
-    </div>
+    <a [routerLink]="''"
+      ><img
+        src="assets/images/logo.svg"
+        alt="Company Logo"
+        class="min-h-[40px] min-w-[74px]"
+    /></a>
   </div>
-  <!-- Desktop Buttons -->
+
+  <div class="mx-40 hidden items-center justify-between space-x-8 md:flex">
+    <ul class="flex space-x-6">
+      @for (item of navItems; track $index) {
+        <li class="duration-100 ease-in md:hover:scale-125">
+          <a [routerLink]="item.link" routerLinkActive="font-semibold">{{
+            item.label
+          }}</a>
+        </li>
+      }
+    </ul>
+  </div>
+
   <div class="hidden items-center space-x-8 md:flex">
-    <quiz-ui-button> Button </quiz-ui-button>
-    <quiz-ui-button> Button </quiz-ui-button>
+    <quiz-ui-button> Login </quiz-ui-button>
   </div>
 
   <!-- Mobile Menu Button -->
   <button
-    class="p-2 text-white md:hidden"
+    class="z-10 text-white md:hidden"
     (click)="isMenuOpen = !isMenuOpen"
     aria-label="Toggle menu"
   >
@@ -63,26 +64,26 @@
 
   <!-- Mobile Menu -->
   <div
-    class="absolute right-0 top-full max-w-fit border-t border-gray-800 bg-gray-900 md:hidden"
+    class="absolute right-5 top-7 max-w-fit rounded-sm bg-gray-500 md:hidden"
     [class.hidden]="!isMenuOpen"
     [class.block]="isMenuOpen"
   >
-    <div class="flex flex-col justify-end space-y-4 p-4">
-      <ul class="flex flex-col space-y-4">
+    <div class="flex flex-col justify-end space-y-20 p-4">
+      <ul class="flex flex-col">
         @for (item of navItems; track $index) {
           <li>
             <a
               [routerLink]="item.link"
               class="block py-2 text-bright hover:text-white"
+              (click)="closeMenu()"
             >
               {{ item.label }}
             </a>
           </li>
         }
       </ul>
-      <div class="flex flex-col space-y-4 border-t border-gray-800 pt-4">
-        <quiz-ui-button> Button </quiz-ui-button>
-        <quiz-ui-button> Button </quiz-ui-button>
+      <div class="hidden items-center md:flex">
+        <quiz-ui-button> Login </quiz-ui-button>
       </div>
     </div>
   </div>

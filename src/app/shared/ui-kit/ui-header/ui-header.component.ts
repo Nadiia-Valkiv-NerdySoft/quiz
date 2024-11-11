@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
 
 @Component({
   selector: 'quiz-ui-header',
   standalone: true,
-  imports: [ RouterLink, UiButtonComponent ],
+  imports: [ RouterLink, RouterLinkActive, UiButtonComponent ],
   templateUrl: './ui-header.component.html',
 })
 export class UiHeaderComponent {
@@ -18,4 +18,8 @@ export class UiHeaderComponent {
   ];
 
   isMenuOpen = false;
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 }

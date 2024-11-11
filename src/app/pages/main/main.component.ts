@@ -11,6 +11,6 @@ import { UiHeaderComponent } from '../../shared/ui-kit/ui-header/ui-header.compo
 })
 export class MainComponent {
   handleButtonClick() {
-    alert('test button clicked');
+    alert('opening catalog page');
   }
 }
