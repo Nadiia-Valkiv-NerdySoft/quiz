@@ -1,4 +1,4 @@
-<nav class="relative flex items-center justify-between p-4 md:mx-5">
+<nav class="flex items-center justify-between p-1 md:mx-5 md:p-4">
   <div class="flex items-center">
     <a [routerLink]="''"
       ><img
@@ -21,25 +21,29 @@
   </div>
 
   <div class="hidden items-center space-x-8 md:flex">
-    <quiz-ui-button> Login </quiz-ui-button>
+    <quiz-ui-button variant="accent"> Login </quiz-ui-button>
   </div>
 
   <!-- Mobile Menu Button -->
-  <button
-    class="z-10 md:hidden"
-    (click)="toggleMenu()"
-    aria-label="Toggle menu"
+  <quiz-ui-button
+    class="z-50 md:hidden"
+    variant="menu"
+    size="sizeLess"
+    (buttonClick)="toggleMenu()"
   >
     <svg-icon
       [src]="isMenuOpen() ? 'assets/icons/close.svg' : 'assets/icons/menu.svg'"
       [svgClass]="'h-6 w-6 text-bright'"
       [applyClass]="true"
     ></svg-icon>
-  </button>
+    @if (!isMenuOpen()) {
+      <span class="mx-1">Menu</span>
+    }
+  </quiz-ui-button>
 
   <!-- Mobile Menu -->
   <div
-    class="absolute right-5 top-7 mr-0 rounded-sm bg-slate-700 md:hidden"
+    class="fixed right-0 top-0 mr-0 rounded-sm bg-slate-700 md:hidden"
     [class.hidden]="!isMenuOpen()"
     [class.block]="isMenuOpen()"
   >
@@ -57,8 +61,8 @@
           </li>
         }
       </ul>
-      <div class="hidden items-center md:flex">
-        <quiz-ui-button> Login </quiz-ui-button>
+      <div class="flex items-center">
+        <quiz-ui-button variant="accent"> Login </quiz-ui-button>
       </div>
     </div>
   </div>
