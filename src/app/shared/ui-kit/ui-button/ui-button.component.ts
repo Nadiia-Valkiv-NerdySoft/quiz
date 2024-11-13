@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonSize, ButtonVariant } from './button.types';
@@ -6,7 +6,7 @@ import { ButtonSize, ButtonVariant } from './button.types';
 @Component({
   selector: 'quiz-ui-button',
   standalone: true,
-  imports: [ CommonModule, RouterLink ],
+  imports: [ NgClass, RouterLink ],
   templateUrl: './ui-button.component.html',
 })
 export class UiButtonComponent {

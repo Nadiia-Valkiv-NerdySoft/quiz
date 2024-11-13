@@ -25,7 +25,12 @@
   </div>
 
   <!-- Mobile Menu Button -->
-  <quiz-ui-button variant="menu" size="sizeLess" (buttonClick)="toggleMenu()">
+  <quiz-ui-button
+    class="z-50 md:hidden"
+    variant="menu"
+    size="sizeLess"
+    (buttonClick)="toggleMenu()"
+  >
     <svg-icon
       [src]="isMenuOpen() ? 'assets/icons/close.svg' : 'assets/icons/menu.svg'"
       [svgClass]="'h-6 w-6 text-bright'"
@@ -38,7 +43,7 @@
 
   <!-- Mobile Menu -->
   <div
-    class="absolute right-5 top-7 mr-0 rounded-sm bg-slate-700 md:hidden"
+    class="fixed right-0 top-0 mr-0 rounded-sm bg-slate-700 md:hidden"
     [class.hidden]="!isMenuOpen()"
     [class.block]="isMenuOpen()"
   >
