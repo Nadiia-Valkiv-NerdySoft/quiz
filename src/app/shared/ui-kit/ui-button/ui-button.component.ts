@@ -56,7 +56,7 @@ export class UiButtonComponent {
     ].join(' ');
   }
 
-  onClick() {
+  onClick(): void {
     this.buttonClick.emit();
   }
 }
