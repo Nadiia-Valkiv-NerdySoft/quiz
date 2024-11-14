@@ -8,7 +8,7 @@
     /></a>
   </div>
 
-  <div class="mx-40 hidden items-center justify-between space-x-8 md:flex">
+  <div class="mx-auto hidden items-center justify-between space-x-8 md:flex">
     <ul class="flex space-x-6">
       @for (item of navItems; track $index) {
         <li class="duration-100 ease-in md:hover:scale-125">
@@ -43,17 +43,17 @@
 
   <!-- Mobile Menu -->
   <div
-    class="fixed right-0 top-0 mr-0 rounded-sm bg-slate-700 md:hidden"
-    [class.hidden]="!isMenuOpen()"
-    [class.block]="isMenuOpen()"
+    class="fixed top-0 w-full rounded-sm bg-muted p-10 transition-transform duration-500 ease-in-out md:hidden"
+    [class.-translate-y-full]="!isMenuOpen()"
+    [class.translate-y-0]="isMenuOpen()"
   >
-    <div class="flex flex-col justify-end p-2">
+    <div class="flex flex-col">
       <ul class="flex flex-col">
         @for (item of navItems; track $index) {
           <li>
             <a
               [routerLink]="item.link"
-              class="block py-1 text-bright hover:text-white"
+              class="block py-3 text-lg font-semibold"
               (click)="closeMenu()"
             >
               {{ item.label }}
