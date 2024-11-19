@@ -9,7 +9,7 @@
     </span>
   </h1>
   <div class="m-4 flex flex-wrap items-center justify-center gap-6">
-    @for (quizCategoryData of mockCategories; track $index) {
+    @for (quizCategoryData of categories; track $index) {
       <quiz-quiz-card [quizCategory]="quizCategoryData"></quiz-quiz-card>
     }
   </div>
