@@ -9,8 +9,8 @@
     </span>
   </h1>
   <div class="m-4 flex flex-wrap items-center justify-center gap-6">
-    @for (quizCategoryData of categories; track $index) {
-      <quiz-quiz-card [quizCategory]="quizCategoryData"></quiz-quiz-card>
+    @for (category of categories$ | async; track category.id) {
+      <quiz-quiz-card [quizCategory]="category" />
     }
   </div>
 
