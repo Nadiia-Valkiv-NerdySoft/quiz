@@ -7,7 +7,7 @@ import { quizCategoriesStore } from '../../store/categories.store';
 @Injectable({
   providedIn: 'root',
 })
-export class QuizCategoriesStoreService {
+export class CategoriesStoreService {
   getCategories(): Observable<QuizCategory[]> {
     return quizCategoriesStore.pipe(selectAllEntities());
   }
