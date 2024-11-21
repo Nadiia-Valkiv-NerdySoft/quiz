@@ -4,6 +4,7 @@ import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-ca
 import { CategoriesService } from '../../core/services/categories.service';
 import { AsyncPipe } from '@angular/common';
 import { CategoriesStoreService } from '../../core/services/categories-store.service';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'quiz-catalog',
@@ -15,13 +16,16 @@ export class CatalogComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
   private readonly categoriesStoreService = inject(CategoriesStoreService);
 
-  categories$ = this.categoriesStoreService.getCategories();
+  categories$!: Observable<any>;
 
   ngOnInit(): void {
-    this.categories$.subscribe((categories) => {
-      if (!categories || categories.length === 0) {
-        this.categoriesService.getRandomCategories().subscribe();
-      }
-    });
+    this.categories$ = this.categoriesStoreService.getCategories().pipe(
+      switchMap((categories) => {
+        if (!categories || categories.length === 0) {
+          return this.categoriesService.getRandomCategories();
+        }
+        return [categories];
+      }),
+    );
   }
 }
