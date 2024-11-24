@@ -5,6 +5,7 @@ import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { RandomizationService } from './randomization.service';
 import { CategoriesStoreService } from './categories-store.service';
 import { ApiService } from './api.service';
+import { skipWhenCategoriesCached } from '../../store/categories.store';
 
 @Injectable({
   providedIn: 'root',
@@ -18,20 +19,14 @@ export class CategoriesService {
   private readonly randomizationService = inject(RandomizationService);
   private readonly categoriesStoreService = inject(CategoriesStoreService);
 
-  categories!: QuizCategory[];
-
   getRandomCategories(): Observable<QuizCategory[]> {
-    if (this.categories && this.categories.length > 0) {
-      return this.categoriesStoreService.getCategories();
-    }
-
     return this.apiService.fetchCategories().pipe(
+      skipWhenCategoriesCached('quizCategories'),
       map(categories => this.randomizationService
       .getRandomItems(categories, this.categoriesNumber)
       .map(category => this.enrichCategory(category))),
       tap((categories) => {
         this.categoriesStoreService.addCategories(categories);
-        this.categories = categories;
       }),
     );
   }
