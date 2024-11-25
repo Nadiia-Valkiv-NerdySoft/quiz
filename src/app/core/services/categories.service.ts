@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, finalize, map, Observable, tap } from 'rxjs';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { RandomizationService } from './randomization.service';
 import { CategoriesStoreService } from './categories-store.service';
@@ -10,6 +10,7 @@ import {
   showSpinner,
   skipWhenCategoriesCached,
 } from '../../store/categories.store';
+import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,16 +23,22 @@ export class CategoriesService {
   private readonly apiService = inject(ApiService);
   private readonly randomizationService = inject(RandomizationService);
   private readonly categoriesStoreService = inject(CategoriesStoreService);
+  private readonly errorHandlerService = inject(ErrorHandlerService);
 
   getRandomCategories(): Observable<QuizCategory[]> {
+    showSpinner();
     return this.apiService.fetchCategories().pipe(
-      tap(() => showSpinner()),
       skipWhenCategoriesCached('quizCategories'),
       map(categories => this.randomizationService
       .getRandomItems(categories, this.categoriesNumber)
       .map(category => this.enrichCategory(category))),
       tap((categories) => {
         this.categoriesStoreService.addCategories(categories);
+      }),
+      catchError((error) => {
+        return this.errorHandlerService.handleError(error);
+      }),
+      finalize(() => {
         hideSpinner();
       }),
     );

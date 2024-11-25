@@ -14,13 +14,14 @@ export const quizCategoriesStore = createStore(
   { name: 'quizCategories' },
   withEntities<QuizCategory>(),
   withRequestsCache<'quizCategories'>(),
-  withProps<QuizCategoriesState>({ isLoading: true }),
+  withProps<QuizCategoriesState>({ isLoading: false }),
 );
 
 export const skipWhenCategoriesCached
   = createRequestsCacheOperator(quizCategoriesStore);
 
 export const showSpinner = () => quizCategoriesStore.update(state => ({ ...state, isLoading: true }));
+
 export const hideSpinner = () => quizCategoriesStore.update(state => ({ ...state, isLoading: false }));
 
 export const isLoading$ = quizCategoriesStore.pipe(

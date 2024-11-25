@@ -9,6 +9,7 @@ import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.co
 import { isLoading$ } from '../../store/categories.store';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
+import { QuizCategory } from '../../shared/models/quiz-category.model';
 
 @Component({
   selector: 'quiz-catalog',
@@ -27,7 +28,7 @@ export class CatalogComponent implements OnInit {
   private readonly categoriesStoreService = inject(CategoriesStoreService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
 
-  categories$!: Observable<any>;
+  categories$!: Observable<QuizCategory[]>;
   isLoading$ = isLoading$;
   errorMessage$ = this.errorHandlerService.getErrorMessage$();
 
