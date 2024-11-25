@@ -8,11 +8,15 @@
       <span class="text-5xl text-bright md:text-7xl">.</span>
     </span>
   </h1>
-  <div class="m-4 flex flex-wrap items-center justify-center gap-6">
-    @for (category of categories$ | async; track category.id) {
-      <quiz-quiz-card [quizCategory]="category" />
-    }
-  </div>
 
-  <quiz-ui-button class="m-4" route="/quiz"> I'm lucky </quiz-ui-button>
+  @if (isLoading$ | async) {
+    <quiz-ui-spinner></quiz-ui-spinner>
+  } @else {
+    <div class="m-4 flex flex-wrap items-center justify-center gap-6">
+      @for (category of categories$ | async; track category.id) {
+        <quiz-quiz-card [quizCategory]="category" />
+      }
+    </div>
+    <quiz-ui-button class="m-4" route="/quiz"> I'm lucky </quiz-ui-button>
+  }
 </div>

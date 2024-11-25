@@ -5,7 +5,11 @@ import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { RandomizationService } from './randomization.service';
 import { CategoriesStoreService } from './categories-store.service';
 import { ApiService } from './api.service';
-import { skipWhenCategoriesCached } from '../../store/categories.store';
+import {
+  hideSpinner,
+  showSpinner,
+  skipWhenCategoriesCached,
+} from '../../store/categories.store';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +25,14 @@ export class CategoriesService {
 
   getRandomCategories(): Observable<QuizCategory[]> {
     return this.apiService.fetchCategories().pipe(
+      tap(() => showSpinner()),
       skipWhenCategoriesCached('quizCategories'),
       map(categories => this.randomizationService
       .getRandomItems(categories, this.categoriesNumber)
       .map(category => this.enrichCategory(category))),
       tap((categories) => {
         this.categoriesStoreService.addCategories(categories);
+        hideSpinner();
       }),
     );
   }
