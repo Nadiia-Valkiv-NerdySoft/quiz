@@ -1,8 +1,10 @@
-import { Observable, map, catchError, of } from 'rxjs';
+import { Observable, map, catchError } from 'rxjs';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ErrorHandlerService } from './error-handler.service';
+import { hideSpinner } from '../../store/categories.store';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +12,7 @@ import { environment } from '../../../environments/environment';
 export class ApiService {
   private readonly categoriesUrl = environment.categoriesUrl;
   private readonly http = inject(HttpClient);
+  private readonly errorHandlerService = inject(ErrorHandlerService);
 
   fetchCategories(): Observable<QuizCategory[]> {
     return this.http
@@ -17,9 +20,8 @@ export class ApiService {
     .pipe(
       map(response => response.trivia_categories),
       catchError((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching categories:', error);
-        return of([]);
+        hideSpinner();
+        return this.errorHandlerService.handleError(error);
       }),
     );
   }

@@ -7,6 +7,8 @@ import { CategoriesStoreService } from '../../core/services/categories-store.ser
 import { Observable } from 'rxjs';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { isLoading$ } from '../../store/categories.store';
+import { ErrorHandlerService } from '../../core/services/error-handler.service';
+import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
 
 @Component({
   selector: 'quiz-catalog',
@@ -16,19 +18,26 @@ import { isLoading$ } from '../../store/categories.store';
     UiQuizCardComponent,
     AsyncPipe,
     UiSpinnerComponent,
+    UiErrorNotificationComponent,
   ],
   templateUrl: './catalog.component.html',
 })
 export class CatalogComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
   private readonly categoriesStoreService = inject(CategoriesStoreService);
+  private readonly errorHandlerService = inject(ErrorHandlerService);
 
   categories$!: Observable<any>;
   isLoading$ = isLoading$;
+  errorMessage$ = this.errorHandlerService.getErrorMessage$();
 
   ngOnInit(): void {
     this.categoriesService.getRandomCategories().subscribe();
 
     this.categories$ = this.categoriesStoreService.getCategories();
+  }
+
+  simulateError(): void {
+    this.errorHandlerService.setError();
   }
 }
