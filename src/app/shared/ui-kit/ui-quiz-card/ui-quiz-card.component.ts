@@ -4,10 +4,12 @@ import { QuizCardColors } from '../../enums/quiz-card-colors.enums';
 import { QuizCardStyle } from './ui-quiz-card.types';
 import { QuizCategory } from '../../models/quiz-category.model';
 import { DEFAULT_CARD_COLOR } from './ui-quiz-card.constants';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'quiz-quiz-card',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './ui-quiz-card.component.html',
 })
 export class UiQuizCardComponent {

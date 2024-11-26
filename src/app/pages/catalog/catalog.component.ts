@@ -4,12 +4,14 @@ import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-ca
 import { CategoriesService } from '../../core/services/categories.service';
 import { AsyncPipe } from '@angular/common';
 import { CategoriesStoreService } from '../../core/services/categories-store.service';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { isLoading$ } from '../../store/categories.store';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
+import { Router } from '@angular/router';
+import { RandomizationService } from '../../core/services/randomization.service';
 
 @Component({
   selector: 'quiz-catalog',
@@ -25,8 +27,10 @@ import { QuizCategory } from '../../shared/models/quiz-category.model';
 })
 export class CatalogComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
+  private readonly randomizationService = inject(RandomizationService);
   private readonly categoriesStoreService = inject(CategoriesStoreService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
+  private readonly router = inject(Router);
 
   categories$!: Observable<QuizCategory[]>;
   isLoading$ = isLoading$;
@@ -40,5 +44,15 @@ export class CatalogComponent implements OnInit {
 
   simulateError(): void {
     this.errorHandlerService.setError();
+  }
+
+  goToRandomQuiz(): void {
+    this.categories$.pipe(take(1)).subscribe((categories) => {
+      const randomIndex = this.randomizationService.getRandomInt(
+        0,
+        categories.length,
+      );
+      this.router.navigate([ '/quiz', categories[randomIndex].id ]);
+    });
   }
 }
