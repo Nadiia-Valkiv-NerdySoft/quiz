@@ -1,5 +1,5 @@
-<nav class="flex items-center justify-between p-1 md:mx-5 md:p-4">
-  <div class="flex items-center">
+<nav class="flex items-center justify-between md:mx-5 md:p-4">
+  <div class="flex items-center p-2">
     <a [routerLink]="''"
       ><img
         src="assets/images/logo.svg"
@@ -26,7 +26,7 @@
 
   <!-- Mobile Menu Button -->
   <quiz-ui-button
-    class="z-50 md:hidden"
+    class="z-50 p-2 md:hidden"
     variant="menu"
     size="sizeLess"
     (buttonClick)="toggleMenu()"
