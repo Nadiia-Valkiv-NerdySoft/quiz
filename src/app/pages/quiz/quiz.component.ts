@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'quiz-quiz',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './quiz.component.html',
 })
 export class QuizComponent {
