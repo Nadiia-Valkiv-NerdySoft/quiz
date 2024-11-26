@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'quiz-quiz',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './quiz.component.html',
 })
-export class QuizComponent {}
+export class QuizComponent {
+  quizId!: string;
+  route = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    this.quizId = this.route.snapshot.paramMap.get('id')!;
+  }
+}
