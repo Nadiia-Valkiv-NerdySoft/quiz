@@ -4,7 +4,7 @@ import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-ca
 import { CategoriesService } from '../../core/services/categories.service';
 import { AsyncPipe } from '@angular/common';
 import { CategoriesStoreService } from '../../core/services/categories-store.service';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { isLoading$ } from '../../store/categories.store';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
@@ -35,7 +35,6 @@ export class CatalogComponent implements OnInit {
   categories$!: Observable<QuizCategory[]>;
   isLoading$ = isLoading$;
   errorMessage$ = this.errorHandlerService.getErrorMessage$();
-  randomCategoryId!: number;
 
   ngOnInit(): void {
     this.categoriesService.getRandomCategories().subscribe();
@@ -48,7 +47,7 @@ export class CatalogComponent implements OnInit {
   }
 
   goToRandomQuiz(): void {
-    this.categories$.subscribe((categories) => {
+    this.categories$.pipe(take(1)).subscribe((categories) => {
       const randomIndex = this.randomizationService.getRandomInt(
         0,
         categories.length,
