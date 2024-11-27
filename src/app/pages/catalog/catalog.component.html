@@ -15,7 +15,7 @@
 
   @if (errorMessage$ | async; as errorMessage) {
     <quiz-ui-error-notification
-      [errorMessage]="errorMessage"
+      [errorMessage]="errorMessage" (tryAgainButtonClick)="reloadCategories()"
     ></quiz-ui-error-notification>
   } @else if (isLoading$ | async) {
     <quiz-ui-spinner></quiz-ui-spinner>
