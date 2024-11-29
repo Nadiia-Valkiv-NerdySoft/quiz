@@ -1,0 +1,49 @@
+<div class="w-80 space-y-7 rounded-xl bg-success p-4 shadow-xl md:w-[640px]">
+  <div class="flex items-center justify-between">
+    <p><span class="bg-warning text-primary">1</span> <span>/10</span></p>
+    <img class="h-12 w-12" [src]="avatarPath" alt="category icon" />
+  </div>
+  <h5 class="text-2xl-plus font-semibold md:text-3xl">
+    Let's begin with this
+    <span class="bg-error">legendary pop group</span>
+    <p>What's their name?</p>
+  </h5>
+
+  <form
+    class="mb-9 flex flex-col flex-wrap items-center justify-center space-y-3"
+  >
+    @for (option of mockOptions; track option.id) {
+      <div class="flex w-40 items-center justify-start">
+        <input
+          type="radio"
+          name="optionRadio"
+          [id]="option.label"
+          [value]="option.id"
+          [checked]="option.checked || false"
+          class="mr-1 h-4 w-4 border-gray-300 bg-gray-100 text-pink-500 focus:ring-2 focus:ring-pink-500"
+        />
+        <label [for]="option.label" class="text-black">{{
+          option.label
+        }}</label>
+      </div>
+    }
+  </form>
+  <div class="mt-28 flex items-center justify-between">
+    <quiz-ui-button class="text-shade" [variant]="'ghost'"
+      ><svg-icon
+        [src]="'assets/icons/chevron-left.svg'"
+        [svgClass]="'h-6 w-6 text-bright'"
+        [applyClass]="true"
+      ></svg-icon
+      >Prev</quiz-ui-button
+    >
+    <quiz-ui-button [variant]="'accent'"
+      >Next
+      <svg-icon
+        [src]="'assets/icons/chevron-right.svg'"
+        [svgClass]="'h-6 w-6 text-bright'"
+        [applyClass]="true"
+      ></svg-icon
+    ></quiz-ui-button>
+  </div>
+</div>

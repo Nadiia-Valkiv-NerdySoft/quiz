@@ -28,7 +28,7 @@ export class UiButtonComponent {
     accent:
       'bg-accent text-bright hover:bg-accent-700 hover:scale-110 disabled:bg-secondary',
     ghost:
-      'bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-200 disabled:bg-gray-100',
+      'bg-transparent border border-shade text-shade hover:bg-gray-200 disabled:bg-gray-100',
     menu: 'z-10 text-bright',
   };
 
