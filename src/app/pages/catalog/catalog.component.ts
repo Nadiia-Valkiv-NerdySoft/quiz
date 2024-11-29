@@ -37,9 +37,7 @@ export class CatalogComponent implements OnInit {
   errorMessage$ = this.errorHandlerService.getErrorMessage$();
 
   ngOnInit(): void {
-    this.categoriesService.getRandomCategories().subscribe();
-
-    this.categories$ = this.categoriesStoreService.getCategories();
+    this.loadCategories();
   }
 
   simulateError(): void {
@@ -54,5 +52,15 @@ export class CatalogComponent implements OnInit {
       );
       this.router.navigate([ '/quiz', categories[randomIndex].id ]);
     });
+  }
+
+  reloadCategories(): void {
+    this.errorHandlerService.clearError();
+    this.loadCategories();
+  }
+
+  private loadCategories(): void {
+    this.categoriesService.getRandomCategories().subscribe();
+    this.categories$ = this.categoriesStoreService.getCategories();
   }
 }

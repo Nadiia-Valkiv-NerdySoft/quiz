@@ -24,4 +24,8 @@ export class ErrorHandlerService {
       'This is a simulated error. Please reload the page',
     );
   }
+
+  clearError(): void {
+    this.errorMessage$.next(null);
+  }
 }
