@@ -43,7 +43,7 @@
     <quiz-ui-button class="text-shade" [variant]="'ghost'"
       ><svg-icon
         [src]="'assets/icons/chevron-left.svg'"
-        [svgClass]="'h-6 w-6 text-bright'"
+        [svgClass]="'h-6 w-6 text-shade'"
         [applyClass]="true"
       ></svg-icon>
       <span class="md:hidden">Prev</span>
@@ -53,8 +53,8 @@
       <span class="md:hidden">Next</span>
       <span class="hidden md:inline">Next question</span>
       <svg-icon
-        [src]="'assets/icons/chevron-right.svg'"
-        [svgClass]="'h-6 w-6 text-bright'"
+        [src]="'assets/icons/chevron-left.svg'"
+        [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
         [applyClass]="true"
       ></svg-icon
     ></quiz-ui-button>
