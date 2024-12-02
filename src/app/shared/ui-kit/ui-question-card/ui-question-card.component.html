@@ -1,11 +1,14 @@
 <div class="w-80 space-y-7 rounded-xl bg-success p-4 shadow-xl md:w-[640px]">
   <div class="flex items-center justify-between">
-    <p><span class="bg-warning text-primary">1</span> <span>/10</span></p>
-    <img class="h-12 w-12" [src]="avatarPath" alt="category icon" />
+    <p>
+      <span class="bg-warning p-1 text-3xl font-semibold text-primary">1</span>
+      <span class="p-1 font-medium">/10</span>
+    </p>
+    <img class="h-20 w-20" [src]="avatarPath" alt="category icon" />
   </div>
   <h5 class="text-2xl-plus font-semibold md:text-3xl">
     Let's begin with this
-    <span class="bg-error">legendary pop group</span>
+    <span class="bg-error p-1">legendary pop group</span>
     <p>What's their name?</p>
   </h5>
 
@@ -14,17 +17,25 @@
   >
     @for (option of mockOptions; track option.id) {
       <div class="flex w-40 items-center justify-start">
-        <input
-          type="radio"
-          name="optionRadio"
-          [id]="option.label"
-          [value]="option.id"
-          [checked]="option.checked || false"
-          class="mr-1 h-4 w-4 border-gray-300 bg-gray-100 text-pink-500 focus:ring-2 focus:ring-pink-500"
-        />
-        <label [for]="option.label" class="text-black">{{
-          option.label
-        }}</label>
+        <label
+          [for]="option.id"
+          class="flex cursor-pointer items-center text-black peer-checked:text-bright"
+        >
+          <input
+            type="radio"
+            name="optionRadio"
+            [value]="option.id"
+            [id]="option.id"
+            [checked]="option.checked || null"
+            class="peer hidden"
+          />
+          <span
+            class="mr-2 flex h-5 w-5 items-center justify-center rounded-full border-4 border-shade bg-bright peer-checked:bg-error"
+          >
+            <span class="h-3 w-3 rounded-full peer-checked:bg-error"></span>
+          </span>
+          {{ option.label }}
+        </label>
       </div>
     }
   </form>
@@ -34,11 +45,13 @@
         [src]="'assets/icons/chevron-left.svg'"
         [svgClass]="'h-6 w-6 text-bright'"
         [applyClass]="true"
-      ></svg-icon
-      >Prev</quiz-ui-button
+      ></svg-icon>
+      <span class="md:hidden">Prev</span>
+      <span class="hidden md:inline">Prev question</span></quiz-ui-button
     >
-    <quiz-ui-button [variant]="'accent'"
-      >Next
+    <quiz-ui-button [variant]="'accent'">
+      <span class="md:hidden">Next</span>
+      <span class="hidden md:inline">Next question</span>
       <svg-icon
         [src]="'assets/icons/chevron-right.svg'"
         [svgClass]="'h-6 w-6 text-bright'"
