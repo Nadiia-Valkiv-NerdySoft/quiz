@@ -1,5 +1,5 @@
-<nav class="relative mx-5 flex items-center justify-between p-4">
-  <div class="flex items-center">
+<nav class="flex items-center justify-between md:mx-5 md:p-4">
+  <div class="flex items-center p-2">
     <a [routerLink]="''"
       ><img
         src="assets/images/logo.svg"
@@ -8,7 +8,7 @@
     /></a>
   </div>
 
-  <div class="mx-40 hidden items-center justify-between space-x-8 md:flex">
+  <div class="mx-auto hidden items-center justify-between space-x-8 md:flex">
     <ul class="flex space-x-6">
       @for (item of navItems; track $index) {
         <li class="duration-100 ease-in md:hover:scale-125">
@@ -21,60 +21,39 @@
   </div>
 
   <div class="hidden items-center space-x-8 md:flex">
-    <quiz-ui-button> Login </quiz-ui-button>
+    <quiz-ui-button variant="accent"> Login </quiz-ui-button>
   </div>
 
   <!-- Mobile Menu Button -->
-  <button
-    class="z-10 text-white md:hidden"
-    (click)="isMenuOpen = !isMenuOpen"
-    aria-label="Toggle menu"
+  <quiz-ui-button
+    class="z-50 p-2 md:hidden"
+    variant="menu"
+    size="sizeLess"
+    (buttonClick)="toggleMenu()"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      [class.hidden]="isMenuOpen"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      [class.hidden]="!isMenuOpen"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-  </button>
+    <svg-icon
+      [src]="isMenuOpen() ? 'assets/icons/close.svg' : 'assets/icons/menu.svg'"
+      [svgClass]="'h-6 w-6 text-bright'"
+      [applyClass]="true"
+    ></svg-icon>
+    @if (!isMenuOpen()) {
+      <span class="mx-1">Menu</span>
+    }
+  </quiz-ui-button>
 
   <!-- Mobile Menu -->
   <div
-    class="absolute right-5 top-7 max-w-fit rounded-sm bg-gray-500 md:hidden"
-    [class.hidden]="!isMenuOpen"
-    [class.block]="isMenuOpen"
+    class="fixed top-0 w-full rounded-sm bg-muted p-10 transition-transform duration-500 ease-in-out md:hidden"
+    [class.-translate-y-full]="!isMenuOpen()"
+    [class.translate-y-0]="isMenuOpen()"
   >
-    <div class="flex flex-col justify-end space-y-20 p-4">
+    <div class="flex flex-col">
       <ul class="flex flex-col">
         @for (item of navItems; track $index) {
           <li>
             <a
               [routerLink]="item.link"
-              class="block py-2 text-bright hover:text-white"
+              class="block py-3 text-lg font-semibold"
               (click)="closeMenu()"
             >
               {{ item.label }}
@@ -82,8 +61,8 @@
           </li>
         }
       </ul>
-      <div class="hidden items-center md:flex">
-        <quiz-ui-button> Login </quiz-ui-button>
+      <div class="flex items-center">
+        <quiz-ui-button variant="accent"> Login </quiz-ui-button>
       </div>
     </div>
   </div>

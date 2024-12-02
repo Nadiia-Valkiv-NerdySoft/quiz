@@ -13,7 +13,7 @@ export const routes: Routes = [
     ),
   },
   {
-    path: 'quiz',
+    path: 'quiz/:id',
     loadComponent: () => import('./pages/quiz/quiz.component').then(c => c.QuizComponent),
   },
   {

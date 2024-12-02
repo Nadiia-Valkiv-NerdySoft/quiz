@@ -1,0 +1,13 @@
+<div
+  class="fixed left-1/2 top-1/2 flex max-w-xs -translate-x-1/2 -translate-y-1/2 transform flex-col gap-2 rounded-lg bg-bright p-4 text-center text-error shadow-lg"
+>
+  {{ errorMessage() }}
+  <quiz-ui-button variant="accent" (buttonClick)="onClick()">
+    <span class="p-2">try again</span>
+    <svg-icon
+      [src]="'assets/icons/retry.svg'"
+      [svgClass]="'h-4 w-4'"
+      [applyClass]="true"
+    ></svg-icon>
+  </quiz-ui-button>
+</div>
