@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AVATAR_PATHS } from '../ui-quiz-card/ui-quiz-card.constants';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { UiRadioGroupComponent } from '../ui-radio-group/ui-radio-group.component';
 import { FormControl } from '@angular/forms';
+import { UiInputRadioComponent } from '../ui-radio-group/ui-input-radio.component';
 
 const MOCK_OPTIONS = [
   { id: 'papper', label: 'Papper Ladies' },
@@ -15,7 +15,7 @@ const MOCK_OPTIONS = [
 @Component({
   selector: 'quiz-ui-question-card',
   standalone: true,
-  imports: [ UiButtonComponent, SvgIconComponent, UiRadioGroupComponent ],
+  imports: [ UiButtonComponent, SvgIconComponent, UiInputRadioComponent ],
   templateUrl: './ui-question-card.component.html',
 })
 export class UiQuestionCardComponent {
