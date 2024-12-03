@@ -1,4 +1,4 @@
-<div class="w-80 space-y-7 rounded-xl bg-success p-4 shadow-xl md:w-[640px]">
+<div class="w-80 space-y-10 rounded-xl bg-success p-6 shadow-xl md:w-[640px]">
   <div class="flex items-center justify-between">
     <p>
       <span class="bg-warning p-1 text-3xl font-semibold text-primary">1</span>
@@ -12,34 +12,10 @@
     <p>What's their name?</p>
   </h5>
 
-  <form
-    class="mb-9 flex flex-col flex-wrap items-center justify-center space-y-3"
-  >
-    @for (option of mockOptions; track option.id) {
-      <div class="flex w-40 items-center justify-start">
-        <label
-          [for]="option.id"
-          class="flex cursor-pointer items-center text-black peer-checked:text-bright"
-        >
-          <input
-            type="radio"
-            name="optionRadio"
-            [value]="option.id"
-            [id]="option.id"
-            [checked]="option.checked || null"
-            class="peer hidden"
-          />
-          <span
-            class="mr-2 flex h-5 w-5 items-center justify-center rounded-full border-4 border-shade bg-bright peer-checked:bg-error"
-          >
-            <span class="h-3 w-3 rounded-full peer-checked:bg-error"></span>
-          </span>
-          {{ option.label }}
-        </label>
-      </div>
-    }
+  <form class="flex flex-col items-center justify-center">
+    <quiz-ui-radio-group [options]="mockOptions"></quiz-ui-radio-group>
   </form>
-  <div class="mt-28 flex items-center justify-between">
+  <div class="flex items-center justify-between">
     <quiz-ui-button class="text-shade" [variant]="'ghost'"
       ><svg-icon
         [src]="'assets/icons/chevron-left.svg'"
