@@ -4,12 +4,10 @@
     class="mb-2 flex cursor-pointer items-center gap-2 font-semibold text-primary"
   >
     <input
-      [value]="option.id"
       [id]="option.id"
       [checked]="option.checked || null"
       type="radio"
-      formControlName="option.id"
-      name="optionRadio"
+      [formControl]="optionControl()"
       class="peer flex h-6 w-6 appearance-none items-center justify-center rounded-full border-2 border-shade bg-bright checked:border-error checked:bg-bright"
     />
     <div

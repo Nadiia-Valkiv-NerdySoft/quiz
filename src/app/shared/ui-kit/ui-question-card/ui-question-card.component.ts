@@ -3,6 +3,7 @@ import { AVATAR_PATHS } from '../ui-quiz-card/ui-quiz-card.constants';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { UiRadioGroupComponent } from '../ui-radio-group/ui-radio-group.component';
+import { FormControl } from '@angular/forms';
 
 const MOCK_OPTIONS = [
   { id: 'papper', label: 'Papper Ladies' },
@@ -19,6 +20,7 @@ const MOCK_OPTIONS = [
 })
 export class UiQuestionCardComponent {
   avatarPath = AVATAR_PATHS.PROFILE_1;
-
   mockOptions = MOCK_OPTIONS;
+
+  radioButtonControl = new FormControl('');
 }

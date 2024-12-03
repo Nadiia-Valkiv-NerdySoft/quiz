@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 interface Option {
   id: string;
@@ -10,13 +10,10 @@ interface Option {
 @Component({
   selector: 'quiz-ui-radio-group',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './ui-radio-group.component.html',
 })
 export class UiRadioGroupComponent {
+  optionControl = input.required<FormControl>();
   options = input<Option[]>([]);
-
-  form = new FormGroup({
-    name: new FormControl(null),
-  });
 }

@@ -13,7 +13,10 @@
   </h5>
 
   <form class="flex flex-col items-center justify-center">
-    <quiz-ui-radio-group [options]="mockOptions"></quiz-ui-radio-group>
+    <quiz-ui-radio-group
+      [options]="mockOptions"
+      [optionControl]="radioButtonControl"
+    ></quiz-ui-radio-group>
   </form>
   <div class="flex items-center justify-between">
     <quiz-ui-button class="text-shade" [variant]="'ghost'"
