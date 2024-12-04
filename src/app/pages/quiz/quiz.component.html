@@ -1,6 +1,20 @@
-<p class="bg-gray-600 text-center text-7xl">quiz id: {{ quizId }}</p>
-<a
-  class="cursor-pointer rounded-lg border-b-2 border-bright p-2 text-bright"
-  [routerLink]="'/catalog'"
-  >Back to catalog page</a
->
+<div class="flex flex-col items-center justify-center gap-3 p-6 text-center">
+  <h1 class="text-center">
+    <span class="py-2 text-4xl font-semibold md:text-6xl-plus"
+      >Emoji Bands
+    </span>
+    <span class="inline-block text-4xl text-error">
+      <span class="md:text-5xl-plus md:font-light md:text-bright"> Quiz </span>
+      <span class="text-4xl md:text-7xl">.</span>
+    </span>
+  </h1>
+  <p class="max-w-[440px]">
+    Can you decipher these emoji clues to answer these music-related questions?
+  </p>
+
+  <quiz-ui-question-card></quiz-ui-question-card>
+
+  <quiz-ui-button class="my-4" variant="accent" route="catalog"
+    >Back to all Quizzes</quiz-ui-button
+  >
+</div>

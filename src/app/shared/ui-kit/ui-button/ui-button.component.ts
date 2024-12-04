@@ -26,16 +26,16 @@ export class UiButtonComponent {
 
   private readonly typeClasses: Record<ButtonVariant, string> = {
     accent:
-      'bg-accent text-bright hover:bg-accent-700 hover:scale-110 disabled:bg-secondary',
+      'bg-accent text-bright hover:bg-accent-700 hover:scale-105 disabled:bg-secondary',
     ghost:
-      'bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-200 disabled:bg-gray-100',
+      'bg-transparent border border-secondary text-shade hover:scale-105 hover:border-accent  disabled:bg-gray-100',
     menu: 'z-10 text-bright',
   };
 
   get buttonClass(): string {
     const baseClasses = [
       'rounded-md',
-      'font-semibold',
+      'font-medium',
       'transition',
       'duration-150',
       'inline-flex',
