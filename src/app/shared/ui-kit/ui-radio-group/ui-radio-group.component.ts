@@ -11,9 +11,9 @@ interface Option {
   selector: 'quiz-ui-radio-group',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './ui-input-radio.component.html',
+  templateUrl: './ui-radio-group.component.html',
 })
-export class UiInputRadioComponent {
+export class UiRadioGroupComponent {
   optionControl = input.required<FormControl>();
-  option = input.required<Option>();
+  options = input<Option[]>([]);
 }

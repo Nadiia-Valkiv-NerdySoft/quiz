@@ -13,13 +13,10 @@
   </h5>
 
   <form class="flex flex-col items-center">
-    @for (option of mockOptions; track option) {
-      <quiz-ui-radio-group
-        class="w-40"
-        [option]="option"
-        [optionControl]="radioButtonControl"
-      ></quiz-ui-radio-group>
-    }
+    <quiz-ui-radio-group
+      [options]="mockOptions"
+      [optionControl]="radioButtonControl"
+    ></quiz-ui-radio-group>
   </form>
   <div class="flex items-center justify-between">
     <quiz-ui-button class="text-shade" [variant]="'ghost'"
