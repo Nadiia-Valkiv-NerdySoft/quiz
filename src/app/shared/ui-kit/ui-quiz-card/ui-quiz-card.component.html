@@ -9,11 +9,7 @@
     class="text-2xl cursor-pointer md:hover:underline font-bold {{
       styles.headerColor
     }}"
-    [routerLink]="[
-      '/quiz',
-      quizCategory()?.id,
-      quizCategory()?.numberOfQuestion,
-    ]"
+    [routerLink]="categoryUrlRoute"
   >
     {{ quizCategory()?.name }}
   </h3>

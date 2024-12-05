@@ -14,6 +14,11 @@ import { RouterLink } from '@angular/router';
 })
 export class UiQuizCardComponent {
   quizCategory = input<QuizCategory>();
+  categoryUrlRoute = [
+    '/quiz',
+    this.quizCategory()?.id,
+    this.quizCategory()?.numberOfQuestion,
+  ];
 
   get styles(): QuizCardStyle[QuizCardColors] {
     return QUIZ_CARD_STYLES[
