@@ -13,7 +13,7 @@ export const routes: Routes = [
     ),
   },
   {
-    path: 'quiz/:id',
+    path: 'quiz/:id/:questions',
     loadComponent: () => import('./pages/quiz/quiz.component').then(c => c.QuizComponent),
   },
   {
@@ -22,5 +22,4 @@ export const routes: Routes = [
       c => c.StatisticsComponent,
     ),
   },
-  { path: '**', redirectTo: 'home' },
 ];

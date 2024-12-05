@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 interface Option {
   id: string;
-  label: string;
   checked?: boolean;
 }
 
@@ -15,5 +14,5 @@ interface Option {
 })
 export class UiRadioGroupComponent {
   optionControl = input.required<FormControl>();
-  options = input<Option[]>([]);
+  options = input<Option[]>();
 }
