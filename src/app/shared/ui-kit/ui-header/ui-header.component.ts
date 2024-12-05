@@ -13,11 +13,9 @@ export class UiHeaderComponent {
   isMenuOpen = signal(false);
 
   navItems = [
-    { label: 'Home', link: 'home' },
+    { label: 'Home', link: '' },
     { label: 'Catalog', link: 'catalog' },
-    { label: 'Quiz', link: 'quiz' },
     { label: 'Statistics', link: 'statistics' },
-    { label: 'About', link: 'about' },
   ];
 
   toggleMenu() {
