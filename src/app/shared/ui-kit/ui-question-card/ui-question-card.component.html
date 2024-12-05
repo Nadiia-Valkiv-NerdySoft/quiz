@@ -1,41 +1,52 @@
-<div class="w-80 space-y-10 rounded-xl bg-success p-6 shadow-xl md:w-[640px]">
+<div
+  class="min-h-60 w-80 space-y-10 rounded-xl bg-success p-6 shadow-xl md:w-[640px]"
+>
   <div class="flex items-center justify-between">
     <p>
       <span class="bg-warning p-1 text-3xl font-semibold text-primary">1</span>
-      <span class="p-1 font-medium">/10</span>
+      <span class="p-1 font-medium">/{{ numberOfQuestions }}</span>
     </p>
     <img class="h-20 w-20" [src]="avatarPath" alt="category icon" />
   </div>
-  <h5 class="text-2xl-plus font-semibold md:text-3xl">
-    Let's begin with this
-    <span class="bg-error p-1">legendary pop group</span>
-    <p>What's their name?</p>
-  </h5>
+  @if (errorMessage$ | async; as errorMessage) {
+    <quiz-ui-error-notification
+      [errorMessage]="errorMessage"
+      (tryAgainButtonClick)="loadQuestion()"
+    ></quiz-ui-error-notification>
+  } @else if (questions().length === 0) {
+    <quiz-ui-spinner></quiz-ui-spinner>
+  } @else {
+    <h5 class="text-2xl-plus font-semibold md:text-3xl">
+      <p>Let's begin with this</p>
+      <span class="bg-error">{{ currentQuestion().category }}</span>
+      <p>{{ currentQuestion().question }}</p>
+    </h5>
 
-  <form class="flex flex-col items-center">
-    <quiz-ui-radio-group
-      [options]="mockOptions"
-      [optionControl]="radioButtonControl"
-    ></quiz-ui-radio-group>
-  </form>
-  <div class="flex items-center justify-between">
-    <quiz-ui-button class="text-shade" [variant]="'ghost'"
-      ><svg-icon
-        [src]="'assets/icons/chevron-left.svg'"
-        [svgClass]="'h-6 w-6 text-shade'"
-        [applyClass]="true"
-      ></svg-icon>
-      <span class="md:hidden">Prev</span>
-      <span class="hidden md:inline">Prev question</span></quiz-ui-button
-    >
-    <quiz-ui-button [variant]="'accent'">
-      <span class="md:hidden">Next</span>
-      <span class="hidden md:inline">Next question</span>
-      <svg-icon
-        [src]="'assets/icons/chevron-left.svg'"
-        [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
-        [applyClass]="true"
-      ></svg-icon
-    ></quiz-ui-button>
-  </div>
+    <form class="flex flex-col items-center">
+      <quiz-ui-radio-group
+        [options]="currentQuestion().answers"
+        [optionControl]="radioButtonControl"
+      ></quiz-ui-radio-group>
+    </form>
+    <div class="flex items-center justify-between">
+      <quiz-ui-button class="text-shade" [variant]="'ghost'"
+        ><svg-icon
+          [src]="'assets/icons/chevron-left.svg'"
+          [svgClass]="'h-6 w-6 text-shade'"
+          [applyClass]="true"
+        ></svg-icon>
+        <span class="md:hidden">Prev</span>
+        <span class="hidden md:inline">Prev question</span></quiz-ui-button
+      >
+      <quiz-ui-button [variant]="'accent'">
+        <span class="md:hidden">Next</span>
+        <span class="hidden md:inline">Next question</span>
+        <svg-icon
+          [src]="'assets/icons/chevron-left.svg'"
+          [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
+          [applyClass]="true"
+        ></svg-icon
+      ></quiz-ui-button>
+    </div>
+  }
 </div>

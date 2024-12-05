@@ -50,7 +50,11 @@ export class CatalogComponent implements OnInit {
         0,
         categories.length,
       );
-      this.router.navigate([ '/quiz', categories[randomIndex].id ]);
+      this.router.navigate([
+        '/quiz',
+        categories[randomIndex].id,
+        categories[randomIndex].numberOfQuestion,
+      ]);
     });
   }
 

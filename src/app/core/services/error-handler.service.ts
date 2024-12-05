@@ -10,7 +10,7 @@ export class ErrorHandlerService {
   errorMessage$ = new BehaviorSubject<string | null>(null);
 
   handleError(error: HttpErrorResponse): Observable<never> {
-    this.errorMessage$.next(environment.categoriesApiErrorMessage);
+    this.errorMessage$.next(environment.apiErrorMessage);
 
     return throwError(() => new Error(error.message));
   }
