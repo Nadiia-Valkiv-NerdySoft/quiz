@@ -3,7 +3,9 @@
 >
   <div class="flex items-center justify-between">
     <p>
-      <span class="bg-warning p-1 text-3xl font-semibold text-primary">1</span>
+      <span class="bg-warning p-1 text-3xl font-semibold text-primary">{{
+        currentQuestionIndex() + 1
+      }}</span>
       <span class="p-1 font-medium">/{{ numberOfQuestions }}</span>
     </p>
     <img class="h-20 w-20" [src]="avatarPath" alt="category icon" />
@@ -18,8 +20,8 @@
   } @else {
     <h5 class="text-2xl-plus font-semibold md:text-3xl">
       <p>Let's begin with this</p>
-      <span class="bg-error">{{ currentQuestion().category }}</span>
-      <p>{{ currentQuestion().question }}</p>
+      <span class="bg-error" [innerHTML]="currentQuestion().category"></span>
+      <p [innerHTML]="currentQuestion().question"></p>
     </h5>
 
     <form class="flex flex-col items-center">
@@ -29,7 +31,11 @@
       ></quiz-ui-radio-group>
     </form>
     <div class="flex items-center justify-between">
-      <quiz-ui-button class="text-shade" [variant]="'ghost'"
+      <quiz-ui-button
+        class="text-shade"
+        [variant]="'ghost'"
+        [disabled]="isFirstQuestion()"
+        (buttonClick)="previousQuestion()"
         ><svg-icon
           [src]="'assets/icons/chevron-left.svg'"
           [svgClass]="'h-6 w-6 text-shade'"
@@ -38,15 +44,29 @@
         <span class="md:hidden">Prev</span>
         <span class="hidden md:inline">Prev question</span></quiz-ui-button
       >
-      <quiz-ui-button [variant]="'accent'">
-        <span class="md:hidden">Next</span>
-        <span class="hidden md:inline">Next question</span>
-        <svg-icon
-          [src]="'assets/icons/chevron-left.svg'"
-          [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
-          [applyClass]="true"
-        ></svg-icon
-      ></quiz-ui-button>
+      @if (isLastQuestion()) {
+        <quiz-ui-button
+          [variant]="'accent'"
+          [disabled]="!radioButtonControl.valid"
+          route="/statistics"
+        >
+          Finish the quiz</quiz-ui-button
+        >
+      } @else {
+        <quiz-ui-button
+          [variant]="'accent'"
+          [disabled]="!radioButtonControl.valid"
+          (buttonClick)="nextQuestion()"
+        >
+          <span class="md:hidden">Next</span>
+          <span class="hidden md:inline">Next question</span>
+          <svg-icon
+            [src]="'assets/icons/chevron-left.svg'"
+            [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
+            [applyClass]="true"
+          ></svg-icon
+        ></quiz-ui-button>
+      }
     </div>
   }
 </div>

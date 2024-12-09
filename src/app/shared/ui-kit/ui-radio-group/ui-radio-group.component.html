@@ -5,7 +5,6 @@
   >
     <input
       [id]="option.id"
-      [checked]="option.checked || null"
       type="radio"
       [formControl]="optionControl()"
       [value]="option.id"
@@ -15,6 +14,6 @@
     <div
       class="absolute ml-[6px] h-3 w-3 rounded-full bg-bright peer-checked:bg-error"
     ></div>
-    <span class="peer-checked:text-bright">{{ option.id }}</span>
+    <span class="peer-checked:text-bright" [innerHTML]="option.id"></span>
   </label>
 }

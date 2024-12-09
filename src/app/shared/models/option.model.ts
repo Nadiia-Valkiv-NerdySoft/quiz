@@ -1,4 +1,4 @@
 export interface Option {
-  id: string;
+  id: string | null;
   checked?: boolean;
 }

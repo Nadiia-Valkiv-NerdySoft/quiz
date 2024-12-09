@@ -25,10 +25,8 @@ export class UiButtonComponent {
   };
 
   private readonly typeClasses: Record<ButtonVariant, string> = {
-    accent:
-      'bg-accent text-bright hover:bg-accent-700 hover:scale-105 disabled:bg-secondary',
-    ghost:
-      'bg-transparent border border-secondary text-shade hover:scale-105 hover:border-accent  disabled:bg-gray-100',
+    accent: 'bg-accent text-bright',
+    ghost: 'bg-transparent border border-secondary text-shade',
     menu: 'z-10 text-bright',
   };
 
@@ -42,9 +40,12 @@ export class UiButtonComponent {
       'items-center',
       'justify-center',
       'ease-in',
+      'disabled:bg-secondary',
     ];
 
-    if (this.disabled()) {
+    if (!this.disabled()) {
+      baseClasses.push('hover:scale-105 hover:border-accent');
+    } else {
       baseClasses.push('cursor-not-allowed');
     }
 
