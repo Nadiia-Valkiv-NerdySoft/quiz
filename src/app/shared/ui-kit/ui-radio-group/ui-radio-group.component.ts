@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Option } from '../../models/option.model';
 
 @Component({
   selector: 'quiz-ui-radio-group',
@@ -10,5 +9,5 @@ import { Option } from '../../models/option.model';
 })
 export class UiRadioGroupComponent {
   optionControl = input.required<FormControl>();
-  options = input<Option[]>();
+  options = input<string[]>();
 }

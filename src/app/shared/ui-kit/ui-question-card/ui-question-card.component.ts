@@ -87,10 +87,7 @@ export class UiQuestionCardComponent implements OnInit {
     if (this.radioButtonControl.value) {
       updatedQuestions[currentIndex] = {
         ...updatedQuestions[currentIndex],
-        userAnswer: {
-          id: this.radioButtonControl.value,
-          checked: true,
-        },
+        userAnswer: this.radioButtonControl.value,
       };
       this.questions.set(updatedQuestions);
     }
@@ -101,7 +98,7 @@ export class UiQuestionCardComponent implements OnInit {
       = this.questions()[this.currentQuestionIndex()].userAnswer;
 
     if (previousAnswer) {
-      this.radioButtonControl.setValue(previousAnswer.id);
+      this.radioButtonControl.setValue(previousAnswer);
     } else {
       this.radioButtonControl.reset();
     }
