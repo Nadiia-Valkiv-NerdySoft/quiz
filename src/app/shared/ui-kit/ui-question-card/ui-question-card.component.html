@@ -1,9 +1,11 @@
 <div
-  class="min-h-60 w-80 space-y-10 rounded-xl bg-success p-6 shadow-xl md:w-[640px]"
+  class="flex w-80 flex-col justify-between rounded-xl bg-success p-6 shadow-xl md:min-h-[636px] md:w-[744px]"
 >
   <div class="flex items-center justify-between">
     <p>
-      <span class="bg-warning p-1 text-3xl font-semibold text-primary">1</span>
+      <span class="bg-warning p-1 text-3xl font-semibold text-primary">{{
+        currentQuestionIndex() + 1
+      }}</span>
       <span class="p-1 font-medium">/{{ numberOfQuestions }}</span>
     </p>
     <img class="h-20 w-20" [src]="avatarPath" alt="category icon" />
@@ -16,20 +18,30 @@
   } @else if (questions().length === 0) {
     <quiz-ui-spinner></quiz-ui-spinner>
   } @else {
-    <h5 class="text-2xl-plus font-semibold md:text-3xl">
-      <p>Let's begin with this</p>
-      <span class="bg-error">{{ currentQuestion().category }}</span>
-      <p>{{ currentQuestion().question }}</p>
-    </h5>
+    <div class="space-y-4">
+      <h5 class="text-2xl-plus font-semibold md:text-3xl">
+        <p>Let's begin with this</p>
+        <span class="bg-error" [innerHTML]="currentQuestion().category"></span>
+      </h5>
 
-    <form class="flex flex-col items-center">
-      <quiz-ui-radio-group
-        [options]="currentQuestion().answers"
-        [optionControl]="radioButtonControl"
-      ></quiz-ui-radio-group>
-    </form>
+      <form class="flex flex-col items-center">
+        <p
+          class="mb-4 text-2xl-plus font-semibold md:text-3xl"
+          [innerHTML]="currentQuestion().question"
+        ></p>
+        <quiz-ui-radio-group
+          [options]="currentQuestion().answers"
+          [optionControl]="radioButtonControl"
+        ></quiz-ui-radio-group>
+      </form>
+    </div>
+
     <div class="flex items-center justify-between">
-      <quiz-ui-button class="text-shade" [variant]="'ghost'"
+      <quiz-ui-button
+        class="text-shade"
+        [variant]="'ghost'"
+        [disabled]="isFirstQuestion()"
+        (buttonClick)="previousQuestion()"
         ><svg-icon
           [src]="'assets/icons/chevron-left.svg'"
           [svgClass]="'h-6 w-6 text-shade'"
@@ -38,15 +50,29 @@
         <span class="md:hidden">Prev</span>
         <span class="hidden md:inline">Prev question</span></quiz-ui-button
       >
-      <quiz-ui-button [variant]="'accent'">
-        <span class="md:hidden">Next</span>
-        <span class="hidden md:inline">Next question</span>
-        <svg-icon
-          [src]="'assets/icons/chevron-left.svg'"
-          [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
-          [applyClass]="true"
-        ></svg-icon
-      ></quiz-ui-button>
+      @if (isLastQuestion()) {
+        <quiz-ui-button
+          [variant]="'accent'"
+          [disabled]="!radioButtonControl.valid"
+          route="/statistics"
+        >
+          Finish the quiz</quiz-ui-button
+        >
+      } @else {
+        <quiz-ui-button
+          [variant]="'accent'"
+          [disabled]="!radioButtonControl.valid"
+          (buttonClick)="nextQuestion()"
+        >
+          <span class="md:hidden">Next</span>
+          <span class="hidden md:inline">Next question</span>
+          <svg-icon
+            [src]="'assets/icons/chevron-left.svg'"
+            [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
+            [applyClass]="true"
+          ></svg-icon
+        ></quiz-ui-button>
+      }
     </div>
   }
 </div>
