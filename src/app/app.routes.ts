@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { quizPageGuard } from './pages/quiz/quiz-page.guard';
+import { QuizPageGuard } from './pages/quiz/quiz-page.guard';
 
 export const routes: Routes = [
   {
@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: 'quiz/:id/:questions',
     loadComponent: () => import('./pages/quiz/quiz.component').then(c => c.QuizComponent),
-    canDeactivate: [quizPageGuard],
+    canDeactivate: [QuizPageGuard],
   },
   {
     path: 'statistics',

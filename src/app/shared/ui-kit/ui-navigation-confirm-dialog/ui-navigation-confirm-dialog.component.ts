@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
+import { DialogService } from '../../../core/services/dialog.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'quiz-ui-navigation-confirm-dialog',
@@ -8,11 +10,33 @@ import { UiButtonComponent } from '../ui-button/ui-button.component';
   templateUrl: './ui-navigation-confirm-dialog.component.html',
 })
 export class NavigationConfirmDialogComponent {
-  confirm() {
-    return true;
+  dialogService = inject(DialogService);
+  isDialogOpen = false;
+  private subscription!: Subscription;
+
+  ngOnInit() {
+    this.subscription = this.dialogService.openDialog$.subscribe(() => {
+      this.open();
+    });
   }
 
-  cancel() {
-    return false;
+  open() {
+    // eslint-disable-next-line no-console
+    console.log('open');
+    this.isDialogOpen = true;
+  }
+
+  onConfirm() {
+    this.dialogService.confirm();
+    this.closeDialog();
+  }
+
+  onCancel() {
+    this.dialogService.cancel();
+    this.closeDialog();
+  }
+
+  private closeDialog() {
+    this.isDialogOpen = false;
   }
 }
