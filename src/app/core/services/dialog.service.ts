@@ -6,20 +6,15 @@ import { Subject } from 'rxjs';
 })
 export class DialogService {
   private openDialogSubject = new Subject<void>();
-  confirm$ = new Subject<void>();
-  cancel$ = new Subject<void>();
+  status$ = new Subject<boolean>();
 
   openDialog$ = this.openDialogSubject.asObservable();
 
-  openConfirmDialog() {
+  openConfirmDialog(): void {
     this.openDialogSubject.next();
   }
 
-  confirm() {
-    this.confirm$.next();
-  }
-
-  cancel() {
-    this.cancel$.next();
+  setStatus(status: boolean): void {
+    this.status$.next(status);
   }
 }

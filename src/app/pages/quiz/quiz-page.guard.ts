@@ -14,13 +14,8 @@ export class QuizPageGuard implements CanDeactivate<QuizComponent> {
     this.dialogService.openConfirmDialog();
 
     return new Observable((observer) => {
-      this.dialogService.confirm$.subscribe(() => {
-        observer.next(true);
-        observer.complete();
-      });
-
-      this.dialogService.cancel$.subscribe(() => {
-        observer.next(false);
+      this.dialogService.status$.subscribe((dialogStatus) => {
+        observer.next(dialogStatus);
         observer.complete();
       });
     });

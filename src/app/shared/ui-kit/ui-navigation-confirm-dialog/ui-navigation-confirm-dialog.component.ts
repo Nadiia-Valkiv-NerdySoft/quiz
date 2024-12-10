@@ -25,12 +25,12 @@ export class NavigationConfirmDialogComponent {
   }
 
   onConfirm() {
-    this.dialogService.confirm();
+    this.dialogService.setStatus(true);
     this.closeDialog();
   }
 
   onCancel() {
-    this.dialogService.cancel();
+    this.dialogService.setStatus(false);
     this.closeDialog();
   }
 
