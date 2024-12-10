@@ -1,0 +1,21 @@
+<div
+  class="flex w-80 flex-col items-center justify-center space-y-8 rounded-2xl bg-bright p-10 text-purple-950 md:w-[680px]"
+>
+  <h4 class="text-4xl font-semibold">Cancel quiz</h4>
+  <p class="text-2xl">
+    Are you sure you want to exit and cancel the quiz? Your answers will not be
+    saved.
+  </p>
+  <div class="flex flex-wrap items-center justify-center gap-4">
+    <quiz-ui-button
+      [customClasses]="'border-accent text-accent '"
+      [size]="'medium'"
+      [variant]="'ghost'"
+      (buttonClick)="cancel()"
+      >Back to quiz</quiz-ui-button
+    >
+    <quiz-ui-button size="medium" [variant]="'accent'" (buttonClick)="confirm()"
+      >Go on main page</quiz-ui-button
+    >
+  </div>
+</div>
