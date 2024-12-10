@@ -5,10 +5,19 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class DialogService {
+  private quizFinishedStatus = false;
   private openDialogSubject = new Subject<void>();
-  status$ = new Subject<boolean>();
 
+  status$ = new Subject<boolean>();
   openDialog$ = this.openDialogSubject.asObservable();
+
+  setQuizFinished(status: boolean): void {
+    this.quizFinishedStatus = status;
+  }
+
+  isQuizFinished(): boolean {
+    return this.quizFinishedStatus;
+  }
 
   openConfirmDialog(): void {
     this.openDialogSubject.next();
