@@ -14,27 +14,27 @@ export class NavigationConfirmDialogComponent {
   isDialogOpen = false;
   private subscription!: Subscription;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.dialogService.openDialog$.subscribe(() => {
       this.open();
     });
   }
 
-  open() {
+  open(): void {
     this.isDialogOpen = true;
   }
 
-  onConfirm() {
+  onConfirm(): void {
     this.dialogService.setStatus(true);
     this.closeDialog();
   }
 
-  onCancel() {
+  onCancel(): void {
     this.dialogService.setStatus(false);
     this.closeDialog();
   }
 
-  private closeDialog() {
+  private closeDialog(): void {
     this.isDialogOpen = false;
   }
 }
