@@ -21,8 +21,6 @@ export class NavigationConfirmDialogComponent {
   }
 
   open() {
-    // eslint-disable-next-line no-console
-    console.log('open');
     this.isDialogOpen = true;
   }
 
