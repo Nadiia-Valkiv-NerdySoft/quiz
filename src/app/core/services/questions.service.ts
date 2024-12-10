@@ -24,10 +24,7 @@ export class QuestionsService {
   private addAllAnswersToQuestion(question: QuestionApiResponse): Question {
     return {
       ...question,
-      answers: [ ...question.incorrect_answers, question.correct_answer ].reduce(
-        (acc, answer) => [ ...acc, { id: answer, checked: false }],
-        [] as { id: string; checked: boolean }[],
-      ),
+      answers: [ ...question.incorrect_answers, question.correct_answer ],
     };
   }
 }

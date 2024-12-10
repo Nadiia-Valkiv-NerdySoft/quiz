@@ -2,7 +2,7 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { AVATAR_PATHS } from '../ui-quiz-card/ui-quiz-card.constants';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UiRadioGroupComponent } from '../ui-radio-group/ui-radio-group.component';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionsService } from '../../../core/services/questions.service';
@@ -22,6 +22,7 @@ import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-
     UiSpinnerComponent,
     AsyncPipe,
     UiErrorNotificationComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './ui-question-card.component.html',
 })
@@ -37,10 +38,16 @@ export class UiQuestionCardComponent implements OnInit {
   questions = signal<Question[]>([]);
   currentQuestionIndex = signal(0);
 
-  radioButtonControl = new FormControl('');
+  radioButtonControl = new FormControl('', Validators.required);
 
   currentQuestion = computed(
     () => this.questions()[this.currentQuestionIndex()] || ({} as Question),
+  );
+
+  isFirstQuestion = computed(() => this.currentQuestionIndex() === 0);
+
+  isLastQuestion = computed(
+    () => this.currentQuestionIndex() === this.numberOfQuestions - 1,
   );
 
   ngOnInit(): void {
@@ -58,5 +65,42 @@ export class UiQuestionCardComponent implements OnInit {
         this.questions.set(q);
       },
     });
+  }
+
+  nextQuestion(): void {
+    this.saveCurrentAnswer();
+    this.currentQuestionIndex.update(index => index + 1);
+    this.restorePreviousAnswer();
+  }
+
+  previousQuestion(): void {
+    if (!this.isFirstQuestion()) {
+      this.currentQuestionIndex.update(index => index - 1);
+      this.restorePreviousAnswer();
+    }
+  }
+
+  private saveCurrentAnswer(): void {
+    const updatedQuestions = [...this.questions()];
+    const currentIndex = this.currentQuestionIndex();
+
+    if (this.radioButtonControl.value) {
+      updatedQuestions[currentIndex] = {
+        ...updatedQuestions[currentIndex],
+        userAnswer: this.radioButtonControl.value,
+      };
+      this.questions.set(updatedQuestions);
+    }
+  }
+
+  private restorePreviousAnswer(): void {
+    const previousAnswer
+      = this.questions()[this.currentQuestionIndex()].userAnswer;
+
+    if (previousAnswer) {
+      this.radioButtonControl.setValue(previousAnswer);
+    } else {
+      this.radioButtonControl.reset();
+    }
   }
 }
