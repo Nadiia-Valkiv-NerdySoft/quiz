@@ -54,7 +54,7 @@
         <quiz-ui-button
           [variant]="'accent'"
           [disabled]="!radioButtonControl.valid"
-          route="/statistics"
+          (buttonClick)="finishQuiz()"
         >
           Finish the quiz</quiz-ui-button
         >

@@ -20,13 +20,13 @@ export class UiButtonComponent {
 
   private readonly sizeClasses: Record<ButtonSize, string> = {
     small: 'px-6 py-2 text-sm',
-    medium: 'px-4 py-6 text-base',
+    medium: 'px-4 py-4 text-base min-w-40',
     sizeLess: '',
   };
 
   private readonly typeClasses: Record<ButtonVariant, string> = {
     accent: 'bg-accent text-bright',
-    ghost: 'bg-transparent border border-secondary text-shade',
+    ghost: 'bg-transparent border',
     menu: 'z-10 text-bright',
   };
 
@@ -51,9 +51,9 @@ export class UiButtonComponent {
 
     return [
       ...baseClasses,
-      this.customClasses,
       this.sizeClasses[this.size()],
       this.typeClasses[this.variant()],
+      this.customClasses,
     ].join(' ');
   }
 

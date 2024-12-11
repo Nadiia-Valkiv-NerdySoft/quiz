@@ -4,13 +4,14 @@ import { UiButtonComponent } from '../ui-button/ui-button.component';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UiRadioGroupComponent } from '../ui-radio-group/ui-radio-group.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from '../../../core/services/questions.service';
 import { Question } from '../../models/question.model';
 import { UiSpinnerComponent } from '../ui-spinner/ui-spinner.component';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AsyncPipe } from '@angular/common';
 import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-notification.component';
+import { DialogService } from '../../../core/services/dialog.service';
 
 @Component({
   selector: 'quiz-ui-question-card',
@@ -27,9 +28,12 @@ import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-
   templateUrl: './ui-question-card.component.html',
 })
 export class UiQuestionCardComponent implements OnInit {
+  private readonly router = inject(Router);
+
   private readonly route = inject(ActivatedRoute);
   private readonly questionsService = inject(QuestionsService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
+  private readonly dialogService = inject(DialogService);
 
   private quizId!: number;
   numberOfQuestions!: number;
@@ -78,6 +82,12 @@ export class UiQuestionCardComponent implements OnInit {
       this.currentQuestionIndex.update(index => index - 1);
       this.restorePreviousAnswer();
     }
+  }
+
+  finishQuiz(): void {
+    this.dialogService.setQuizFinished(true);
+
+    this.router.navigate(['/statistics']);
   }
 
   private saveCurrentAnswer(): void {
