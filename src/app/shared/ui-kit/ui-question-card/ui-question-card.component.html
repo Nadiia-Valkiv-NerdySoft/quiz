@@ -19,24 +19,25 @@
     <quiz-ui-spinner></quiz-ui-spinner>
   } @else {
     <div class="space-y-4">
-      <h5 class="text-2xl-plus font-semibold md:text-3xl">
+      <h5 class="text-2xl font-semibold md:text-3xl">
         <p>Let's begin with this</p>
         <span class="bg-error" [innerHTML]="currentQuestion().category"></span>
       </h5>
 
       <form class="flex flex-col items-center">
         <p
-          class="mb-4 text-2xl-plus font-semibold md:text-3xl"
+          class="mb-4 text-2xl font-semibold md:text-3xl"
           [innerHTML]="currentQuestion().question"
         ></p>
         <quiz-ui-radio-group
+          class="self-start md:self-auto"
           [options]="currentQuestion().answers"
           [optionControl]="radioButtonControl"
         ></quiz-ui-radio-group>
       </form>
     </div>
 
-    <div class="flex items-center justify-between">
+    <div class="mt-5 flex items-center justify-between">
       <quiz-ui-button
         class="text-shade"
         [variant]="'ghost'"
