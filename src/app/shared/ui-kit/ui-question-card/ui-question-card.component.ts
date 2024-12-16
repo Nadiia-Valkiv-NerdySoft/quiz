@@ -35,7 +35,7 @@ export class UiQuestionCardComponent implements OnInit {
   private readonly errorHandlerService = inject(ErrorHandlerService);
   private readonly dialogService = inject(DialogService);
 
-  private subscription: Subscription;
+  private subscription!: Subscription;
 
   private quizId!: number;
   numberOfQuestions!: number;
