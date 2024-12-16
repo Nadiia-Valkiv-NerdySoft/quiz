@@ -29,7 +29,6 @@ import { DialogService } from '../../../core/services/dialog.service';
 })
 export class UiQuestionCardComponent implements OnInit {
   private readonly router = inject(Router);
-
   private readonly route = inject(ActivatedRoute);
   private readonly questionsService = inject(QuestionsService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
@@ -37,6 +36,7 @@ export class UiQuestionCardComponent implements OnInit {
 
   private quizId!: number;
   numberOfQuestions!: number;
+  isMessageVisible = false;
   avatarPath = AVATAR_PATHS.PROFILE_1;
   errorMessage$ = this.errorHandlerService.getErrorMessage$();
   questions = signal<Question[]>([]);
@@ -59,6 +59,10 @@ export class UiQuestionCardComponent implements OnInit {
     this.numberOfQuestions = +this.route.snapshot.paramMap.get('questions')!;
 
     this.loadQuestion();
+
+    this.radioButtonControl.valueChanges.subscribe(() => {
+      this.isMessageVisible = false;
+    });
   }
 
   loadQuestion(): void {
@@ -72,9 +76,13 @@ export class UiQuestionCardComponent implements OnInit {
   }
 
   nextQuestion(): void {
-    this.saveCurrentAnswer();
-    this.currentQuestionIndex.update(index => index + 1);
-    this.restorePreviousAnswer();
+    if (this.radioButtonControl.valid) {
+      this.saveCurrentAnswer();
+      this.currentQuestionIndex.update(index => index + 1);
+      this.restorePreviousAnswer();
+    } else {
+      this.isMessageVisible = true;
+    }
   }
 
   previousQuestion(): void {
@@ -85,9 +93,12 @@ export class UiQuestionCardComponent implements OnInit {
   }
 
   finishQuiz(): void {
-    this.dialogService.setQuizFinished(true);
-
-    this.router.navigate(['/statistics']);
+    if (this.radioButtonControl.valid) {
+      this.dialogService.setQuizFinished(true);
+      this.router.navigate(['/statistics']);
+    } else {
+      this.isMessageVisible = true;
+    }
   }
 
   private saveCurrentAnswer(): void {

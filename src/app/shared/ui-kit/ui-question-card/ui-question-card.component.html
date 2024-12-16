@@ -37,43 +37,48 @@
       </form>
     </div>
 
-    <div class="mt-5 flex items-center justify-between">
-      <quiz-ui-button
-        class="text-shade"
-        [variant]="'ghost'"
-        [disabled]="isFirstQuestion()"
-        (buttonClick)="previousQuestion()"
-        ><svg-icon
-          [src]="'assets/icons/chevron-left.svg'"
-          [svgClass]="'h-6 w-6 text-shade'"
-          [applyClass]="true"
-        ></svg-icon>
-        <span class="md:hidden">Prev</span>
-        <span class="hidden md:inline">Prev question</span></quiz-ui-button
-      >
-      @if (isLastQuestion()) {
+    <div class="my-5 flex items-center justify-between">
+      <div>
+        @if (!isFirstQuestion()) {
+          <quiz-ui-button
+            [variant]="'accent'"
+            (buttonClick)="previousQuestion()"
+            ><svg-icon
+              [src]="'assets/icons/chevron-left.svg'"
+              [svgClass]="'h-6 w-6 text-shade'"
+              [applyClass]="true"
+            ></svg-icon>
+            <span class="md:hidden">Prev</span>
+            <span class="hidden md:inline">Prev question</span></quiz-ui-button
+          >
+        }
+      </div>
+
+      <div class="flex">
         <quiz-ui-button
           [variant]="'accent'"
-          [disabled]="!radioButtonControl.valid"
-          (buttonClick)="finishQuiz()"
+          (buttonClick)="isLastQuestion() ? finishQuiz() : nextQuestion()"
         >
-          Finish the quiz</quiz-ui-button
-        >
-      } @else {
-        <quiz-ui-button
-          [variant]="'accent'"
-          [disabled]="!radioButtonControl.valid"
-          (buttonClick)="nextQuestion()"
-        >
-          <span class="md:hidden">Next</span>
-          <span class="hidden md:inline">Next question</span>
+          <span class="md:hidden">{{
+            isLastQuestion() ? 'Finish' : 'Next'
+          }}</span>
+          <span class="hidden md:inline">
+            {{ isLastQuestion() ? 'Finish the quiz' : 'Next question' }}</span
+          >
           <svg-icon
             [src]="'assets/icons/chevron-left.svg'"
             [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
             [applyClass]="true"
           ></svg-icon
         ></quiz-ui-button>
-      }
+        @if (isMessageVisible) {
+          <span
+            class="absolute mt-10 max-w-24 text-xs font-bold text-error md:max-w-40"
+          >
+            Please choose an answer
+          </span>
+        }
+      </div>
     </div>
   }
 </div>
