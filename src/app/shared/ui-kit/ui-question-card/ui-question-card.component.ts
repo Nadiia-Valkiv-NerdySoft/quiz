@@ -12,6 +12,7 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { AsyncPipe } from '@angular/common';
 import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-notification.component';
 import { DialogService } from '../../../core/services/dialog.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'quiz-ui-question-card',
@@ -33,6 +34,8 @@ export class UiQuestionCardComponent implements OnInit {
   private readonly questionsService = inject(QuestionsService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
   private readonly dialogService = inject(DialogService);
+
+  private subscription: Subscription;
 
   private quizId!: number;
   numberOfQuestions!: number;
@@ -59,10 +62,13 @@ export class UiQuestionCardComponent implements OnInit {
     this.numberOfQuestions = +this.route.snapshot.paramMap.get('questions')!;
 
     this.loadQuestion();
+    this.resetStepMessage();
+  }
 
-    this.radioButtonControl.valueChanges.subscribe(() => {
-      this.isMessageVisible = false;
-    });
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   loadQuestion(): void {
@@ -123,5 +129,11 @@ export class UiQuestionCardComponent implements OnInit {
     } else {
       this.radioButtonControl.reset();
     }
+  }
+
+  private resetStepMessage(): void {
+    this.subscription = this.radioButtonControl.valueChanges.subscribe(() => {
+      this.isMessageVisible = false;
+    });
   }
 }
