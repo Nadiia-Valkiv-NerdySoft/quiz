@@ -73,14 +73,6 @@ export class UiQuestionCardComponent implements OnInit {
 
   private handleBeforeUnload = (event: BeforeUnloadEvent): void => {
     if (!this.dialogService.canLeavePage()) {
-      // this.dialogService.setDialogState(reloadPageDialog);
-      // this.dialogService.openConfirmDialog();
-
-      // this.dialogService.status$.pipe(first()).subscribe((status) => {
-      //   if (status) {
-      //     window.location.reload();
-      //   }
-      // });
       event.preventDefault();
     }
   };

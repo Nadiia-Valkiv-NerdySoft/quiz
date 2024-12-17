@@ -8,15 +8,6 @@ export const finishQuizDialog: DialogState = {
   confirmText: 'Finish',
 };
 
-export const reloadPageDialog: DialogState = {
-  isOpen: false,
-  title: 'Reload Page',
-  message:
-    'Are you sure you want to reload the page? Your answers will not be saved.',
-  cancelText: 'Stay',
-  confirmText: 'Reload',
-};
-
 export const defaultDialog: DialogState = {
   isOpen: false,
   title: 'Cancel quiz',
