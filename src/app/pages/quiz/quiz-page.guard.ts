@@ -11,7 +11,7 @@ export class QuizPageGuard implements CanDeactivate<QuizComponent> {
   dialogService = inject(DialogService);
 
   canDeactivate(): Observable<boolean> {
-    if (this.dialogService.isQuizFinished()) {
+    if (this.dialogService.canLeavePage()) {
       return of(true);
     }
 

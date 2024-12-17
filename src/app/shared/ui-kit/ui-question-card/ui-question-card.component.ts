@@ -63,6 +63,7 @@ export class UiQuestionCardComponent implements OnInit {
 
     this.loadQuestion();
     this.resetStepMessage();
+    this.dialogService.setCanPageLeaveStatus(false);
   }
 
   ngOnDestroy(): void {
@@ -100,7 +101,7 @@ export class UiQuestionCardComponent implements OnInit {
 
   finishQuiz(): void {
     if (this.radioButtonControl.valid) {
-      this.dialogService.setQuizFinished(true);
+      this.dialogService.setCanPageLeaveStatus(true);
       this.router.navigate(['/statistics']);
     } else {
       this.isMessageVisible = true;
