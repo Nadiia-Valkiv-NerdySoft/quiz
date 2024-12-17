@@ -65,7 +65,7 @@ export class UiQuestionCardComponent implements OnInit {
     this.resetStepMessage();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
