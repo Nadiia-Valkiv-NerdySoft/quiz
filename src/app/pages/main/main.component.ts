@@ -7,8 +7,4 @@ import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.compo
   imports: [UiButtonComponent],
   templateUrl: './main.component.html',
 })
-export class MainComponent {
-  handleButtonClick() {
-    alert('opening catalog page');
-  }
-}
+export class MainComponent {}

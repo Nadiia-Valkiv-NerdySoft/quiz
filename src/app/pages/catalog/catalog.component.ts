@@ -40,10 +40,6 @@ export class CatalogComponent implements OnInit {
     this.loadCategories();
   }
 
-  simulateError(): void {
-    this.errorHandlerService.setError();
-  }
-
   goToRandomQuiz(): void {
     this.categories$.pipe(take(1)).subscribe((categories) => {
       const randomIndex = this.randomizationService.getRandomInt(
