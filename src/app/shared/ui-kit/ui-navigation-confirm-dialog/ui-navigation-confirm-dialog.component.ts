@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
 import { DialogService } from '../../../core/services/dialog.service';
 import { Subscription } from 'rxjs';
+import { DialogState } from './dialog-state.interface';
 
 @Component({
   selector: 'quiz-ui-navigation-confirm-dialog',
@@ -11,17 +12,20 @@ import { Subscription } from 'rxjs';
 })
 export class NavigationConfirmDialogComponent {
   dialogService = inject(DialogService);
-  isDialogOpen = false;
+  dialogState: DialogState = {
+    isOpen: false,
+    title: '',
+    message: '',
+    cancelText: '',
+    confirmText: '',
+  };
+
   private subscription!: Subscription;
 
   ngOnInit(): void {
-    this.subscription = this.dialogService.openDialog$.subscribe(() => {
-      this.open();
+    this.subscription = this.dialogService.openDialog$.subscribe((state) => {
+      this.dialogState = state;
     });
-  }
-
-  open(): void {
-    this.isDialogOpen = true;
   }
 
   onConfirm(): void {
@@ -35,6 +39,13 @@ export class NavigationConfirmDialogComponent {
   }
 
   private closeDialog(): void {
-    this.isDialogOpen = false;
+    this.dialogState = {
+      ...this.dialogState,
+      isOpen: false,
+    };
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }

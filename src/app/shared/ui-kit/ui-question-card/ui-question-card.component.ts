@@ -13,6 +13,7 @@ import { AsyncPipe } from '@angular/common';
 import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-notification.component';
 import { DialogService } from '../../../core/services/dialog.service';
 import { Subscription } from 'rxjs';
+import { defaultDialog, finishQuizDialog } from '../../constants/dialog-states';
 
 @Component({
   selector: 'quiz-ui-question-card',
@@ -63,14 +64,26 @@ export class UiQuestionCardComponent implements OnInit {
 
     this.loadQuestion();
     this.resetStepMessage();
-    this.dialogService.setCanPageLeaveStatus(false);
+
+    this.dialogService.setCanPageLeaveStatus(true);
+    this.dialogService.setDialogState(defaultDialog);
+
+    window.addEventListener('beforeunload', this.handleBeforeUnload);
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  private handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+    if (!this.dialogService.canLeavePage()) {
+      // this.dialogService.setDialogState(reloadPageDialog);
+      // this.dialogService.openConfirmDialog();
+
+      // this.dialogService.status$.pipe(first()).subscribe((status) => {
+      //   if (status) {
+      //     window.location.reload();
+      //   }
+      // });
+      event.preventDefault();
     }
-  }
+  };
 
   loadQuestion(): void {
     this.questionsService
@@ -101,7 +114,8 @@ export class UiQuestionCardComponent implements OnInit {
 
   finishQuiz(): void {
     if (this.radioButtonControl.valid) {
-      this.dialogService.setCanPageLeaveStatus(true);
+      this.dialogService.setDialogState(finishQuizDialog);
+
       this.router.navigate(['/statistics']);
     } else {
       this.isMessageVisible = true;
@@ -134,7 +148,15 @@ export class UiQuestionCardComponent implements OnInit {
 
   private resetStepMessage(): void {
     this.subscription = this.radioButtonControl.valueChanges.subscribe(() => {
+      this.dialogService.setCanPageLeaveStatus(false);
       this.isMessageVisible = false;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    window.removeEventListener('beforeunload', this.handleBeforeUnload);
   }
 }
