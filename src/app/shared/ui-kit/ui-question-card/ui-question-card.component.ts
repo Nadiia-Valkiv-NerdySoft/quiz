@@ -149,6 +149,7 @@ export class UiQuestionCardComponent implements OnInit {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+
     window.removeEventListener('beforeunload', this.handleBeforeUnload);
   }
 }
