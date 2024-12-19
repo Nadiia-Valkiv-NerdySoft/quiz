@@ -14,8 +14,29 @@
     Good try! Why not have another go? You might get a bigger score!
   </p>
 
-  <div class="min-h-10 min-w-4 bg-bright">
-    <p class="text-3xl font-bold text-secondary">My statistics</p>
+  <div
+    class="flex flex-col items-center justify-center rounded-3xl bg-bright p-7"
+  >
+    <p class="text-3xl font-bold text-primary">My statistics</p>
+    <div class="flex flex-wrap items-center gap-5">
+      <ngx-charts-pie-chart
+        [results]="data"
+        [animations]="true"
+        [doughnut]="true"
+        [arcWidth]="0.5"
+        [scheme]="colorScheme"
+        [view]="[240, 240]"
+      >
+      </ngx-charts-pie-chart>
+      <div class="flex flex-col gap-3">
+        <quiz-ui-chart-legend-item
+          *ngFor="let item of data; trackBy: trackByItem"
+          [item]="item"
+          [backgroundColor]="getColor(item.name)"
+        >
+        </quiz-ui-chart-legend-item>
+      </div>
+    </div>
   </div>
 
   <quiz-ui-button class="my-4" variant="accent" route="/"
