@@ -32,7 +32,9 @@
     "@ngneat/elf": "^2.5.1",
     "@ngneat/elf-entities": "^5.0.2",
     "@ngneat/elf-requests": "^1.9.2",
+    "@swimlane/ngx-charts": "^21.1.0",
     "angular-svg-icon": "^18.0.2",
+    "d3": "^7.9.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

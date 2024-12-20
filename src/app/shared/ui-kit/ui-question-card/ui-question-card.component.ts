@@ -14,6 +14,7 @@ import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-
 import { DialogService } from '../../../core/services/dialog.service';
 import { Subscription } from 'rxjs';
 import { defaultDialog, finishQuizDialog } from '../../constants/dialog-states';
+import { StatisticsService } from '../../../core/services/statistics.service';
 
 @Component({
   selector: 'quiz-ui-question-card',
@@ -35,6 +36,7 @@ export class UiQuestionCardComponent implements OnInit {
   private readonly questionsService = inject(QuestionsService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
   private readonly dialogService = inject(DialogService);
+  private readonly statisticsService = inject(StatisticsService);
 
   private subscription!: Subscription;
 
@@ -45,6 +47,8 @@ export class UiQuestionCardComponent implements OnInit {
   errorMessage$ = this.errorHandlerService.getErrorMessage$();
   questions = signal<Question[]>([]);
   currentQuestionIndex = signal(0);
+  score = 0;
+  startTime: number = 0;
 
   radioButtonControl = new FormControl('', Validators.required);
 
@@ -63,6 +67,8 @@ export class UiQuestionCardComponent implements OnInit {
     this.numberOfQuestions = +this.route.snapshot.paramMap.get('questions')!;
 
     this.loadQuestion();
+    this.startTime = Date.now();
+
     this.resetStepMessage();
 
     this.dialogService.setCanPageLeaveStatus(true);
@@ -70,12 +76,6 @@ export class UiQuestionCardComponent implements OnInit {
 
     window.addEventListener('beforeunload', this.handleBeforeUnload);
   }
-
-  private handleBeforeUnload = (event: BeforeUnloadEvent): void => {
-    if (!this.dialogService.canLeavePage()) {
-      event.preventDefault();
-    }
-  };
 
   loadQuestion(): void {
     this.questionsService
@@ -107,6 +107,12 @@ export class UiQuestionCardComponent implements OnInit {
   finishQuiz(): void {
     if (this.radioButtonControl.valid) {
       this.dialogService.setDialogState(finishQuizDialog);
+      this.calculateScore();
+      this.statisticsService.updateTemporaryLastQuizStatistic(
+        this.score,
+        this.questions().length,
+        this.startTime,
+      );
 
       this.router.navigate(['/statistics']);
     } else {
@@ -143,6 +149,18 @@ export class UiQuestionCardComponent implements OnInit {
       this.dialogService.setCanPageLeaveStatus(false);
       this.isMessageVisible = false;
     });
+  }
+
+  private handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+    if (!this.dialogService.canLeavePage()) {
+      event.preventDefault();
+    }
+  };
+
+  private calculateScore(): void {
+    this.score = this.questions().reduce((acc, question) => {
+      return acc + (question.correct_answer === question.userAnswer ? 1 : 0);
+    }, 0);
   }
 
   ngOnDestroy(): void {
