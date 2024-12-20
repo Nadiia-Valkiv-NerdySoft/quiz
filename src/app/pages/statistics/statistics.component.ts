@@ -33,6 +33,7 @@ export class StatisticsComponent implements OnInit {
   lastQuizData: LastQuizData = INITIAL_QUIZ_STATISTIC;
 
   ngOnInit(): void {
+    this.statisticsService.updateStatistic();
     this.loadStatistics();
   }
 

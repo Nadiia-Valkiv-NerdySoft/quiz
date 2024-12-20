@@ -4,13 +4,17 @@ import {
   Statistic,
 } from '../../shared/models/statistic.model';
 import { UserStatistic } from '../../shared/models/user-statistic.model';
-import { QuizStatistic } from '../../shared/models/quiz-statistic.model';
+import {
+  INITIAL_QUIZ_STATISTIC,
+  QuizStatistic,
+} from '../../shared/models/quiz-statistic.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StatisticsService {
   private readonly STORAGE_KEY = 'statisticPageData';
+  temporaryLastQuizStatistic: QuizStatistic = INITIAL_QUIZ_STATISTIC;
 
   getStatistic(): Statistic {
     const data = localStorage.getItem(this.STORAGE_KEY);
@@ -21,56 +25,48 @@ export class StatisticsService {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
   }
 
-  updateStatistic(
+  updateTemporaryLastQuizStatistic(
     score: number,
     numberOfQuestions: number,
     startTime: number,
   ): void {
-    const statistic = this.getStatistic();
     const timeTaken = this.calculateTakenTimeOnQuiz(startTime);
 
-    this.updateLastQuizStatistic(
-      statistic.lastQuizData,
-      score,
-      numberOfQuestions,
-      timeTaken,
-    );
+    this.temporaryLastQuizStatistic = {
+      rightAnswers: score,
+      allAnswers: numberOfQuestions,
+      time: timeTaken,
+    };
+  }
 
-    this.updateUserStatistic(
-      statistic.userStatistic,
-      score,
-      numberOfQuestions,
-      timeTaken,
-    );
+  updateStatistic(): void {
+    const statistic = this.getStatistic();
+    this.updateLastQuizStatistic(statistic.lastQuizData);
+
+    this.updateUserStatistic(statistic.userStatistic);
 
     this.saveStatistic(statistic);
   }
 
-  private updateLastQuizStatistic(
-    lastQuizData: QuizStatistic,
-    score: number,
-    numberOfQuestions: number,
-    timeTaken: number,
-  ): void {
-    lastQuizData.rightAnswers = score;
-    lastQuizData.allAnswers = numberOfQuestions;
-    lastQuizData.time = timeTaken;
+  private updateLastQuizStatistic(lastQuizData: QuizStatistic): void {
+    lastQuizData.rightAnswers = this.temporaryLastQuizStatistic.rightAnswers;
+    lastQuizData.allAnswers = this.temporaryLastQuizStatistic.allAnswers;
+    lastQuizData.time = this.temporaryLastQuizStatistic.time;
   }
 
-  private updateUserStatistic(
-    userStatistic: UserStatistic,
-    score: number,
-    numberOfQuestions: number,
-    timeTaken: number,
-  ): void {
+  private updateUserStatistic(userStatistic: UserStatistic): void {
     userStatistic.numberOfQuizzes += 1;
-    userStatistic.numberOfAllQuestions += numberOfQuestions;
-    userStatistic.numberOfRightQuestions += score;
-    userStatistic.numberOfWrongQuestions += numberOfQuestions - score;
+    userStatistic.numberOfAllQuestions
+      += this.temporaryLastQuizStatistic.allAnswers;
+    userStatistic.numberOfRightQuestions
+      += this.temporaryLastQuizStatistic.rightAnswers;
+    userStatistic.numberOfWrongQuestions
+      += this.temporaryLastQuizStatistic.allAnswers
+      - this.temporaryLastQuizStatistic.rightAnswers;
 
     const totalTime = this.calculateTotalTimeOnQuizzes(
       userStatistic,
-      timeTaken,
+      this.temporaryLastQuizStatistic.time,
     );
     userStatistic.averageTimePerOneQuiz = this.calculateAverageTimeOnQuiz(
       totalTime,
