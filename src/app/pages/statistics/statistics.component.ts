@@ -1,47 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import {
   StatisticItem,
   UiChartLegendItemComponent,
 } from '../../shared/ui-kit/ui-chart-legend-item/ui-chart-legend-item.component';
+import { StatisticsService } from '../../core/services/statistics.service';
+import { TimeFormatPipe } from './time-format.pipe';
+import { INITIAL_QUIZ_STATISTIC } from '../../shared/models/quiz-statistic.model';
+import { UserStatistic } from '../../shared/models/user-statistic.model';
+
+interface LastQuizData {
+  rightAnswers: number;
+  allAnswers: number;
+  time: number;
+}
 
 @Component({
   selector: 'quiz-statistics',
   standalone: true,
-  imports: [ UiButtonComponent, NgxChartsModule, UiChartLegendItemComponent ],
+  imports: [
+    UiButtonComponent,
+    NgxChartsModule,
+    UiChartLegendItemComponent,
+    TimeFormatPipe,
+  ],
   templateUrl: './statistics.component.html',
 })
-export class StatisticsComponent {
-  numberOfQuizzes = 33;
-  numberOfAllQuestions = 67;
-  numberOfRightQuestions = 60;
-  numberOfWrongQuestions = 7;
-  averageTimePerOneQuiz = 24;
+export class StatisticsComponent implements OnInit {
+  private statisticsService = inject(StatisticsService);
+  donutChartData: StatisticItem[] = [];
+  lastQuizData: LastQuizData = INITIAL_QUIZ_STATISTIC;
 
-  data: StatisticItem[] = [
-    {
-      name: 'Quizzes played',
-      value: this.numberOfQuizzes,
-      extra: 'Quizzes were played',
-    },
-    {
-      name: 'Questions answered',
-      value: this.numberOfAllQuestions,
-      extra: 'Questions have been answered',
-      numberOfRightQ: this.numberOfRightQuestions,
-      numberOfWrongQ: this.numberOfWrongQuestions,
-    },
-    {
-      name: 'Average time',
-      value: this.averageTimePerOneQuiz,
-      extra: 'Average time of answering quizzes',
-    },
-  ];
+  ngOnInit(): void {
+    this.loadStatistics();
+  }
+
+  private loadStatistics(): void {
+    const statsData = this.statisticsService.getStatistic();
+
+    if (statsData) {
+      const { lastQuizData, userStatistic: statisticData } = statsData;
+      this.lastQuizData = lastQuizData;
+
+      this.createDonutChartData(statisticData);
+    }
+  }
+
+  createDonutChartData(statisticData: UserStatistic): void {
+    this.donutChartData = [
+      {
+        name: 'Quizzes played',
+        value: statisticData.numberOfQuizzes,
+        extra: 'Quizzes were played',
+      },
+      {
+        name: 'Questions answered',
+        value: statisticData.numberOfAllQuestions,
+        extra: 'Questions have been answered',
+        numberOfRightQ: statisticData.numberOfRightQuestions,
+        numberOfWrongQ: statisticData.numberOfWrongQuestions,
+      },
+      {
+        name: 'Average time',
+        value: statisticData.averageTimePerOneQuiz,
+        extra: 'Average time of answering quizzes',
+      },
+    ];
+  }
 
   getColor(name: string): string {
     const item = this.colorScheme.domain.find(
-      (color, index) => this.data[index]?.name === name,
+      (color, index) => this.donutChartData[index]?.name === name,
     );
     return item || '#000';
   }
