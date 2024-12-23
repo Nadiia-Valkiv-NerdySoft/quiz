@@ -15,7 +15,6 @@ export class UiHeaderComponent {
   navItems = [
     { label: 'Home', link: '' },
     { label: 'Catalog', link: 'catalog' },
-    { label: 'Statistics', link: 'statistics' },
   ];
 
   toggleMenu() {
