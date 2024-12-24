@@ -1,10 +1,18 @@
-import type { Config } from 'jest';
-
-const jestConfig: Config = {
+export default {
   preset: 'jest-preset-angular',
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  testPathIgnorePatterns: [ '<rootDir>/node_modules/', '<rootDir>/dist/' ],
   globalSetup: 'jest-preset-angular/global-setup',
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  reporters: [
+    'default',
+    [
+      'jest-html-reporters',
+      {
+        publicPath: './reports',
+        filename: 'test-report.html',
+        openReport: false,
+      },
+    ],
+  ],
 };
-
-export default jestConfig;
