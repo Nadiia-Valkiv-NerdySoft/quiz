@@ -13,9 +13,9 @@
     "lint:eslint": "eslint .",
     "lint:eslint:fix": "eslint . --fix",
     "prepare": "husky",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "lint-staged": {
     "*.ts": "eslint --fix",
