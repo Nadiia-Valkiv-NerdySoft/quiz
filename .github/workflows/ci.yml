@@ -21,5 +21,15 @@ jobs:
       - name: Run Linting
         run: npm run lint
 
+      - name: Run Tests
+        run: npm test
+
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: jest-test-report
+          path: ./reports/test-report.html
+
       - name: Build Project
         run: npm run build
