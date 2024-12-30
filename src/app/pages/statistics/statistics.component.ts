@@ -6,15 +6,10 @@ import {
   UiChartLegendItemComponent,
 } from '../../shared/ui-kit/ui-chart-legend-item/ui-chart-legend-item.component';
 import { StatisticsService } from '../../core/services/statistics.service';
-import { TimeFormatPipe } from './time-format.pipe';
 import { INITIAL_QUIZ_STATISTIC } from '../../shared/models/quiz-statistic.model';
 import { UserStatistic } from '../../shared/models/user-statistic.model';
-
-interface LastQuizData {
-  rightAnswers: number;
-  allAnswers: number;
-  time: number;
-}
+import { LastQuizData } from '../../shared/models/last-quiz-data.model';
+import { QuizFeedbackComponent } from '../../shared/ui-kit/ui-quiz-feedback/ui-quiz-feedback.component';
 
 @Component({
   selector: 'quiz-statistics',
@@ -23,7 +18,7 @@ interface LastQuizData {
     UiButtonComponent,
     NgxChartsModule,
     UiChartLegendItemComponent,
-    TimeFormatPipe,
+    QuizFeedbackComponent,
   ],
   templateUrl: './statistics.component.html',
 })

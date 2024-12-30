@@ -1,24 +1,5 @@
 <div class="flex flex-col items-center justify-center gap-5 p-7">
-  <h2>
-    <span class="py-2 text-4xl font-semibold md:text-6xl-plus"
-      >Your Score
-    </span>
-    <span class="text-4xl text-error md:text-7xl">:</span>
-  </h2>
-
-  <p>
-    <span class="bg-warning p-1 text-3xl font-semibold text-primary">{{
-      lastQuizData.rightAnswers
-    }}</span>
-    <span class="p-1 font-medium">/{{ lastQuizData.allAnswers }}</span>
-  </p>
-  <h6 class="text-2xl font-semibold">
-    {{ lastQuizData.time | timeFormat }}
-  </h6>
-  <p class="text-center">
-    Good try! Why not have another go? You might get a bigger score!
-  </p>
-
+  <quiz-ui-quiz-feedback [lastQuizData]="lastQuizData"></quiz-ui-quiz-feedback>
   <div
     class="flex flex-col items-center justify-center rounded-3xl bg-bright p-7"
   >
