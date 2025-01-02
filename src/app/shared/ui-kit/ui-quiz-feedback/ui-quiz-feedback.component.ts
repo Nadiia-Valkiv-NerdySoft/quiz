@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { LastQuizData } from '../../models/last-quiz-data.model';
 import { TimeFormatPipe } from './time-format.pipe';
 import {
-  QUIZ_FEEDBACK_Default_MESSAGE,
+  QUIZ_FEEDBACK_DEFAULT_MESSAGE,
   QUIZ_FEEDBACK_MESSAGES,
 } from '../../constants/quiz-feedback-messages';
 
@@ -28,6 +28,6 @@ export class QuizFeedbackComponent {
       item => percentage <= item.maxPercentage,
     );
 
-    return feedback?.message || QUIZ_FEEDBACK_Default_MESSAGE;
+    return feedback?.message || QUIZ_FEEDBACK_DEFAULT_MESSAGE;
   }
 }

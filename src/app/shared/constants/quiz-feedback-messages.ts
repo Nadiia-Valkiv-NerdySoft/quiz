@@ -22,5 +22,5 @@ export const QUIZ_FEEDBACK_MESSAGES = [
   },
 ];
 
-export const QUIZ_FEEDBACK_Default_MESSAGE
+export const QUIZ_FEEDBACK_DEFAULT_MESSAGE
   = 'Something went wrong. Please try again later.';
