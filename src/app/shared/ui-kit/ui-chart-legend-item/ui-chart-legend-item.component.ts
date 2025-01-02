@@ -4,9 +4,6 @@ export interface StatisticItem {
   name: string;
   value: number;
   extra: string;
-  numberOfRightQ?: number;
-  numberOfWrongQ?: number;
-  averageTimePerQ?: number;
 }
 
 @Component({
@@ -23,10 +20,9 @@ export class UiChartLegendItemComponent {
     return this.item().value;
   }
 
-  get hasQuestionStats(): boolean {
-    return (
-      this.item().numberOfRightQ !== undefined
-      && this.item().numberOfWrongQ !== undefined
-    );
+  getTextClass(): string {
+    return this.item().extra === 'Correct answers'
+      ? 'text-success'
+      : 'text-error';
   }
 }
