@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 .firebase
-reports/test-report.html
+.reports

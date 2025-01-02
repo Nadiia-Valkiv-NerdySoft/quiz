@@ -35,6 +35,13 @@
           [optionControl]="radioButtonControl"
         ></quiz-ui-radio-group>
       </form>
+      <div class="flex items-center justify-center">
+        @if (isMessageVisible) {
+          <span class="absolute text-xs font-bold text-error">
+            *Please choose an answer
+          </span>
+        }
+      </div>
     </div>
 
     <div class="my-5 flex items-center justify-between">
@@ -71,13 +78,6 @@
             [applyClass]="true"
           ></svg-icon
         ></quiz-ui-button>
-        @if (isMessageVisible) {
-          <span
-            class="absolute mt-10 max-w-24 text-xs font-bold text-error md:max-w-40"
-          >
-            Please choose an answer
-          </span>
-        }
       </div>
     </div>
   }
