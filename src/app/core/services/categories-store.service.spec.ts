@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CategoriesStoreService } from './categories-store.service';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
-import { addEntities } from '@ngneat/elf-entities';
+import { addEntities, selectAllEntities } from '@ngneat/elf-entities';
 import { quizCategoriesStore } from '../../store/categories.store';
 
 describe('CategoriesStoreService', () => {
@@ -44,7 +44,7 @@ describe('CategoriesStoreService', () => {
 
     service.addCategories(mockCategories);
 
-    service.getCategories().subscribe((categories) => {
+    quizCategoriesStore.pipe(selectAllEntities()).subscribe((categories) => {
       expect(categories).toEqual(mockCategories);
       done();
     });
