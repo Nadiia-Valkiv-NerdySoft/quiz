@@ -5,6 +5,7 @@ import { CategoriesService } from './categories.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { RandomizationService } from './randomization.service';
 import { of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('CategoriesService', () => {
   let categoriesService: CategoriesService;
@@ -82,18 +83,19 @@ describe('CategoriesService', () => {
 
     it('should handle errors from api using ErrorHandlerService', (done) => {
       // Arrange
-      const error = new Error('API is down');
-      const handledError = new Error('Handled Error');
+      const error = new HttpErrorResponse({
+        error: 'API is down',
+        status: 500,
+        statusText: 'Internal Server Error',
+      });
       apiService.fetchCategories.mockReturnValue(throwError(() => error));
-      errorHandlerService.handleError.mockReturnValue(
-        throwError(() => handledError),
-      );
+      errorHandlerService.handleError.mockReturnValue(throwError(() => error));
       // Act
       categoriesService.getRandomCategories().subscribe({
         error: (err) => {
           // Assert
           expect(errorHandlerService.handleError).toHaveBeenCalledWith(error);
-          expect(err).toEqual(handledError);
+          expect(err).toEqual(error);
           done();
         },
       });
