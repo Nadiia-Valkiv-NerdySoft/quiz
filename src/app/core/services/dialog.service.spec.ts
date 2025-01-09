@@ -32,7 +32,8 @@ describe('DialogService', () => {
       // Act
       dialogService.setDialogState(expectedState);
       // Assert
-      expect(dialogService.dialogState).toBe(expectedState);
+      // eslint-disable-next-line dot-notation
+      expect(dialogService['dialogState']).toBe(expectedState);
     });
   });
 
@@ -49,7 +50,8 @@ describe('DialogService', () => {
       // Act
       dialogService.openConfirmDialog();
       // Assert
-      expect(dialogService.dialogState.isOpen).toBe(true);
+      // eslint-disable-next-line dot-notation
+      expect(dialogService['dialogState'].isOpen).toBe(true);
     });
   });
 
