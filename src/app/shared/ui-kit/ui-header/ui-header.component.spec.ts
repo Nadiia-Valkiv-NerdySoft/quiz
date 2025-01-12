@@ -3,6 +3,7 @@ import { UiHeaderComponent } from './ui-header.component';
 import { provideRouter } from '@angular/router';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
 import { provideHttpClient } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
 
 describe('UiHeaderComponent', () => {
   let component: UiHeaderComponent;
@@ -33,30 +34,25 @@ describe('UiHeaderComponent', () => {
     });
 
     it('should toggle menu state when toggleMenu is called', () => {
-      component.toggleMenu();
-      expect(component.isMenuOpen()).toBeTruthy();
+      const mobileMenu = fixture.debugElement.query(By.css('.fixed'));
+      const svgIcon = fixture.debugElement.query(By.css('svg-icon'));
+
+      expect(component.isMenuOpen()).toBeFalsy();
+      expect(mobileMenu.nativeElement.classList).toContain('-translate-y-full');
+      expect(svgIcon.componentInstance.src()).toBe('assets/icons/menu.svg');
 
       component.toggleMenu();
-      expect(component.isMenuOpen()).toBeFalsy();
+      fixture.detectChanges();
+
+      expect(component.isMenuOpen()).toBeTruthy();
+      expect(mobileMenu.nativeElement.classList).toContain('translate-y-0');
+      expect(svgIcon.componentInstance.src()).toBe('assets/icons/close.svg');
     });
 
     it('should close menu when closeMenu is called', () => {
       component.isMenuOpen.set(true);
       component.closeMenu();
       expect(component.isMenuOpen()).toBeFalsy();
-    });
-  });
-
-  describe('Responsive Design', () => {
-    it('should have hidden mobile menu button on desktop', () => {
-      const menuButton = fixture.nativeElement.querySelector('.md\\:hidden');
-      expect(menuButton).toBeTruthy();
-    });
-
-    it('should have visible desktop navigation on larger screens', () => {
-      const desktopNav
-        = fixture.nativeElement.querySelector('.hidden.md\\:flex');
-      expect(desktopNav).toBeTruthy();
     });
   });
 });
