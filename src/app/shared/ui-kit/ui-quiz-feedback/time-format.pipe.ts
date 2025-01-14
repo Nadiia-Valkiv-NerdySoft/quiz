@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimeFormatPipe implements PipeTransform {
   transform(value: number): string {
-    if (!value && value !== 0) {
+    if (!value || value <= 0) {
       return '0 sec';
     }
 
