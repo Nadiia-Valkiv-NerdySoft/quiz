@@ -48,7 +48,8 @@ describe('QuizComponent', () => {
     const button = fixture.debugElement.query(By.css('quiz-ui-button'));
     expect(button).toBeTruthy();
     expect(button.nativeElement.textContent).toContain('Back to all Quizzes');
-    expect(button.attributes.route).toBe('/catalog');
+    // eslint-disable-next-line dot-notation
+    expect(button.attributes?.['route']).toBe('/catalog');
   });
 
   it('should render the navigation confirm dialog component', () => {
