@@ -2,8 +2,9 @@ export default {
   preset: 'jest-preset-angular',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  globalSetup: 'jest-preset-angular/global-setup',
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!d3-selection|internmap|d3-*|@swimlane/ngx-charts|.*\\.mjs$)',
+  ],
   reporters: [
     'default',
     [
