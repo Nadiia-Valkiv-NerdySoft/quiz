@@ -73,12 +73,12 @@ describe('StatisticsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should call updateStatistic on init', () => {
-      expect(statisticsService.updateStatistic).toHaveBeenCalledTimes(1);
+    it('should not call updateStatistic on init when no played quizzes', () => {
+      expect(statisticsService.updateStatistic).toHaveBeenCalledTimes(0);
     });
 
     it('should load statistics on init', () => {
-      expect(statisticsService.getStatistic).toHaveBeenCalledTimes(2);
+      expect(statisticsService.getStatistic).toHaveBeenCalledTimes(1);
       expect(statisticsService.getStatistic()).toEqual(mockStatisticsData);
     });
 

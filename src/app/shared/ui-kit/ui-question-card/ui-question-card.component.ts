@@ -106,6 +106,7 @@ export class UiQuestionCardComponent implements OnInit {
 
   finishQuiz(): void {
     if (this.radioButtonControl.valid) {
+      this.saveCurrentAnswer();
       this.dialogService.setDialogState(finishQuizDialog);
       this.calculateScore();
       this.statisticsService.updateTemporaryLastQuizStatistic(
