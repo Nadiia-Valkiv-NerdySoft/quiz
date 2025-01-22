@@ -29,7 +29,9 @@ export class StatisticsComponent implements OnInit {
   userStatistic = signal<UserStatistic>(INITIAL_USER_STATISTIC);
 
   ngOnInit(): void {
-    this.statisticsService.updateStatistic();
+    if (this.statisticsService.temporaryLastQuizStatistic.allAnswers !== 0) {
+      this.statisticsService.updateStatistic();
+    }
     this.loadStatistics();
   }
 

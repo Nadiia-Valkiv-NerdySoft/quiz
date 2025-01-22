@@ -79,8 +79,9 @@ export class StatisticsService {
     timeTaken: number,
   ): number {
     return (
-      userStatistic.averageTimePerOneQuiz * userStatistic.numberOfQuizzes
-      + timeTaken / 60
+      userStatistic.averageTimePerOneQuiz
+        * (userStatistic.numberOfQuizzes - 1)
+      + timeTaken
     );
   }
 
