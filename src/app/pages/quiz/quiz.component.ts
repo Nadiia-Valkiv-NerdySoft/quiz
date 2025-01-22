@@ -1,17 +1,16 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { UiQuestionCardComponent } from '../../shared/ui-kit/ui-question-card/ui-question-card.component';
+import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
+import { NavigationConfirmDialogComponent } from '../../shared/ui-kit/ui-navigation-confirm-dialog/ui-navigation-confirm-dialog.component';
 
 @Component({
   selector: 'quiz-quiz',
   standalone: true,
-  imports: [RouterLink],
+  imports: [
+    UiQuestionCardComponent,
+    UiButtonComponent,
+    NavigationConfirmDialogComponent,
+  ],
   templateUrl: './quiz.component.html',
 })
-export class QuizComponent {
-  quizId!: string;
-  route = inject(ActivatedRoute);
-
-  ngOnInit(): void {
-    this.quizId = this.route.snapshot.paramMap.get('id')!;
-  }
-}
+export class QuizComponent {}

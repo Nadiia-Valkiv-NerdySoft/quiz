@@ -6,14 +6,16 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
     "lint": "npm run lint:eslint && npm run lint:styles",
     "lint:fix": "npm run lint:eslint:fix && npm run lint:styles:fix",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
     "lint:styles:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
     "lint:eslint": "eslint .",
     "lint:eslint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "lint-staged": {
     "*.ts": "eslint --fix",
@@ -32,7 +34,9 @@
     "@ngneat/elf": "^2.5.1",
     "@ngneat/elf-entities": "^5.0.2",
     "@ngneat/elf-requests": "^1.9.2",
+    "@swimlane/ngx-charts": "^21.1.0",
     "angular-svg-icon": "^18.0.2",
+    "d3": "^7.9.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -45,6 +49,7 @@
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.13.0",
     "@types/jasmine": "~5.1.0",
+    "@types/jest": "^29.5.14",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
     "autoprefixer": "^10.4.20",
@@ -53,12 +58,9 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-json": "^4.0.1",
     "husky": "^9.1.6",
-    "jasmine-core": "~5.2.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
+    "jest": "^29.7.0",
+    "jest-html-reporters": "^3.1.7",
+    "jest-preset-angular": "^14.4.2",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
@@ -69,6 +71,7 @@
     "stylelint-order": "^6.0.4",
     "stylelint-prettier": "^5.0.2",
     "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
     "typescript": "~5.5.2"
   }
 }

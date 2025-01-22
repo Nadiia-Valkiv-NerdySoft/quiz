@@ -1,0 +1,84 @@
+<div
+  class="flex w-80 flex-col justify-between rounded-xl bg-success p-6 shadow-xl md:min-h-[636px] md:w-[744px]"
+>
+  <div class="flex items-center justify-between">
+    <p>
+      <span class="bg-warning p-1 text-3xl font-semibold text-primary">{{
+        currentQuestionIndex() + 1
+      }}</span>
+      <span class="p-1 font-medium">/{{ numberOfQuestions }}</span>
+    </p>
+    <img class="h-20 w-20" [src]="avatarPath" alt="category icon" />
+  </div>
+  @if (errorMessage$ | async; as errorMessage) {
+    <quiz-ui-error-notification
+      [errorMessage]="errorMessage"
+      (tryAgainButtonClick)="loadQuestion()"
+    ></quiz-ui-error-notification>
+  } @else if (questions().length === 0) {
+    <quiz-ui-spinner></quiz-ui-spinner>
+  } @else {
+    <div class="space-y-4">
+      <h5 class="text-2xl font-semibold md:text-3xl">
+        <p>Let's begin with this</p>
+        <span class="bg-error" [innerHTML]="currentQuestion().category"></span>
+      </h5>
+
+      <form class="flex flex-col items-center">
+        <p
+          class="mb-4 text-2xl font-semibold md:text-3xl"
+          [innerHTML]="currentQuestion().question"
+        ></p>
+        <quiz-ui-radio-group
+          class="self-start md:self-auto"
+          [options]="currentQuestion().answers"
+          [optionControl]="radioButtonControl"
+        ></quiz-ui-radio-group>
+      </form>
+      <div class="flex items-center justify-center">
+        @if (isMessageVisible) {
+          <span class="absolute text-xs font-bold text-error">
+            *Please choose an answer
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="my-5 flex items-center justify-between">
+      <div>
+        @if (!isFirstQuestion()) {
+          <quiz-ui-button
+            [variant]="'accent'"
+            (buttonClick)="previousQuestion()"
+            ><svg-icon
+              [src]="'assets/icons/chevron-left.svg'"
+              [svgClass]="'h-6 w-6 text-shade'"
+              [applyClass]="true"
+            ></svg-icon>
+            <span class="md:hidden">Prev</span>
+            <span class="hidden md:inline">Prev question</span></quiz-ui-button
+          >
+        }
+      </div>
+
+      <div class="flex">
+        <quiz-ui-button
+          [variant]="'accent'"
+          (buttonClick)="isLastQuestion() ? finishQuiz() : nextQuestion()"
+        >
+          <span class="md:hidden">{{
+            isLastQuestion() ? 'Finish' : 'Next'
+          }}</span>
+          <span class="hidden md:inline">
+            {{ isLastQuestion() ? 'Finish the quiz' : 'Next question' }}</span
+          >
+          <svg-icon
+            [src]="'assets/icons/chevron-left.svg'"
+            [svgClass]="'h-6 w-6 text-bright transform rotate-180'"
+            [applyClass]="true"
+          ></svg-icon
+        ></quiz-ui-button>
+      </div>
+    </div>
+  }
+</div>

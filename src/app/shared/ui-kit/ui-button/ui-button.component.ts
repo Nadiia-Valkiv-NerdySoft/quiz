@@ -20,39 +20,40 @@ export class UiButtonComponent {
 
   private readonly sizeClasses: Record<ButtonSize, string> = {
     small: 'px-6 py-2 text-sm',
-    medium: 'px-4 py-6 text-base',
+    medium: 'px-4 py-4 text-base min-w-40',
     sizeLess: '',
   };
 
   private readonly typeClasses: Record<ButtonVariant, string> = {
-    accent:
-      'bg-accent text-bright hover:bg-accent-700 hover:scale-110 disabled:bg-secondary',
-    ghost:
-      'bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-200 disabled:bg-gray-100',
+    accent: 'bg-accent text-bright',
+    ghost: 'bg-transparent border',
     menu: 'z-10 text-bright',
   };
 
   get buttonClass(): string {
     const baseClasses = [
       'rounded-md',
-      'font-semibold',
+      'font-medium',
       'transition',
       'duration-150',
       'inline-flex',
       'items-center',
       'justify-center',
       'ease-in',
+      'disabled:bg-secondary',
     ];
 
-    if (this.disabled()) {
+    if (!this.disabled()) {
+      baseClasses.push('hover:scale-105 hover:border-accent');
+    } else {
       baseClasses.push('cursor-not-allowed');
     }
 
     return [
       ...baseClasses,
-      this.customClasses,
       this.sizeClasses[this.size()],
       this.typeClasses[this.variant()],
+      this.customClasses,
     ].join(' ');
   }
 

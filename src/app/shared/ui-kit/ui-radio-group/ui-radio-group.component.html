@@ -1,0 +1,22 @@
+@for (option of options(); track option) {
+  <label
+    [for]="option"
+    class="mb-2 flex cursor-pointer items-center justify-start gap-2 font-semibold text-primary"
+  >
+    <input
+      [id]="option"
+      type="radio"
+      [formControl]="optionControl()"
+      [value]="option"
+      name="option"
+      class="peer flex h-6 w-6 min-w-6 appearance-none items-center justify-center rounded-full border-2 border-shade bg-bright checked:border-error checked:bg-bright"
+    />
+    <div
+      class="absolute m-[6px] h-3 w-3 rounded-full bg-bright peer-checked:bg-error"
+    ></div>
+    <span
+      class="max-w-full break-words text-left peer-checked:text-bright"
+      [innerHTML]="option"
+    ></span>
+  </label>
+}
