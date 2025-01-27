@@ -6,6 +6,8 @@ This is an Angular-based quiz application that allows users to explore various q
 
 The project enables users to participate in quizzes, track their progress, and get statistics about their performance. The app fetches questions dynamically from an API and organizes them into various quizzes, each with a set of random questions. It also provides a fun interactive experience with modern UI components.
 
+The quiz questions are retrieved from the [Open Trivia API](https://opentdb.com/api_config.php), ensuring a diverse range of topics and difficulty levels.
+
 You can check out the live version of the app here: [Quiz App on Firebase](https://quiz-app-nerdysoft.web.app/)
 
 ## **Table of Contents**
@@ -63,11 +65,8 @@ Open your browser and navigate to `http://localhost:4200/` to access the applica
 - **Angular Material**
 - **Husky & Lint-Staged** for Git hooks
 - **ESLint & Prettier** for code formatting
+- **Jest** for code unit testing
 - **GitHub Actions** for CI/CD
-
-## **License**
-
-This project is licensed under the MIT License.
 
 ## **Development Server**
 
@@ -92,24 +91,49 @@ ng build
 
 The build artifacts will be stored in the `dist/` directory.
 
-## **Running Unit Tests**
+## **Running Tests**
 
-To run the unit tests, use:
+To run tests once:
 
 ```bash
-ng test
+npm run test
+```
+
+To run tests with coverage report:
+
+```bash
+npm run test:coverage
+```
+
+To run tests in watch mode:
+
+```bash
+
+npm run test:watch
 ```
 
 ## **Linting & Formatting**
 
-To check for linting issues, run:
+To check for linting issues (ESLint & Stylelint), run:
 
 ```bash
 npm run lint
 ```
 
-To format the code with Prettier, run:
+To fix linting issues automatically, use:
 
 ```bash
-npm run format
+npm run lint:fix
+```
+
+To check styles only:
+
+```bash
+npm run lint:styles
+```
+
+To fix style issues automatically:
+
+```bash
+npm run lint:styles:fix
 ```
