@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '../../../environments/environment';
+import { ErrorHandlerService } from './error-handler.service';
 
 describe('ErrorHandlerService', () => {
   let service: ErrorHandlerService;

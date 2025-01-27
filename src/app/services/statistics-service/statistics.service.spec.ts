@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { StatisticsService } from './statistics.service';
 import { expect } from '@jest/globals';
 import {
   INITIAL_STATISTIC,
   Statistic,
 } from '../../shared/models/statistic.model';
+import { StatisticsService } from './statistics.service';
 
 describe('StatisticsService', () => {
   let statisticsService: StatisticsService;

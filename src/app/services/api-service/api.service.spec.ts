@@ -3,11 +3,11 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { ApiService } from './api.service';
 import { environment } from '../../../environments/environment';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { QuestionApiResponse } from '../../shared/models/question-api-response.model';
 import { provideHttpClient } from '@angular/common/http';
+import { ApiService } from './api.service';
 
 describe('ApiService', () => {
   let service: ApiService;

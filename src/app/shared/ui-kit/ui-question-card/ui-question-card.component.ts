@@ -5,16 +5,16 @@ import { SvgIconComponent } from 'angular-svg-icon';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UiRadioGroupComponent } from '../ui-radio-group/ui-radio-group.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionsService } from '../../../core/services/questions.service';
 import { Question } from '../../models/question.model';
 import { UiSpinnerComponent } from '../ui-spinner/ui-spinner.component';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AsyncPipe } from '@angular/common';
 import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-notification.component';
-import { DialogService } from '../../../core/services/dialog.service';
 import { Subscription } from 'rxjs';
 import { defaultDialog, finishQuizDialog } from '../../constants/dialog-states';
-import { StatisticsService } from '../../../core/services/statistics.service';
+import { QuestionsService } from '../../../services/questions-service/questions.service';
+import { ErrorHandlerService } from '../../../services/error-handler-service/error-handler.service';
+import { DialogService } from '../../../services/dialog-service/dialog.service';
+import { StatisticsService } from '../../../services/statistics-service/statistics.service';
 
 @Component({
   selector: 'quiz-ui-question-card',
