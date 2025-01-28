@@ -5,7 +5,7 @@ import { NavigationConfirmDialogComponent } from '../../shared/ui-kit/ui-navigat
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
-import { UiQuestionCardComponent } from '../../shared/ui-kit/ui-question-card/ui-question-card.component';
+import { QuestionCardComponent } from './components/question-card/question-card.component';
 
 describe('QuizComponent', () => {
   let component: QuizComponent;
@@ -15,7 +15,7 @@ describe('QuizComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         QuizComponent,
-        UiQuestionCardComponent,
+        QuestionCardComponent,
         UiButtonComponent,
         NavigationConfirmDialogComponent,
       ],
@@ -39,7 +39,7 @@ describe('QuizComponent', () => {
 
   it('should render the question card component', () => {
     const questionCard = fixture.debugElement.query(
-      By.css('quiz-ui-question-card'),
+      By.css('quiz-question-card'),
     );
     expect(questionCard).toBeTruthy();
   });

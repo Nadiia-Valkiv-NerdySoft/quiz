@@ -3,7 +3,6 @@ import { BehaviorSubject, of } from 'rxjs';
 import { CatalogComponent } from './catalog.component';
 import { provideRouter } from '@angular/router';
 import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-card.component';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
 import { By } from '@angular/platform-browser';
@@ -13,6 +12,7 @@ import { CategoriesService } from '../../services/categories-service/categories.
 import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
 import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
 import { RandomizationService } from '../../services/randomization-service/randomization.service';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 describe('CatalogComponent Template', () => {
   let component: CatalogComponent;
@@ -50,7 +50,7 @@ describe('CatalogComponent Template', () => {
     await TestBed.configureTestingModule({
       imports: [
         UiButtonComponent,
-        UiQuizCardComponent,
+        QuizCardComponent,
         UiSpinnerComponent,
         UiErrorNotificationComponent,
       ],

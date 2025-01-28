@@ -1,4 +1,4 @@
-import { QuizCardColors } from '../enums/quiz-card-colors.enums';
+import { QuizCardColors } from '../../pages/catalog/components/quiz-card/quiz-card-colors.enums';
 
 export interface QuizCategory {
   id: string;

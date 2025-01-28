@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-card.component';
 import { AsyncPipe } from '@angular/common';
 import { Observable, take } from 'rxjs';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
@@ -12,13 +11,14 @@ import { CategoriesService } from '../../services/categories-service/categories.
 import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
 import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
 import { RandomizationService } from '../../services/randomization-service/randomization.service';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 @Component({
   selector: 'quiz-catalog',
   standalone: true,
   imports: [
     UiButtonComponent,
-    UiQuizCardComponent,
+    QuizCardComponent,
     AsyncPipe,
     UiSpinnerComponent,
     UiErrorNotificationComponent,

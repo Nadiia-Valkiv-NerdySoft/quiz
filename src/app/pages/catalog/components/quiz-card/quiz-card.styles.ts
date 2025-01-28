@@ -1,6 +1,6 @@
-import { QuizCardColors } from '../../enums/quiz-card-colors.enums';
-import { AVATAR_PATHS } from './ui-quiz-card.constants';
-import { QuizCardStyle } from './ui-quiz-card.types';
+import { QuizCardColors } from './quiz-card-colors.enums';
+import { AVATAR_PATHS } from './quiz-card.constants';
+import { QuizCardStyle } from './quiz-card.types';
 
 export const QUIZ_CARD_STYLES: QuizCardStyle = {
   [QuizCardColors.SUCCESS]: {

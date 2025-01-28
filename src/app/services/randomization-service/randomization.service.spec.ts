@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { QuizCardColors } from '../../shared/enums/quiz-card-colors.enums';
+import { QuizCardColors } from '../../pages/catalog/components/quiz-card/quiz-card-colors.enums';
 import { RandomizationService } from './randomization.service';
 
 describe('RandomizationService', () => {

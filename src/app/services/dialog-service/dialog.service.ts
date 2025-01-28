@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DialogState } from '../../shared/ui-kit/ui-navigation-confirm-dialog/dialog-state.interface';
-import { defaultDialog } from '../../shared/constants/dialog-states';
+import { defaultDialog } from '../../shared/ui-kit/ui-navigation-confirm-dialog/dialog-states';
 
 @Injectable({
   providedIn: 'root',
