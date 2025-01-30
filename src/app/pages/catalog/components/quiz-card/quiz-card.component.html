@@ -1,4 +1,8 @@
-<div class="h-60 w-64 rounded-xl p-4 shadow-xl {{ styles.backgroundColor }}">
+<div
+  class="h-60 w-64 rounded-xl p-4 shadow-xl {{ styles.backgroundColor }}
+"
+  [routerLink]="categoryUrlRoute"
+>
   <div class="flex items-center justify-between">
     <p class="{{ styles.textColor }}">
       {{ quizCategory()?.numberOfQuestion }} Questions
