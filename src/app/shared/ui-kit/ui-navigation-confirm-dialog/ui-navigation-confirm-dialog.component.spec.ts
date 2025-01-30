@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogService } from '../../../core/services/dialog.service';
 import { NavigationConfirmDialogComponent } from './ui-navigation-confirm-dialog.component';
 import { of } from 'rxjs/internal/observable/of';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { DialogService } from '../../../services/dialog-service/dialog.service';
 
 describe('UiNavigationConfirmDialogComponent', () => {
   let component: NavigationConfirmDialogComponent;

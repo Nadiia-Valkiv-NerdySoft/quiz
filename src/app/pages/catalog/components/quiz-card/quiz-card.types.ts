@@ -1,4 +1,4 @@
-import { QuizCardColors } from '../../enums/quiz-card-colors.enums';
+import { QuizCardColors } from './quiz-card-colors.enums';
 
 export type QuizCardStyle = {
   // eslint-disable-next-line no-unused-vars

@@ -1,24 +1,24 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-card.component';
-import { CategoriesService } from '../../core/services/categories.service';
 import { AsyncPipe } from '@angular/common';
-import { CategoriesStoreService } from '../../core/services/categories-store.service';
 import { Observable, take } from 'rxjs';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { isLoading$ } from '../../store/categories.store';
-import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { Router } from '@angular/router';
-import { RandomizationService } from '../../core/services/randomization.service';
+import { CategoriesService } from '../../services/categories-service/categories.service';
+import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
+import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
+import { RandomizationService } from '../../services/randomization-service/randomization.service';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 @Component({
   selector: 'quiz-catalog',
   standalone: true,
   imports: [
     UiButtonComponent,
-    UiQuizCardComponent,
+    QuizCardComponent,
     AsyncPipe,
     UiSpinnerComponent,
     UiErrorNotificationComponent,

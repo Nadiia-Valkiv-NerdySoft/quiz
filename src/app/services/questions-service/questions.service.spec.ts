@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { QuestionsService } from './questions.service';
-import { ApiService } from './api.service';
-import { ErrorHandlerService } from './error-handler.service';
+import { ApiService } from '../api-service/api.service';
+import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
 import { QuestionApiResponse } from '../../shared/models/question-api-response.model';
 import { Question } from '../../shared/models/question.model';
+import { QuestionsService } from './questions.service';
 
 describe('QuestionsService', () => {
   let questionsService: QuestionsService;

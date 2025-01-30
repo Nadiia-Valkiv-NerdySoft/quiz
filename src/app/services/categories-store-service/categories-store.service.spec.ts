@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { CategoriesStoreService } from './categories-store.service';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
 import { addEntities, selectAllEntities } from '@ngneat/elf-entities';
 import { quizCategoriesStore } from '../../store/categories.store';
+import { CategoriesStoreService } from './categories-store.service';
 
 describe('CategoriesStoreService', () => {
   let service: CategoriesStoreService;

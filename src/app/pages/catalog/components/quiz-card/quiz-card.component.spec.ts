@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UiQuizCardComponent } from './ui-quiz-card.component';
+import { QuizCardComponent } from './quiz-card.component';
 import { provideRouter } from '@angular/router';
-import { QuizCardColors } from '../../enums/quiz-card-colors.enums';
+import { QuizCardColors } from './quiz-card-colors.enums';
 
 describe('UiQuizCardComponent', () => {
-  let component: UiQuizCardComponent;
-  let fixture: ComponentFixture<UiQuizCardComponent>;
+  let component: QuizCardComponent;
+  let fixture: ComponentFixture<QuizCardComponent>;
 
   const quizCategory = {
     id: '1',
@@ -16,11 +16,11 @@ describe('UiQuizCardComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [UiQuizCardComponent],
+      imports: [QuizCardComponent],
       providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UiQuizCardComponent);
+    fixture = TestBed.createComponent(QuizCardComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('quizCategory', quizCategory);
   });

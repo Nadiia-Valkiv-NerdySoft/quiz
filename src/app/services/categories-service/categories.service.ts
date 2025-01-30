@@ -2,15 +2,15 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, finalize, map, Observable, tap } from 'rxjs';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
-import { RandomizationService } from './randomization.service';
-import { CategoriesStoreService } from './categories-store.service';
-import { ApiService } from './api.service';
+import { RandomizationService } from '../randomization-service/randomization.service';
+import { CategoriesStoreService } from '../categories-store-service/categories-store.service';
+import { ApiService } from '../api-service/api.service';
 import {
   hideSpinner,
   showSpinner,
   skipWhenCategoriesCached,
 } from '../../store/categories.store';
-import { ErrorHandlerService } from './error-handler.service';
+import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
 
 @Injectable({
   providedIn: 'root',

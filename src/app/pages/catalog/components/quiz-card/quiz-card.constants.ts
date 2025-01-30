@@ -1,4 +1,4 @@
-import { QuizCardColors } from '../../enums/quiz-card-colors.enums';
+import { QuizCardColors } from './quiz-card-colors.enums';
 
 export const DEFAULT_CARD_COLOR = QuizCardColors.BRIGHT;
 export const AVATAR_PATHS = {

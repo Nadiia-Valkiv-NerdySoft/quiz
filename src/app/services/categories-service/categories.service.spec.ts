@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { ApiService } from './api.service';
-import { CategoriesStoreService } from './categories-store.service';
-import { CategoriesService } from './categories.service';
-import { ErrorHandlerService } from './error-handler.service';
-import { RandomizationService } from './randomization.service';
+import { ApiService } from '../api-service/api.service';
+import { CategoriesStoreService } from '../categories-store-service/categories-store.service';
+import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
+import { RandomizationService } from '../randomization-service/randomization.service';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CategoriesService } from './categories.service';
 
 describe('CategoriesService', () => {
   let categoriesService: CategoriesService;
