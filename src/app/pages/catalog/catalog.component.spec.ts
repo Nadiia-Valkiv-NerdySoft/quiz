@@ -11,7 +11,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { CategoriesService } from '../../services/categories-service/categories.service';
 import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
 import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
-import { RandomizationService } from '../../services/randomization-service/randomization.service';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 describe('CatalogComponent Template', () => {
@@ -20,7 +19,6 @@ describe('CatalogComponent Template', () => {
   let categoriesServiceMock: any;
   let categoriesStoreServiceMock: any;
   let errorHandlerServiceMock: any;
-  let randomizationServiceMock: any;
   let errorMessage$: BehaviorSubject<string | null>;
   let isLoading$: BehaviorSubject<boolean>;
   let categories$: BehaviorSubject<any[]>;
@@ -43,10 +41,6 @@ describe('CatalogComponent Template', () => {
       clearError: jest.fn(),
     };
 
-    randomizationServiceMock = {
-      getRandomInt: jest.fn().mockReturnValue(0),
-    };
-
     await TestBed.configureTestingModule({
       imports: [
         UiButtonComponent,
@@ -64,7 +58,6 @@ describe('CatalogComponent Template', () => {
           useValue: categoriesStoreServiceMock,
         },
         { provide: ErrorHandlerService, useValue: errorHandlerServiceMock },
-        { provide: RandomizationService, useValue: randomizationServiceMock },
       ],
     }).compileComponents();
 
@@ -180,7 +173,6 @@ describe('CatalogComponent Template', () => {
 
     const quizCards = fixture.debugElement.queryAll(By.css('.quiz-title'));
     quizCards.forEach((card, index) => {
-      // const titleElement = card.nativeElement.query(By.css('.quiz-title'));
       expect(card.nativeElement.textContent.trim()).toContain(
         mockCategories[index].title,
       );

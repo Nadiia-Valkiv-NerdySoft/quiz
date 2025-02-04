@@ -4,7 +4,7 @@ import { ApiService } from '../api-service/api.service';
 import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
 import { QuestionApiResponse } from '../../shared/models/question-api-response.model';
 import { Question } from '../../shared/models/question.model';
-import { RandomizationService } from '../randomization-service/randomization.service';
+import { RandomUtils } from '../../utils/random';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,6 @@ import { RandomizationService } from '../randomization-service/randomization.ser
 export class QuestionsService {
   private readonly apiService = inject(ApiService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
-  private readonly randomizationService = inject(RandomizationService);
 
   getQuestions(amount: number, id: number): Observable<Question[]> {
     return this.apiService.fetchQuestions(id, amount).pipe(
@@ -25,10 +24,7 @@ export class QuestionsService {
     const answers = [ ...question.incorrect_answers, question.correct_answer ];
     return {
       ...question,
-      answers: this.randomizationService.getRandomItems(
-        answers,
-        answers.length,
-      ),
+      answers: RandomUtils.getRandomItems(answers, answers.length),
     };
   }
 }

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ApiService } from '../api-service/api.service';
 import { CategoriesStoreService } from '../categories-store-service/categories-store.service';
 import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
-import { RandomizationService } from '../randomization-service/randomization.service';
+import { RandomUtils } from '../../utils/random';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CategoriesService } from './categories.service';
@@ -10,7 +10,6 @@ import { CategoriesService } from './categories.service';
 describe('CategoriesService', () => {
   let categoriesService: CategoriesService;
   let apiService: jest.Mocked<ApiService>;
-  let randomizationService: jest.Mocked<RandomizationService>;
   let categoriesStoreService: jest.Mocked<CategoriesStoreService>;
   let errorHandlerService: jest.Mocked<ErrorHandlerService>;
 
@@ -22,12 +21,6 @@ describe('CategoriesService', () => {
   beforeEach(() => {
     const apiServiceMock = {
       fetchCategories: jest.fn(),
-    };
-
-    const randomizationServiceMock = {
-      getRandomItems: jest.fn(),
-      getRandomColor: jest.fn(),
-      getRandomInt: jest.fn(),
     };
 
     const categoriesStoreServiceMock = {
@@ -43,7 +36,6 @@ describe('CategoriesService', () => {
       providers: [
         CategoriesService,
         { provide: ApiService, useValue: apiServiceMock },
-        { provide: RandomizationService, useValue: randomizationServiceMock },
         {
           provide: CategoriesStoreService,
           useValue: categoriesStoreServiceMock,
@@ -54,9 +46,7 @@ describe('CategoriesService', () => {
 
     categoriesService = TestBed.inject(CategoriesService);
     apiService = TestBed.inject(ApiService) as jest.Mocked<ApiService>;
-    randomizationService = TestBed.inject(
-      RandomizationService,
-    ) as jest.Mocked<RandomizationService>;
+
     categoriesStoreService = TestBed.inject(
       CategoriesStoreService,
     ) as jest.Mocked<CategoriesStoreService>;
@@ -69,8 +59,7 @@ describe('CategoriesService', () => {
     it('should return random categories when API call is successful', (done) => {
       // Arrange
       apiService.fetchCategories.mockReturnValue(of(mockCategories));
-      randomizationService.getRandomItems.mockReturnValue(mockCategories);
-
+      jest.spyOn(RandomUtils, 'getRandomItems').mockReturnValue(mockCategories);
       // Act
       categoriesService.getRandomCategories().subscribe({
         next: (categories) => {
@@ -104,7 +93,7 @@ describe('CategoriesService', () => {
     it('should add random categories to the store', (done) => {
       // Arrange
       apiService.fetchCategories.mockReturnValue(of(mockCategories));
-      randomizationService.getRandomItems.mockReturnValue(mockCategories);
+      jest.spyOn(RandomUtils, 'getRandomItems').mockReturnValue(mockCategories);
 
       // Act
       categoriesService.getRandomCategories().subscribe({
