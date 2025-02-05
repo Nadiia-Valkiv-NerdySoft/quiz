@@ -6,6 +6,12 @@ import { QuestionApiResponse } from '../../shared/models/question-api-response.m
 import { Question } from '../../shared/models/question.model';
 import { QuestionsService } from './questions.service';
 
+jest.mock('../../utils/random', () => ({
+  RandomUtils: {
+    getRandomItems: jest.fn(items => items),
+  },
+}));
+
 describe('QuestionsService', () => {
   let questionsService: QuestionsService;
   let apiService: jest.Mocked<ApiService>;
@@ -112,7 +118,10 @@ describe('QuestionsService', () => {
       questionsService.getQuestions(amount, id).subscribe({
         error: (err) => {
           // Assert
-          expect(errorHandlerService.handleError).toHaveBeenCalledWith(error);
+          expect(errorHandlerService.handleError).toHaveBeenCalled();
+          expect(errorHandlerService.handleError.mock.calls[0][0]).toEqual(
+            error,
+          );
           expect(err).toBe(handledError);
           done();
         },
