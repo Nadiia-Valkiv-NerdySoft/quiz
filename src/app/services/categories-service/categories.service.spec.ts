@@ -6,6 +6,8 @@ import { RandomUtils } from '../../utils/random';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CategoriesService } from './categories.service';
+import { QuizCategory } from '../../shared/models/quiz-category.model';
+import { QuizCardColors } from '../../pages/catalog/components/quiz-card/quiz-card-colors.enums';
 
 describe('CategoriesService', () => {
   let categoriesService: CategoriesService;
@@ -13,12 +15,25 @@ describe('CategoriesService', () => {
   let categoriesStoreService: jest.Mocked<CategoriesStoreService>;
   let errorHandlerService: jest.Mocked<ErrorHandlerService>;
 
-  const mockCategories = [
-    { id: '1', name: 'Category 1' },
-    { id: '2', name: 'Category 2' },
+  const mockCategories: QuizCategory[] = [
+    {
+      id: '1',
+      name: 'Category 1',
+      cardColor: QuizCardColors.ERROR,
+      numberOfQuestion: 5,
+    },
+    {
+      id: '2',
+      name: 'Category 2',
+      cardColor: QuizCardColors.ERROR,
+      numberOfQuestion: 5,
+    },
   ];
 
   beforeEach(() => {
+    RandomUtils.getRandomItems = jest.fn().mockReturnValue(mockCategories);
+    RandomUtils.getRandomColor = jest.fn().mockReturnValue('error');
+    RandomUtils.getRandomInt = jest.fn().mockReturnValue(5);
     const apiServiceMock = {
       fetchCategories: jest.fn(),
     };
@@ -59,7 +74,6 @@ describe('CategoriesService', () => {
     it('should return random categories when API call is successful', (done) => {
       // Arrange
       apiService.fetchCategories.mockReturnValue(of(mockCategories));
-      jest.spyOn(RandomUtils, 'getRandomItems').mockReturnValue(mockCategories);
       // Act
       categoriesService.getRandomCategories().subscribe({
         next: (categories) => {
@@ -83,7 +97,10 @@ describe('CategoriesService', () => {
       categoriesService.getRandomCategories().subscribe({
         error: (err) => {
           // Assert
-          expect(errorHandlerService.handleError).toHaveBeenCalledWith(error);
+          expect(errorHandlerService.handleError).toHaveBeenCalled();
+          expect(errorHandlerService.handleError.mock.calls[0][0]).toEqual(
+            error,
+          );
           expect(err).toEqual(error);
           done();
         },
