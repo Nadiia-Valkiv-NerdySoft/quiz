@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CategoriesService } from './categories.service';
 import { QuizCategory } from '../../shared/models/quiz-category.model';
-import { QuizCardColors } from '../../pages/catalog/components/quiz-card/quiz-card-colors.enums';
+import { QuizCardColors } from '../../pages/quizzes/pages/catalog/components/quiz-card/quiz-card-colors.enums';
 
 describe('CategoriesService', () => {
   let categoriesService: CategoriesService;

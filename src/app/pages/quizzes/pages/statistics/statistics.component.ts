@@ -1,16 +1,15 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import {} from '../../shared/ui-kit/ui-chart-legend-item/ui-chart-legend-item.component';
-import { INITIAL_QUIZ_STATISTIC } from '../../shared/models/quiz-statistic.model';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { StatisticsService } from '../../../../services/statistics-service/statistics.service';
+import { LastQuizData } from '../../../../shared/models/last-quiz-data.model';
+import { INITIAL_QUIZ_STATISTIC } from '../../../../shared/models/quiz-statistic.model';
 import {
-  INITIAL_USER_STATISTIC,
   UserStatistic,
-} from '../../shared/models/user-statistic.model';
-import { LastQuizData } from '../../shared/models/last-quiz-data.model';
-import { QuizFeedbackComponent } from '../../shared/ui-kit/ui-quiz-feedback/ui-quiz-feedback.component';
-import { TimeFormatPipe } from '../../shared/ui-kit/ui-quiz-feedback/time-format.pipe';
-import { UiDonutChartComponent } from '../../shared/ui-kit/ui-donut-chart/ui-donut-chart.component';
-import { StatisticsService } from '../../services/statistics-service/statistics.service';
+  INITIAL_USER_STATISTIC,
+} from '../../../../shared/models/user-statistic.model';
+import { UiButtonComponent } from '../../../../shared/ui-kit/ui-button/ui-button.component';
+import { UiDonutChartComponent } from '../../../../shared/ui-kit/ui-donut-chart/ui-donut-chart.component';
+import { TimeFormatPipe } from '../../../../shared/ui-kit/ui-quiz-feedback/time-format.pipe';
+import { QuizFeedbackComponent } from '../../../../shared/ui-kit/ui-quiz-feedback/ui-quiz-feedback.component';
 
 @Component({
   selector: 'quiz-statistics',

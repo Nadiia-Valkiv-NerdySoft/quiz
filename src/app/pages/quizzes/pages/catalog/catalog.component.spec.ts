@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BehaviorSubject, of } from 'rxjs';
-import { CatalogComponent } from './catalog.component';
-import { provideRouter } from '@angular/router';
-import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
-import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
-import { By } from '@angular/platform-browser';
-import { provideAngularSvgIcon } from 'angular-svg-icon';
 import { provideHttpClient } from '@angular/common/http';
-import { CategoriesService } from '../../services/categories-service/categories.service';
-import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
-import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { provideAngularSvgIcon } from 'angular-svg-icon';
+import { BehaviorSubject, of } from 'rxjs';
+import { CategoriesService } from '../../../../services/categories-service/categories.service';
+import { CategoriesStoreService } from '../../../../services/categories-store-service/categories-store.service';
+import { ErrorHandlerService } from '../../../../services/error-handler-service/error-handler.service';
+import { UiButtonComponent } from '../../../../shared/ui-kit/ui-button/ui-button.component';
+import { UiErrorNotificationComponent } from '../../../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
+import { UiSpinnerComponent } from '../../../../shared/ui-kit/ui-spinner/ui-spinner.component';
+import { CatalogComponent } from './catalog.component';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 describe('CatalogComponent Template', () => {

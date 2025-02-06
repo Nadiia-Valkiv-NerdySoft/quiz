@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { filter, first, Observable } from 'rxjs';
 import { QuizComponent } from './quiz.component';
-import { DialogService } from '../../services/dialog-service/dialog.service';
+import { DialogService } from '../../../../services/dialog-service/dialog.service';
 
 @Injectable({
   providedIn: 'root',
