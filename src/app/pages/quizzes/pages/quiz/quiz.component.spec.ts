@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { QuestionCardComponent } from './components/question-card/question-card.component';
+import { UiButtonComponent } from '../../../../shared/ui-kit/ui-button/ui-button.component';
+import { NavigationConfirmDialogComponent } from '../../../../shared/ui-kit/ui-navigation-confirm-dialog/ui-navigation-confirm-dialog.component';
 
 describe('QuizComponent', () => {
   let component: QuizComponent;
