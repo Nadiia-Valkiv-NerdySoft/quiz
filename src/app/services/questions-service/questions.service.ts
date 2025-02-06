@@ -4,6 +4,7 @@ import { ApiService } from '../api-service/api.service';
 import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
 import { QuestionApiResponse } from '../../shared/models/question-api-response.model';
 import { Question } from '../../shared/models/question.model';
+import { RandomUtils } from '../../utils/random';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +15,16 @@ export class QuestionsService {
 
   getQuestions(amount: number, id: number): Observable<Question[]> {
     return this.apiService.fetchQuestions(id, amount).pipe(
-      map(questions => questions.map(q => this.addAllAnswersToQuestion(q))),
-      catchError((error) => {
-        return this.errorHandlerService.handleError(error);
-      }),
+      map(questions => questions.map(q => this.mergeAndShuffleAnswers(q))),
+      catchError(this.errorHandlerService.handleError),
     );
   }
 
-  private addAllAnswersToQuestion(question: QuestionApiResponse): Question {
+  private mergeAndShuffleAnswers(question: QuestionApiResponse): Question {
+    const answers = [ ...question.incorrect_answers, question.correct_answer ];
     return {
       ...question,
-      answers: [ ...question.incorrect_answers, question.correct_answer ],
+      answers: RandomUtils.getRandomItems(answers, answers.length),
     };
   }
 }

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories-service/categories.service';
 import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
 import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
-import { RandomizationService } from '../../services/randomization-service/randomization.service';
+import { RandomUtils } from '../../utils/random';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 @Component({
@@ -27,7 +27,6 @@ import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 })
 export class CatalogComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
-  private readonly randomizationService = inject(RandomizationService);
   private readonly categoriesStoreService = inject(CategoriesStoreService);
   private readonly errorHandlerService = inject(ErrorHandlerService);
   private readonly router = inject(Router);
@@ -42,10 +41,7 @@ export class CatalogComponent implements OnInit {
 
   goToRandomQuiz(): void {
     this.categories$.pipe(take(1)).subscribe((categories) => {
-      const randomIndex = this.randomizationService.getRandomInt(
-        0,
-        categories.length,
-      );
+      const randomIndex = RandomUtils.getRandomInt(0, categories.length);
       this.router.navigate([
         '/quiz',
         categories[randomIndex].id,
