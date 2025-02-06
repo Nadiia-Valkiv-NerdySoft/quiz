@@ -1,23 +1,26 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { AVATAR_PATHS } from '../ui-quiz-card/ui-quiz-card.constants';
-import { UiButtonComponent } from '../ui-button/ui-button.component';
+import { AVATAR_PATHS } from '../../../catalog/components/quiz-card/quiz-card.constants';
+import { UiButtonComponent } from '../../../../shared/ui-kit/ui-button/ui-button.component';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UiRadioGroupComponent } from '../ui-radio-group/ui-radio-group.component';
+import { UiRadioGroupComponent } from '../../../../shared/ui-kit/ui-radio-group/ui-radio-group.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionsService } from '../../../core/services/questions.service';
-import { Question } from '../../models/question.model';
-import { UiSpinnerComponent } from '../ui-spinner/ui-spinner.component';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { Question } from '../../../../shared/models/question.model';
+import { UiSpinnerComponent } from '../../../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { AsyncPipe } from '@angular/common';
-import { UiErrorNotificationComponent } from '../ui-error-notification/ui-error-notification.component';
-import { DialogService } from '../../../core/services/dialog.service';
+import { UiErrorNotificationComponent } from '../../../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
 import { Subscription } from 'rxjs';
-import { defaultDialog, finishQuizDialog } from '../../constants/dialog-states';
-import { StatisticsService } from '../../../core/services/statistics.service';
+import { QuestionsService } from '../../../../services/questions-service/questions.service';
+import { ErrorHandlerService } from '../../../../services/error-handler-service/error-handler.service';
+import { DialogService } from '../../../../services/dialog-service/dialog.service';
+import { StatisticsService } from '../../../../services/statistics-service/statistics.service';
+import {
+  defaultDialog,
+  finishQuizDialog,
+} from '../../../../shared/ui-kit/ui-navigation-confirm-dialog/dialog-states';
 
 @Component({
-  selector: 'quiz-ui-question-card',
+  selector: 'quiz-question-card',
   standalone: true,
   imports: [
     UiButtonComponent,
@@ -28,9 +31,9 @@ import { StatisticsService } from '../../../core/services/statistics.service';
     UiErrorNotificationComponent,
     ReactiveFormsModule,
   ],
-  templateUrl: './ui-question-card.component.html',
+  templateUrl: './question-card.component.html',
 })
-export class UiQuestionCardComponent implements OnInit {
+export class QuestionCardComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly questionsService = inject(QuestionsService);

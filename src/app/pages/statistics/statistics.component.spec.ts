@@ -2,7 +2,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { StatisticsComponent } from './statistics.component';
-import { StatisticsService } from '../../core/services/statistics.service';
 import { QuizFeedbackComponent } from '../../shared/ui-kit/ui-quiz-feedback/ui-quiz-feedback.component';
 import { INITIAL_QUIZ_STATISTIC } from '../../shared/models/quiz-statistic.model';
 import { INITIAL_USER_STATISTIC } from '../../shared/models/user-statistic.model';
@@ -10,6 +9,7 @@ import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.compo
 import { UiDonutChartComponent } from '../../shared/ui-kit/ui-donut-chart/ui-donut-chart.component';
 import { TimeFormatPipe } from '../../shared/ui-kit/ui-quiz-feedback/time-format.pipe';
 import { By } from '@angular/platform-browser';
+import { StatisticsService } from '../../services/statistics-service/statistics.service';
 
 describe('StatisticsComponent', () => {
   let component: StatisticsComponent;

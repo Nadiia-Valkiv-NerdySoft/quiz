@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
-import { DialogService } from '../../../core/services/dialog.service';
 import { Subscription } from 'rxjs';
 import { DialogState } from './dialog-state.interface';
+import { DialogService } from '../../../services/dialog-service/dialog.service';
 
 @Component({
   selector: 'quiz-ui-navigation-confirm-dialog',

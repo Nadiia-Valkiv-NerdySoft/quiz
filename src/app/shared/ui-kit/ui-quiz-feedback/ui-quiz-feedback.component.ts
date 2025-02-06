@@ -4,7 +4,7 @@ import { TimeFormatPipe } from './time-format.pipe';
 import {
   QUIZ_FEEDBACK_DEFAULT_MESSAGE,
   QUIZ_FEEDBACK_MESSAGES,
-} from '../../constants/quiz-feedback-messages';
+} from './quiz-feedback-messages';
 
 @Component({
   selector: 'quiz-ui-quiz-feedback',

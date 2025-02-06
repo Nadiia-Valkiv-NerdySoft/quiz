@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject, of } from 'rxjs';
 import { CatalogComponent } from './catalog.component';
-import { CategoriesService } from '../../core/services/categories.service';
-import { CategoriesStoreService } from '../../core/services/categories-store.service';
-import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { provideRouter } from '@angular/router';
-import { RandomizationService } from '../../core/services/randomization.service';
 import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import { UiQuizCardComponent } from '../../shared/ui-kit/ui-quiz-card/ui-quiz-card.component';
 import { UiSpinnerComponent } from '../../shared/ui-kit/ui-spinner/ui-spinner.component';
 import { UiErrorNotificationComponent } from '../../shared/ui-kit/ui-error-notification/ui-error-notification.component';
 import { By } from '@angular/platform-browser';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
 import { provideHttpClient } from '@angular/common/http';
+import { CategoriesService } from '../../services/categories-service/categories.service';
+import { CategoriesStoreService } from '../../services/categories-store-service/categories-store.service';
+import { ErrorHandlerService } from '../../services/error-handler-service/error-handler.service';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 describe('CatalogComponent Template', () => {
   let component: CatalogComponent;
@@ -20,7 +19,6 @@ describe('CatalogComponent Template', () => {
   let categoriesServiceMock: any;
   let categoriesStoreServiceMock: any;
   let errorHandlerServiceMock: any;
-  let randomizationServiceMock: any;
   let errorMessage$: BehaviorSubject<string | null>;
   let isLoading$: BehaviorSubject<boolean>;
   let categories$: BehaviorSubject<any[]>;
@@ -43,14 +41,10 @@ describe('CatalogComponent Template', () => {
       clearError: jest.fn(),
     };
 
-    randomizationServiceMock = {
-      getRandomInt: jest.fn().mockReturnValue(0),
-    };
-
     await TestBed.configureTestingModule({
       imports: [
         UiButtonComponent,
-        UiQuizCardComponent,
+        QuizCardComponent,
         UiSpinnerComponent,
         UiErrorNotificationComponent,
       ],
@@ -64,7 +58,6 @@ describe('CatalogComponent Template', () => {
           useValue: categoriesStoreServiceMock,
         },
         { provide: ErrorHandlerService, useValue: errorHandlerServiceMock },
-        { provide: RandomizationService, useValue: randomizationServiceMock },
       ],
     }).compileComponents();
 
@@ -180,7 +173,6 @@ describe('CatalogComponent Template', () => {
 
     const quizCards = fixture.debugElement.queryAll(By.css('.quiz-title'));
     quizCards.forEach((card, index) => {
-      // const titleElement = card.nativeElement.query(By.css('.quiz-title'));
       expect(card.nativeElement.textContent.trim()).toContain(
         mockCategories[index].title,
       );

@@ -1,10 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { QuestionsService } from './questions.service';
-import { ApiService } from './api.service';
-import { ErrorHandlerService } from './error-handler.service';
+import { ApiService } from '../api-service/api.service';
+import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
 import { QuestionApiResponse } from '../../shared/models/question-api-response.model';
 import { Question } from '../../shared/models/question.model';
+import { QuestionsService } from './questions.service';
+
+jest.mock('../../utils/random', () => ({
+  RandomUtils: {
+    getRandomItems: jest.fn(items => items),
+  },
+}));
 
 describe('QuestionsService', () => {
   let questionsService: QuestionsService;
@@ -112,7 +118,10 @@ describe('QuestionsService', () => {
       questionsService.getQuestions(amount, id).subscribe({
         error: (err) => {
           // Assert
-          expect(errorHandlerService.handleError).toHaveBeenCalledWith(error);
+          expect(errorHandlerService.handleError).toHaveBeenCalled();
+          expect(errorHandlerService.handleError.mock.calls[0][0]).toEqual(
+            error,
+          );
           expect(err).toBe(handledError);
           done();
         },

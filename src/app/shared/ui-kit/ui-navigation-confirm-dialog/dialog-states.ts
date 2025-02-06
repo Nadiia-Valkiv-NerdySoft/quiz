@@ -1,4 +1,4 @@
-import { DialogState } from '../ui-kit/ui-navigation-confirm-dialog/dialog-state.interface';
+import { DialogState } from './dialog-state.interface';
 
 export const finishQuizDialog: DialogState = {
   isOpen: false,
