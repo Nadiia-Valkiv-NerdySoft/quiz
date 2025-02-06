@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuizComponent } from './quiz.component';
-import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
-import { NavigationConfirmDialogComponent } from '../../shared/ui-kit/ui-navigation-confirm-dialog/ui-navigation-confirm-dialog.component';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
