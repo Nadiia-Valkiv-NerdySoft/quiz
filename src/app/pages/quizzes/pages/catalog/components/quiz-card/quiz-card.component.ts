@@ -2,9 +2,9 @@ import { Component, input, OnInit } from '@angular/core';
 import { QUIZ_CARD_STYLES } from './quiz-card.styles';
 import { QuizCardColors } from './quiz-card-colors.enums';
 import { QuizCardStyle } from './quiz-card.types';
-import { QuizCategory } from '../../../../shared/models/quiz-category.model';
 import { DEFAULT_CARD_COLOR } from './quiz-card.constants';
 import { RouterLink } from '@angular/router';
+import { QuizCategory } from '../../../../../../shared/models/quiz-category.model';
 
 @Component({
   selector: 'quiz-quiz-card',
