@@ -2,15 +2,120 @@
 
 <div class="p-6">
   <div
-    class="mb-4 flex max-w-fit items-center justify-center gap-2 rounded bg-accent px-4 py-2 text-bright hover:bg-blue-600"
+    (click)="toggleForm()"
+    class="mb-4 flex max-w-fit cursor-pointer items-center justify-center gap-2 rounded px-4 py-2 text-bright underline"
   >
     <span>Add New User</span>
     <svg-icon
       [src]="'assets/icons/chevron-left.svg'"
-      [svgClass]="'h-6 w-6 text-shade -rotate-90 stroke-[2]'"
+      [svgClass]="
+        'h-6 w-6 text-shade ' +
+        (isFormVisible() ? 'rotate-90' : '-rotate-90') +
+        ' stroke-[2] transition-transform'
+      "
       [applyClass]="true"
     ></svg-icon>
   </div>
+
+  @if (isFormVisible()) {
+    <form
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit()"
+      class="mb-6 rounded-lg bg-primary p-6 shadow-lg"
+    >
+      <!-- Name Fields -->
+      <div class="mb-4 flex gap-4">
+        <div class="flex-1">
+          <input
+            type="text"
+            formControlName="first_name"
+            placeholder="First Name"
+            class="w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+          />
+          @if (
+            userForm.get('first_name')?.touched &&
+            userForm.get('first_name')?.invalid
+          ) {
+            <span class="mt-1 text-sm text-red-500"
+              >First name is required</span
+            >
+          }
+        </div>
+        <div class="flex-1">
+          <input
+            type="text"
+            formControlName="last_name"
+            placeholder="Last Name"
+            class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+          />
+          @if (
+            userForm.get('last_name')?.touched &&
+            userForm.get('last_name')?.invalid
+          ) {
+            <span class="mt-1 text-sm text-red-500">Last name is required</span>
+          }
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="mb-4">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+          class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:border-muted focus:outline-none focus:ring-1 focus:ring-muted"
+        />
+        @if (userForm.get('email')?.touched && userForm.get('email')?.invalid) {
+          <span class="mt-1 text-sm text-red-500"
+            >Please enter a valid email</span
+          >
+        }
+      </div>
+
+      <!-- Date of Birth Field -->
+      <div class="mb-4">
+        <input
+          type="date"
+          formControlName="dob"
+          placeholder="Date of Birth"
+          class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+        />
+        @if (userForm.get('dob')?.touched && userForm.get('dob')?.invalid) {
+          <span class="mt-1 text-sm text-red-500"
+            >Date of birth is required</span
+          >
+        }
+      </div>
+
+      <!-- Interests Field -->
+      <div class="mb-6">
+        <input
+          type="text"
+          formControlName="interests"
+          placeholder="Interests"
+          class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+        />
+      </div>
+
+      <!-- Form Buttons -->
+      <div class="flex gap-3">
+        <button
+          type="submit"
+          [disabled]="!userForm.valid"
+          class="rounded bg-accent px-6 py-2 text-bright transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Create
+        </button>
+        <button
+          type="button"
+          (click)="toggleForm()"
+          class="rounded border border-accent bg-transparent px-6 py-2 text-bright transition-colors hover:bg-muted"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  }
 
   <div class="overflow-x-auto">
     <table class="w-full border-collapse rounded-lg border border-gray-700">
