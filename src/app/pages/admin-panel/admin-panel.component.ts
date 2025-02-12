@@ -10,17 +10,11 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'quiz-admin-panel',
   standalone: true,
-  imports: [
-    FormatDatePipe,
-    SvgIconComponent,
-    CommonModule,
-    ReactiveFormsModule,
-  ],
+  imports: [ FormatDatePipe, SvgIconComponent, ReactiveFormsModule ],
   templateUrl: './admin-panel.component.html',
 })
 export class AdminPanelComponent implements OnInit {
@@ -30,18 +24,15 @@ export class AdminPanelComponent implements OnInit {
   tableHeaders = TABLE_HEADERS;
   users = signal<User[]>([]);
   isFormVisible = signal(false);
-  userForm: FormGroup;
-  private isSubmitting = signal(false);
+  userForm: FormGroup = this.fb.group({
+    first_name: [ '', Validators.required ],
+    last_name: [ '', Validators.required ],
+    email: [ '', [ Validators.required, Validators.email ]],
+    dob: [ '', Validators.required ],
+    interests: [ '', Validators.required ],
+  });
 
-  constructor() {
-    this.userForm = this.fb.group({
-      first_name: [ '', Validators.required ],
-      last_name: [ '', Validators.required ],
-      email: [ '', [ Validators.required, Validators.email ]],
-      dob: [ '', Validators.required ],
-      interests: [ '', Validators.required ],
-    });
-  }
+  private isSubmitting = signal(false);
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((users) => {
@@ -62,19 +53,26 @@ export class AdminPanelComponent implements OnInit {
 
       const newUser: User = {
         ...this.userForm.value,
-        id: crypto.randomUUID(),
       };
 
-      this.users.update(currentUsers => [ ...currentUsers, newUser ]);
-
-      this.userForm.reset();
-      this.isSubmitting.set(false);
+      this.userService.createUser(newUser).subscribe(
+        (user) => {
+          this.users.update(currentUsers => [ ...currentUsers, user ]);
+        },
+        () => {
+          this.isSubmitting.set(false);
+          this.userForm.reset();
+          this.isSubmitting.set(false);
+        },
+      );
     }
   }
 
   deleteUser(id: number, event: Event): void {
     event.stopPropagation();
-    //  It will be implemented in the next task.
+    this.userService.deleteUser(id).subscribe(() => {
+      this.users.update(currentUsers => currentUsers.filter(user => user.id !== id));
+    });
   }
 
   updateUser(user: User, event: Event): void {

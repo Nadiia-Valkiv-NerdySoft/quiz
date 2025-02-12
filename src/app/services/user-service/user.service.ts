@@ -18,4 +18,17 @@ export class UserService {
       catchError(this.errorHandlerService.handleError),
     );
   }
+
+  createUser(user: User): Observable<User> {
+    return this.http
+    .post<User>(`${this.baseUserUrl}/users`, user)
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  // Method to delete a user by their ID
+  deleteUser(userId: number): Observable<void> {
+    return this.http
+    .delete<void>(`${this.baseUserUrl}/users/${userId}`)
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
 }
