@@ -30,7 +30,8 @@
             type="text"
             formControlName="first_name"
             placeholder="First Name"
-            class="w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+            pInputText
+            class="w-full"
           />
           @if (
             userForm.get('first_name')?.touched &&
@@ -46,7 +47,8 @@
             type="text"
             formControlName="last_name"
             placeholder="Last Name"
-            class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+            pInputText
+            class="w-full"
           />
           @if (
             userForm.get('last_name')?.touched &&
@@ -56,34 +58,38 @@
           }
         </div>
       </div>
-
-      <!-- Email Field -->
-      <div class="mb-4">
-        <input
-          type="email"
-          formControlName="email"
-          placeholder="Email"
-          class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:border-muted focus:outline-none focus:ring-1 focus:ring-muted"
-        />
-        @if (userForm.get('email')?.touched && userForm.get('email')?.invalid) {
-          <span class="mt-1 text-sm text-red-500"
-            >Please enter a valid email</span
-          >
-        }
-      </div>
-
-      <!-- Date of Birth Field -->
-      <div class="mb-4">
-        <p-datepicker
-          formControlName="dob"
-          placeholder="Date of Birth"
-          [showIcon]="true"
-        />
-        @if (userForm.get('dob')?.touched && userForm.get('dob')?.invalid) {
-          <span class="mt-1 text-sm text-red-500"
-            >Date of birth is required</span
-          >
-        }
+      <div class="mb-4 flex gap-4">
+        <!-- Email Field -->
+        <div class="flex-1">
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            pInputText
+            class="w-full"
+          />
+          @if (
+            userForm.get('email')?.touched && userForm.get('email')?.invalid
+          ) {
+            <span class="mt-1 text-sm text-red-500"
+              >Please enter a valid email</span
+            >
+          }
+        </div>
+        <!-- Date of Birth Field -->
+        <div class="w-full flex-1">
+          <p-datepicker
+            formControlName="dob"
+            placeholder="Date of Birth"
+            [showIcon]="true"
+            class="w-full"
+          />
+          @if (userForm.get('dob')?.touched && userForm.get('dob')?.invalid) {
+            <div class="mt-1 text-sm text-red-500">
+              Date of birth is required
+            </div>
+          }
+        </div>
       </div>
 
       <!-- Interests Field -->
@@ -92,7 +98,8 @@
           type="text"
           formControlName="interests"
           placeholder="Interests"
-          class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+          pInputText
+          class="w-full"
         />
       </div>
 

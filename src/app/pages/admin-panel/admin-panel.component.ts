@@ -11,6 +11,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { DatePickerModule } from 'primeng/datepicker';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'quiz-admin-panel',
@@ -19,6 +20,7 @@ import { DatePickerModule } from 'primeng/datepicker';
     SvgIconComponent,
     ReactiveFormsModule,
     DatePickerModule,
+    InputTextModule,
   ],
   templateUrl: './admin-panel.component.html',
 })
