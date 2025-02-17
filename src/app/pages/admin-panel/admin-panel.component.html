@@ -74,11 +74,10 @@
 
       <!-- Date of Birth Field -->
       <div class="mb-4">
-        <input
-          type="date"
+        <p-datepicker
           formControlName="dob"
           placeholder="Date of Birth"
-          class="bg-dark w-full rounded-md border border-gray-600 bg-primary px-4 py-2 text-bright placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-muted"
+          [showIcon]="true"
         />
         @if (userForm.get('dob')?.touched && userForm.get('dob')?.invalid) {
           <span class="mt-1 text-sm text-red-500"

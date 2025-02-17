@@ -10,10 +10,16 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'quiz-admin-panel',
-  imports: [ FormatDatePipe, SvgIconComponent, ReactiveFormsModule ],
+  imports: [
+    FormatDatePipe,
+    SvgIconComponent,
+    ReactiveFormsModule,
+    DatePickerModule,
+  ],
   templateUrl: './admin-panel.component.html',
 })
 export class AdminPanelComponent implements OnInit {
