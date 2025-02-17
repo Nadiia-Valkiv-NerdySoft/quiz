@@ -15,7 +15,6 @@ import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 @Component({
   selector: 'quiz-catalog',
-  standalone: true,
   imports: [
     UiButtonComponent,
     QuizCardComponent,

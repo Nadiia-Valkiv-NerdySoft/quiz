@@ -8,7 +8,6 @@ import {
 
 @Component({
   selector: 'quiz-ui-quiz-feedback',
-  standalone: true,
   imports: [TimeFormatPipe],
   templateUrl: './ui-quiz-feedback.component.html',
 })

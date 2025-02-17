@@ -13,7 +13,6 @@ import {
 
 @Component({
   selector: 'quiz-admin-panel',
-  standalone: true,
   imports: [ FormatDatePipe, SvgIconComponent, ReactiveFormsModule ],
   templateUrl: './admin-panel.component.html',
 })

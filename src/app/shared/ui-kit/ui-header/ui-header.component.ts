@@ -5,7 +5,6 @@ import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'quiz-ui-header',
-  standalone: true,
   imports: [ RouterLink, RouterLinkActive, UiButtonComponent, SvgIconComponent ],
   templateUrl: './ui-header.component.html',
 })

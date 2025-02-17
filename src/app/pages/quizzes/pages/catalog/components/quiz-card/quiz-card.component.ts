@@ -8,7 +8,6 @@ import { QuizCategory } from '../../../../../../shared/models/quiz-category.mode
 
 @Component({
   selector: 'quiz-quiz-card',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './quiz-card.component.html',
 })

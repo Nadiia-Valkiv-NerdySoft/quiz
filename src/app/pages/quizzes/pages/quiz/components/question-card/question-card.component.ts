@@ -21,7 +21,6 @@ import { AVATAR_PATHS } from '../../../catalog/components/quiz-card/quiz-card.co
 
 @Component({
   selector: 'quiz-question-card',
-  standalone: true,
   imports: [
     UiButtonComponent,
     SvgIconComponent,

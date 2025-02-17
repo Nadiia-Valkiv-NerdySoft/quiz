@@ -6,7 +6,6 @@ import { DialogService } from '../../../services/dialog-service/dialog.service';
 
 @Component({
   selector: 'quiz-ui-navigation-confirm-dialog',
-  standalone: true,
   imports: [UiButtonComponent],
   templateUrl: './ui-navigation-confirm-dialog.component.html',
 })

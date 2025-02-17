@@ -8,7 +8,6 @@ export interface StatisticItem {
 
 @Component({
   selector: 'quiz-ui-chart-legend-item',
-  standalone: true,
   imports: [],
   templateUrl: './ui-chart-legend-item.component.html',
 })

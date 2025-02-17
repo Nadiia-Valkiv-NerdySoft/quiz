@@ -4,7 +4,6 @@ import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'quiz-ui-error-notification',
-  standalone: true,
   imports: [ UiButtonComponent, SvgIconComponent ],
   templateUrl: './ui-error-notification.component.html',
 })

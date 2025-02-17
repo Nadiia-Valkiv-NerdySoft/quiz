@@ -4,7 +4,6 @@ import { UiHeaderComponent } from '../../shared/ui-kit/ui-header/ui-header.compo
 
 @Component({
   selector: 'quiz-quizzes',
-  standalone: true,
   imports: [ RouterOutlet, UiHeaderComponent ],
   templateUrl: './quizzes.component.html',
 })

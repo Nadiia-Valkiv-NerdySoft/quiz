@@ -8,7 +8,6 @@ import {
 
 @Component({
   selector: 'quiz-ui-donut-chart',
-  standalone: true,
   imports: [ NgxChartsModule, UiChartLegendItemComponent ],
   templateUrl: './ui-donut-chart.component.html',
 })

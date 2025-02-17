@@ -5,7 +5,6 @@ import { ButtonSize, ButtonVariant } from './button.types';
 
 @Component({
   selector: 'quiz-ui-button',
-  standalone: true,
   imports: [ NgClass, RouterLink ],
   templateUrl: './ui-button.component.html',
 })
