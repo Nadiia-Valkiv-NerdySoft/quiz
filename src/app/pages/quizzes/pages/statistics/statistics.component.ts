@@ -13,7 +13,6 @@ import { QuizFeedbackComponent } from '../../../../shared/ui-kit/ui-quiz-feedbac
 
 @Component({
   selector: 'quiz-statistics',
-  standalone: true,
   imports: [
     UiButtonComponent,
     QuizFeedbackComponent,

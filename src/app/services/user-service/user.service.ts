@@ -18,4 +18,28 @@ export class UserService {
       catchError(this.errorHandlerService.handleError),
     );
   }
+
+  createUser(user: User): Observable<User> {
+    return this.http
+    .post<User>(`${this.baseUserUrl}/users`, user)
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  deleteUser(userId: number): Observable<void> {
+    return this.http
+    .delete<void>(`${this.baseUserUrl}/users/${userId}`)
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http
+    .put<User>(`${this.baseUserUrl}/users/${user.id}`, user)
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  patchUser(userId: number, partialUser: Partial<User>): Observable<User> {
+    return this.http
+    .patch<User>(`${this.baseUserUrl}/users/${userId}`, partialUser)
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
 }

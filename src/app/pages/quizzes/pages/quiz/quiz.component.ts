@@ -5,7 +5,6 @@ import { NavigationConfirmDialogComponent } from '../../../../shared/ui-kit/ui-n
 
 @Component({
   selector: 'quiz-quiz',
-  standalone: true,
   imports: [
     QuestionCardComponent,
     UiButtonComponent,

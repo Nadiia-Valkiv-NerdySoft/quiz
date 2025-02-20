@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'quiz-ui-radio-group',
-  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './ui-radio-group.component.html',
 })

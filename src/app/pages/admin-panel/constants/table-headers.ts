@@ -1,6 +1,7 @@
 export const TABLE_HEADERS: string[] = [
-  'ID',
+  'No.',
   'Name',
+  'Surname',
   'Email',
   'Date of Birth',
   'Interests',

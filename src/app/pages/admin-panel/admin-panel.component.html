@@ -2,56 +2,31 @@
 
 <div class="p-6">
   <div
-    class="mb-4 flex max-w-fit items-center justify-center gap-2 rounded bg-accent px-4 py-2 text-bright hover:bg-blue-600"
+    (click)="toggleForm()"
+    class="mb-4 flex max-w-fit cursor-pointer items-center justify-center gap-2 rounded px-4 py-2 text-bright underline"
   >
     <span>Add New User</span>
     <svg-icon
       [src]="'assets/icons/chevron-left.svg'"
-      [svgClass]="'h-6 w-6 text-shade -rotate-90 stroke-[2]'"
+      [svgClass]="
+        'h-6 w-6 text-shade ' +
+        (isFormVisible() ? 'rotate-90' : '-rotate-90') +
+        ' stroke-[2] transition-transform'
+      "
       [applyClass]="true"
     ></svg-icon>
   </div>
 
-  <div class="overflow-x-auto">
-    <table class="w-full border-collapse rounded-lg border border-gray-700">
-      <thead>
-        <tr class="bg-gray-900">
-          @for (header of tableHeaders; track header) {
-            <th class="border-b border-gray-700 p-4 text-left">{{ header }}</th>
-          }
-        </tr>
-      </thead>
-      <tbody>
-        @for (user of users(); track user.id) {
-          <tr class="cursor-pointer border-b border-gray-700 hover:bg-gray-800">
-            <td class="p-4">{{ user.id }}</td>
-            <td class="p-4">{{ user.first_name }} {{ user.last_name }}</td>
-            <td class="p-4">{{ user.email }}</td>
-            <td class="p-4">{{ user.dob | formatDate }}</td>
-            <td class="p-4">{{ user.interests }}</td>
-            <td class="p-4">
-              <div class="flex gap-2">
-                <button
-                  (click)="updateUser(user, $event)"
-                  class="rounded bg-blue-600 px-3 py-1 text-white hover:bg-blue-700"
-                >
-                  Update
-                </button>
-                <button
-                  (click)="deleteUser(user.id, $event)"
-                  class="rounded bg-red-600 px-3 py-1 text-white hover:bg-red-700"
-                >
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="6" class="p-4 text-center">No users found</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  @if (isFormVisible()) {
+    <quiz-add-user
+      (userSaved)="onUserSaved($event)"
+      (toggleForm)="toggleForm()"
+    ></quiz-add-user>
+  }
+
+  <quiz-users-list
+    [users]="users()"
+    (updatedUser)="updateUser($event)"
+    (deleteUserId)="onDeleteUser($event)"
+  ></quiz-users-list>
 </div>
