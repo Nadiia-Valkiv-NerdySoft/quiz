@@ -1,28 +1,20 @@
-import {
-  Component,
-  inject,
-  signal,
-  ViewChild,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, signal, ViewChild, OnInit } from '@angular/core';
 import { User } from '../../shared/models/user.model';
 import { UserService } from '../../services/user-service/user.service';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'quiz-admin-panel',
   imports: [ SvgIconComponent, AddUserComponent, UsersListComponent ],
   templateUrl: './admin-panel.component.html',
 })
-export class AdminPanelComponent implements OnInit, OnDestroy {
+export class AdminPanelComponent implements OnInit {
   @ViewChild(UsersListComponent) usersListComponent!: UsersListComponent;
 
   private userService = inject(UserService);
-  private subscription: Subscription | null = null;
 
   users = signal<User[]>([]);
   isFormVisible = signal(false);
@@ -32,7 +24,10 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   loadUsers(): void {
-    this.subscription = this.userService.getUsers().subscribe({
+    this.userService
+    .getUsers()
+    .pipe(takeUntilDestroyed())
+    .subscribe({
       next: users => this.users.set(users),
     });
   }
@@ -42,30 +37,33 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   onUserSaved(newUser: User) {
-    this.subscription = this.userService.updateUser(newUser).subscribe(() => {
+    this.userService
+    .updateUser(newUser)
+    .pipe(takeUntilDestroyed())
+    .subscribe(() => {
       this.toggleForm();
       this.users.update(currentUsers => [ ...currentUsers, newUser ]);
     });
   }
 
   updateUser(user: User): void {
-    this.subscription = this.userService.updateUser(user).subscribe({
+    this.userService
+    .updateUser(user)
+    .pipe(takeUntilDestroyed())
+    .subscribe({
       next: (updatedUser) => {
-        this.users.update(currentUsers => currentUsers.map(u => (u.id === updatedUser.id ? updatedUser : u)));
+        this.users.update(currentUsers => currentUsers.map(u => u.id === updatedUser.id ? updatedUser : u));
       },
       error: () => this.usersListComponent.onRowEditCancel(user),
     });
   }
 
   onDeleteUser(id: number): void {
-    this.subscription = this.userService.deleteUser(id).subscribe(() => {
+    this.userService
+    .deleteUser(id)
+    .pipe(takeUntilDestroyed())
+    .subscribe(() => {
       this.users.update(currentUsers => currentUsers.filter(user => user.id !== id));
     });
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }
