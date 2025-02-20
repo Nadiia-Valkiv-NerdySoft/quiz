@@ -1,4 +1,11 @@
-import { Component, inject, signal, ViewChild, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  ViewChild,
+  OnInit,
+  DestroyRef,
+} from '@angular/core';
 import { User } from '../../shared/models/user.model';
 import { UserService } from '../../services/user-service/user.service';
 import { SvgIconComponent } from 'angular-svg-icon';
@@ -15,6 +22,7 @@ export class AdminPanelComponent implements OnInit {
   @ViewChild(UsersListComponent) usersListComponent!: UsersListComponent;
 
   private userService = inject(UserService);
+  private destroyRef = inject(DestroyRef);
 
   users = signal<User[]>([]);
   isFormVisible = signal(false);
@@ -26,7 +34,7 @@ export class AdminPanelComponent implements OnInit {
   loadUsers(): void {
     this.userService
     .getUsers()
-    .pipe(takeUntilDestroyed())
+    .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe({
       next: users => this.users.set(users),
     });
@@ -39,7 +47,7 @@ export class AdminPanelComponent implements OnInit {
   onUserSaved(newUser: User) {
     this.userService
     .updateUser(newUser)
-    .pipe(takeUntilDestroyed())
+    .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe(() => {
       this.toggleForm();
       this.users.update(currentUsers => [ ...currentUsers, newUser ]);
@@ -49,7 +57,7 @@ export class AdminPanelComponent implements OnInit {
   updateUser(user: User): void {
     this.userService
     .updateUser(user)
-    .pipe(takeUntilDestroyed())
+    .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe({
       next: (updatedUser) => {
         this.users.update(currentUsers => currentUsers.map(u => u.id === updatedUser.id ? updatedUser : u));
@@ -61,7 +69,7 @@ export class AdminPanelComponent implements OnInit {
   onDeleteUser(id: number): void {
     this.userService
     .deleteUser(id)
-    .pipe(takeUntilDestroyed())
+    .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe(() => {
       this.users.update(currentUsers => currentUsers.filter(user => user.id !== id));
     });
