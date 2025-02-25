@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { User } from '../../../../shared/models/user.model';
 import { FormatDatePipe } from '../../format-date.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TABLE_HEADERS } from '../../constants/table-headers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'quiz-users-list',
@@ -26,6 +27,8 @@ export class UsersListComponent {
   @Output() deleteUserId = new EventEmitter<number>();
 
   @Input() users!: User[];
+
+  private router = inject(Router);
 
   tableHeaders = TABLE_HEADERS;
   editingUser: { [key: number]: User } = {};
@@ -47,5 +50,9 @@ export class UsersListComponent {
 
   deleteUser(id: number): void {
     this.deleteUserId.emit(id);
+  }
+
+  navigateToUser(id: number): void {
+    this.router.navigate([`admin/${id}`]);
   }
 }

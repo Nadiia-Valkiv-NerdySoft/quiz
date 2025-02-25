@@ -19,6 +19,13 @@ export class UserService {
     );
   }
 
+  getUser(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUserUrl}/users/${userId}`).pipe(
+      map(user => user),
+      catchError(this.errorHandlerService.handleError),
+    );
+  }
+
   createUser(user: User): Observable<User> {
     return this.http
     .post<User>(`${this.baseUserUrl}/users`, user)

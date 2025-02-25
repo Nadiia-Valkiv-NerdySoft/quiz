@@ -15,4 +15,10 @@ export const routes: Routes = [
       c => c.AdminPanelComponent,
     ),
   },
+  {
+    path: 'admin/:id',
+    loadComponent: () => import(
+      './pages/admin-panel/components/user-information/user-information.component'
+    ).then(c => c.UserInformationComponent),
+  },
 ];
