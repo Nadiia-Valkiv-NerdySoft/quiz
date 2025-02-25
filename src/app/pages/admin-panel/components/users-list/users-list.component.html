@@ -19,7 +19,7 @@
       let-editing="editing"
       let-ri="rowIndex"
     >
-      <tr [pEditableRow]="user">
+      <tr [pEditableRow]="user" (click)="navigateToUser(user.id)">
         <td>{{ ri + 1 }}</td>
         <td>
           <p-cellEditor>
