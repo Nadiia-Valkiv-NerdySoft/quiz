@@ -81,18 +81,20 @@
   <!-- Form Buttons -->
   <div class="flex gap-3">
     <button
+      pButton
       type="submit"
       [disabled]="!userForm.valid"
-      class="rounded bg-accent px-6 py-2 text-bright transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      Create
-    </button>
+      label="Create"
+      icon="pi pi-check"
+      styleClass="p-button-success"
+    ></button>
     <button
+      pButton
       type="button"
       (click)="closeForm()"
-      class="rounded border border-accent bg-transparent px-6 py-2 text-bright transition-colors hover:bg-muted"
-    >
-      Cancel
-    </button>
+      label="Cancel"
+      icon="pi pi-times"
+      styleClass="p-button-outlined"
+    ></button>
   </div>
 </form>

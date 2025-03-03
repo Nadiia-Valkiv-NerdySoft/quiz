@@ -9,10 +9,16 @@ import { UserService } from '../../../../services/user-service/user.service';
 import { User } from '../../../../shared/models/user.model';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'quiz-add-user',
-  imports: [ ReactiveFormsModule, DatePickerModule, InputTextModule ],
+  imports: [
+    ReactiveFormsModule,
+    DatePickerModule,
+    InputTextModule,
+    ButtonModule,
+  ],
   templateUrl: './add-user.component.html',
 })
 export class AddUserComponent {
