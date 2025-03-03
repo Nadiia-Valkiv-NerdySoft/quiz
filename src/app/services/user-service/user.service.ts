@@ -49,4 +49,12 @@ export class UserService {
     .patch<User>(`${this.baseUserUrl}/users/${userId}`, partialUser)
     .pipe(catchError(this.errorHandlerService.handleError));
   }
+
+  getUsersByName(firstName: string): Observable<User[]> {
+    return this.http
+    .get<
+        User[]
+      >(`${this.baseUserUrl}/users`, { params: { first_name: firstName } })
+    .pipe(catchError(this.errorHandlerService.handleError));
+  }
 }

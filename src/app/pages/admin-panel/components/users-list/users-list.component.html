@@ -1,12 +1,43 @@
+<div class="m-5 flex justify-between p-5">
+  <p-floatlabel variant="on">
+    <input
+      type="text"
+      pInputText
+      [formControl]="searchControl"
+      class="p-inputtext p-component p-mr-2"
+    />
+    <label>Search by name...</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="globalSearchQuery"
+      (input)="table.filterGlobal(globalSearchQuery, 'contains')"
+      class="p-inputtext p-component p-mr-2"
+    />
+    <label>Global search</label>
+  </p-floatlabel>
+</div>
+
 <div class="overflow-x-auto">
   <p-table
-    [value]="users"
+    #table
+    [value]="users()"
     [tableStyle]="{ 'min-width': '50rem' }"
     editMode="row"
     dataKey="id"
     [paginator]="true"
     [rows]="5"
     [rowsPerPageOptions]="[5, 10, 20]"
+    [globalFilterFields]="[
+      'first_name',
+      'last_name',
+      'email',
+      'dob',
+      'interests',
+    ]"
   >
     <ng-template pTemplate="header">
       <tr>
