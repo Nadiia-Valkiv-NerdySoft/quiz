@@ -14,7 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TABLE_HEADERS } from '../../constants/table-headers';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -34,6 +34,7 @@ import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
     FloatLabelModule,
     IconFieldModule,
     InputIconModule,
+    RouterLink,
   ],
   templateUrl: './users-list.component.html',
 })

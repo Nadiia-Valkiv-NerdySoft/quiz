@@ -53,91 +53,103 @@
       let-editing="editing"
       let-ri="rowIndex"
     >
-      <tr [pEditableRow]="user" (click)="!editing && navigateToUser(user.id)">
-        <td>{{ ri + 1 }}</td>
+      <tr [pEditableRow]="user">
         <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="text"
-                [(ngModel)]="user.first_name"
-                [ngModelOptions]="{ standalone: true }"
-                class="max-w-[150px]"
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ user.first_name }}
-            </ng-template>
-          </p-cellEditor>
+          <a [routerLink]="[user.id]">{{ ri + 1 }}</a>
+        </td>
+        <td>
+          <a [routerLink]="[user.id]"
+            ><p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="user.first_name"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="w-full"
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ user.first_name }}
+              </ng-template>
+            </p-cellEditor></a
+          >
         </td>
 
         <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="text"
-                [(ngModel)]="user.last_name"
-                [ngModelOptions]="{ standalone: true }"
-                class="max-w-[150px]"
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ user.last_name }}
-            </ng-template>
-          </p-cellEditor>
+          <a [routerLink]="[user.id]"
+            ><p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="user.last_name"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="w-full"
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ user.last_name }}
+              </ng-template>
+            </p-cellEditor></a
+          >
         </td>
 
         <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="email"
-                [(ngModel)]="user.email"
-                [ngModelOptions]="{ standalone: true }"
-                class="max-w-[150px]"
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ user.email }}
-            </ng-template>
-          </p-cellEditor>
+          <a [routerLink]="[user.id]"
+            ><p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="email"
+                  [(ngModel)]="user.email"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="w-full"
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ user.email }}
+              </ng-template>
+            </p-cellEditor></a
+          >
         </td>
 
         <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-datepicker
-                [(ngModel)]="user.dob"
-                [ngModelOptions]="{ standalone: true }"
-                dateFormat="dd/mm/yy"
-                [showIcon]="true"
-                class="max-w-[150px]"
-              ></p-datepicker>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ user.dob | formatDate }}
-            </ng-template>
-          </p-cellEditor>
+          <a [routerLink]="[user.id]"
+            ><p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-datepicker
+                  [(ngModel)]="user.dob"
+                  [ngModelOptions]="{ standalone: true }"
+                  dateFormat="dd/mm/yy"
+                  [showIcon]="true"
+                  class="w-full"
+                ></p-datepicker>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ user.dob | formatDate }}
+              </ng-template>
+            </p-cellEditor></a
+          >
         </td>
 
         <td>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="text"
-                [(ngModel)]="user.interests"
-                [ngModelOptions]="{ standalone: true }"
-                class="max-w-[150px]"
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ user.interests }}
-            </ng-template>
-          </p-cellEditor>
+          <a [routerLink]="[user.id]"
+            ><p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="user.interests"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="w-full"
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ user.interests }}
+              </ng-template>
+            </p-cellEditor></a
+          >
         </td>
 
         <td class="flex justify-between">
