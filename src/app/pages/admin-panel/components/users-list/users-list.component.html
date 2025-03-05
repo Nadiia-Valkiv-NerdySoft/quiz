@@ -9,7 +9,7 @@
     <label>Search by name...</label>
   </p-floatlabel>
 
-  <p-floatlabel variant="on">
+  <p-floatlabel variant="on" class="bg-transparent">
     <input
       type="text"
       pInputText
@@ -55,10 +55,10 @@
     >
       <tr [pEditableRow]="user">
         <td>
-          <a [routerLink]="[user.id]">{{ ri + 1 }}</a>
+          <a [routerLink]="!editing ? [user.id] : null">{{ ri + 1 }}</a>
         </td>
         <td>
-          <a [routerLink]="[user.id]"
+          <a [routerLink]="!editing ? [user.id] : null"
             ><p-cellEditor>
               <ng-template pTemplate="input">
                 <input
@@ -77,7 +77,7 @@
         </td>
 
         <td>
-          <a [routerLink]="[user.id]"
+          <a [routerLink]="!editing ? [user.id] : null"
             ><p-cellEditor>
               <ng-template pTemplate="input">
                 <input
@@ -96,7 +96,7 @@
         </td>
 
         <td>
-          <a [routerLink]="[user.id]"
+          <a [routerLink]="!editing ? [user.id] : null"
             ><p-cellEditor>
               <ng-template pTemplate="input">
                 <input
@@ -115,7 +115,7 @@
         </td>
 
         <td>
-          <a [routerLink]="[user.id]"
+          <a [routerLink]="!editing ? [user.id] : null"
             ><p-cellEditor>
               <ng-template pTemplate="input">
                 <p-datepicker
@@ -134,7 +134,7 @@
         </td>
 
         <td>
-          <a [routerLink]="[user.id]"
+          <a [routerLink]="!editing ? [user.id] : null"
             ><p-cellEditor>
               <ng-template pTemplate="input">
                 <input
