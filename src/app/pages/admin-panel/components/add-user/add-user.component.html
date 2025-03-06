@@ -5,7 +5,7 @@
 >
   <!-- Name Fields -->
   <div class="mb-4 flex gap-4">
-    <div class="flex-1">
+    <div class="w-full flex-1">
       <input
         type="text"
         formControlName="first_name"
@@ -60,6 +60,8 @@
         [showIcon]="true"
         dateFormat="dd/mm/yy"
         class="w-full"
+        [style]="{ width: '100%' }"
+        inputStyleClass="w-full"
       ></p-datepicker>
       @if (userForm.get('dob')?.touched && userForm.get('dob')?.invalid) {
         <span class="mt-1 text-sm text-red-500">Date of birth is required</span>
@@ -81,18 +83,18 @@
   <!-- Form Buttons -->
   <div class="flex gap-3">
     <button
+      pButton
       type="submit"
       [disabled]="!userForm.valid"
-      class="rounded bg-accent px-6 py-2 text-bright transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      Create
-    </button>
-    <button
-      type="button"
+      label="Create"
+      icon="pi pi-check"
+      styleClass="p-button-success"
+    ></button>
+    <p-button
+      variant="outlined"
       (click)="closeForm()"
-      class="rounded border border-accent bg-transparent px-6 py-2 text-bright transition-colors hover:bg-muted"
-    >
-      Cancel
-    </button>
+      label="Cancel"
+      icon="pi pi-times"
+    ></p-button>
   </div>
 </form>
