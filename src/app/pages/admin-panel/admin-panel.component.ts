@@ -12,10 +12,11 @@ import { SvgIconComponent } from 'angular-svg-icon';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'quiz-admin-panel',
-  imports: [ SvgIconComponent, AddUserComponent, UsersListComponent ],
+  imports: [ SvgIconComponent, AddUserComponent, UsersListComponent, MatButtonModule ],
   templateUrl: './admin-panel.component.html',
 })
 export class AdminPanelComponent implements OnInit {

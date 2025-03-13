@@ -25,6 +25,7 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/assets"],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss",
               "src/styles/fonts.scss",
               "primeicons/primeicons.css"
@@ -72,5 +73,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2536b1a2-fc70-4499-82a4-f5a826bcb294"
   }
 }
