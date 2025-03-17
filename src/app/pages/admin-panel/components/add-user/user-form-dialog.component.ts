@@ -19,8 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogData } from '../../admin-panel.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'quiz-user-form-dialog',
@@ -34,8 +34,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './user-form-dialog.component.html',
 })
 export class UserFormDialogComponent {
