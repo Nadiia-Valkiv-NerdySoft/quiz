@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -38,7 +38,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   providers: [provideNativeDateAdapter()],
   templateUrl: './user-form-dialog.component.html',
   styleUrls: ['./user-form-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class UserFormDialogComponent {
   private fb = inject(FormBuilder);

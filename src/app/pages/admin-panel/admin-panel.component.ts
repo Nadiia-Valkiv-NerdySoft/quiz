@@ -50,6 +50,7 @@ export class AdminPanelComponent implements OnInit {
       width: '600px',
       disableClose: true,
       data: isUpdateUser ? { user: this.users()[0] } : undefined,
+      panelClass: 'user-dialog-dark',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

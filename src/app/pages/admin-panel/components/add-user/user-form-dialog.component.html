@@ -2,7 +2,7 @@
 
 <mat-dialog-content>
   <form [formGroup]="userForm">
-    <mat-form-field appearance="fill" class="text-muted">
+    <mat-form-field appearance="fill">
       <mat-label>First Name</mat-label>
       <input matInput formControlName="first_name" />
       @if (userForm.get('first_name')?.hasError('required')) {
@@ -10,7 +10,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="text-muted">
+    <mat-form-field appearance="fill">
       <mat-label>Last Name</mat-label>
       <input matInput formControlName="last_name" />
       @if (userForm.get('last_name')?.hasError('required')) {
@@ -18,7 +18,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="text-muted">
+    <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" type="email" />
       @if (userForm.get('email')?.hasError('required')) {
@@ -29,7 +29,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="text-muted">
+    <mat-form-field appearance="fill">
       <mat-label>Date of Birth</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="dob" />
       <mat-datepicker-toggle
@@ -42,7 +42,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="text-muted">
+    <mat-form-field appearance="fill">
       <mat-label>Interests</mat-label>
       <input matInput formControlName="interests" />
       @if (userForm.get('interests')?.hasError('required')) {
@@ -53,7 +53,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()" class="text-muted">Cancel</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
   <button
     mat-button
     [disabled]="userForm.invalid"
