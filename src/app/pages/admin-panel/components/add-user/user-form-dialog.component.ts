@@ -37,7 +37,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './user-form-dialog.component.html',
-  styleUrls: ['./user-form-dialog.component.scss'],
+  styleUrls: ['./user-form-dialog.components.scss'],
 })
 export class UserFormDialogComponent {
   private fb = inject(FormBuilder);
