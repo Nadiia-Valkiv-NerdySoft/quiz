@@ -1,13 +1,7 @@
 <h2 class="py-5 text-center text-6xl">List of users</h2>
 
-<button mat-raised-button (click)="openUserDialog(false)">Add user</button>
-
-<button mat-raised-button (click)="openUserDialog(true)">update user</button>
+<button mat-raised-button (click)="openUserDialog()">Add user</button>
 
 <div class="p-6">
-  <quiz-users-list
-    [users]="users()"
-    (updatedUser)="updateUser($event)"
-    (deleteUserId)="onDeleteUser($event)"
-  ></quiz-users-list>
+  <quiz-users-list></quiz-users-list>
 </div>
