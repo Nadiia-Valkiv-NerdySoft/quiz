@@ -1,0 +1,91 @@
+.dark-theme-table {
+  .search-bar {
+    background-color: #222328;
+    border-radius: 4px;
+    float: right;
+    margin-bottom: 16px;
+
+    input {
+      background-color: #262626;
+      border: solid 1px #3d3d3d;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
+      margin-bottom: 20px;
+      max-width: 300px;
+      outline: none;
+      padding: 12px 16px;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: #888;
+        opacity: 1;
+      }
+
+      &:focus {
+        background-color: #333;
+        box-shadow: 0 0 0 2px rgba(155, 154, 154, 30%);
+      }
+    }
+  }
+
+  .mat-mdc-table {
+    background-color: #1e1e1e;
+    color: white;
+  }
+
+  .mat-mdc-header-row {
+    background-color: #2d2d2d;
+  }
+
+  .mat-mdc-header-cell {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .mat-mdc-row {
+    background-color: #1e1e1e;
+    cursor: pointer;
+
+    &:nth-child(odd) {
+      background-color: #262626;
+    }
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+
+  .mat-mdc-cell {
+    border-bottom-color: #3d3d3d;
+    color: #e0e0e0;
+  }
+
+  .mat-mdc-paginator {
+    background-color: #1e1e1e;
+    color: white;
+  }
+}
+
+.delete-icon {
+  color: rgb(219, 85, 85);
+  margin-left: 12px;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darkred;
+  }
+}
+
+.edit-icon {
+  color: lightblue;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #1f42a2;
+  }
+}
+
+.actions-td {
+  padding: 10px;
+}

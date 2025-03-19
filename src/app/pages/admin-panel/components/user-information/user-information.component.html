@@ -20,7 +20,7 @@
       <p><span class="font-semibold">Email:</span> {{ user()?.email }}</p>
       <p>
         <span class="font-semibold">Date of Birth:</span>
-        {{ user()?.dob }}
+        {{ user()?.dob | formatDate }}
       </p>
       <p>
         <span class="font-semibold">Interests:</span>

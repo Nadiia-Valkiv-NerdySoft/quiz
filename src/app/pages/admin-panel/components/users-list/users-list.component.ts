@@ -2,15 +2,8 @@ import { DestroyRef, inject, OnInit } from '@angular/core';
 import { User } from '../../../../shared/models/user.model';
 import { FormatDatePipe } from '../../format-date.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DatePickerModule } from 'primeng/datepicker';
-import { InputTextModule } from 'primeng/inputtext';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
 import { TABLE_HEADERS } from '../../constants/table-headers';
 import { Router, RouterLink } from '@angular/router';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
 import { UserService } from '../../../../services/user-service/user.service';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -18,34 +11,30 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserFormDialogService } from '../../../../services/user-form-dialog-service/user-form-dialog.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'quiz-users-list',
   imports: [
     FormatDatePipe,
     ReactiveFormsModule,
-    DatePickerModule,
-    InputTextModule,
-    TableModule,
-    ButtonModule,
     FormsModule,
-    FloatLabelModule,
-    IconFieldModule,
-    InputIconModule,
     RouterLink,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent implements OnInit {
   private userService = inject(UserService);
   private userFormDialogService = inject(UserFormDialogService);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
-  //@ts-ignore
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   tableHeaders = TABLE_HEADERS;
   displayedColumns: string[] = [
@@ -74,23 +63,22 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  deleteUser(id: number): void {
-    this.userService
-    .deleteUser(id)
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(
-        (user: { id: number }) => user.id !== id,
-      );
-    });
-  }
-
   createUser(newUser: User): void {
     this.userService
     .createUser(newUser)
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe((createdUser) => {
       this.dataSource.data = [ ...this.dataSource.data, createdUser ];
+    });
+  }
+
+  openUpdateUserDialog(user: User): void {
+    const dialogRef = this.userFormDialogService.openUserDialog(user);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.updateUser(result);
+      }
     });
   }
 
@@ -111,17 +99,14 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  navigateToUser(id: number): void {
-    this.router.navigate([`admin/${id}`]);
-  }
-
-  openUpdateUserDialog(user: User): void {
-    const dialogRef = this.userFormDialogService.openUserDialog(user);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
-        this.updateUser(result);
-      }
+  deleteUser(id: number): void {
+    this.userService
+    .deleteUser(id)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter(
+        (user: { id: number }) => user.id !== id,
+      );
     });
   }
 
@@ -132,5 +117,9 @@ export class UsersListComponent implements OnInit {
   search(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  navigateToUser(id: number): void {
+    this.router.navigate([`admin/${id}`]);
   }
 }

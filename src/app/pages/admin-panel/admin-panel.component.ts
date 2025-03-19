@@ -1,4 +1,4 @@
-import { Component, inject, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,8 +17,6 @@ import { UserFormDialogService } from '../../services/user-form-dialog-service/u
     FormsModule,
   ],
   templateUrl: './admin-panel.component.html',
-  styleUrls: ['./admin.panel.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class AdminPanelComponent {
   usersListComponent = viewChild(UsersListComponent);
