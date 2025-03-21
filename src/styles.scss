@@ -1,6 +1,32 @@
+@use '@angular/material' as mat;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --text-color: whitesmoke;
+  --secondary-container: rgb(155, 155, 152);
+  --mat-sys-secondary-container: var(--secondary-container);
+
+  @include mat.form-field-overrides(
+    (
+      outlined-outline-color: var(--text-color),
+      outlined-hover-outline-color: var(--text-color),
+    )
+  );
+  @include mat.paginator-overrides(
+    (
+      enabled-icon-color: var(--text-color),
+    )
+  );
+  @include mat.select-overrides(
+    (
+      panel-background-color: var(--text-color),
+      enabled-trigger-text-color: var(--text-color),
+      enabled-arrow-color: var(--text-color),
+    )
+  );
+}
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -11,4 +37,9 @@ body {
 html,
 body {
   height: 100%;
+}
+
+.mat-mdc-paginator-page-size-label,
+.mat-mdc-paginator-range-label {
+  color: var(--text-color);
 }

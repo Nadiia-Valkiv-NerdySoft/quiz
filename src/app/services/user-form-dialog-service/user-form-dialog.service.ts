@@ -3,9 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserFormDialogComponent } from '../../pages/admin-panel/components/add-user/user-form-dialog.component';
 import { User } from '../../shared/models/user.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UserFormDialogService {
   readonly dialog = inject(MatDialog);
 

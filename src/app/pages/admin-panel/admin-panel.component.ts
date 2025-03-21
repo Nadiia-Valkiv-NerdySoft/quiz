@@ -16,6 +16,7 @@ import { UserFormDialogService } from '../../services/user-form-dialog-service/u
     MatInputModule,
     FormsModule,
   ],
+  providers: [UserFormDialogService],
   templateUrl: './admin-panel.component.html',
 })
 export class AdminPanelComponent {
