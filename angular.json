@@ -24,7 +24,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/assets"],
-            "styles": ["src/styles.scss", "src/styles/fonts.scss"],
+            "styles": [
+              "src/styles.scss",
+              "src/styles/fonts.scss",
+              "primeicons/primeicons.css"
+            ],
             "scripts": []
           },
           "configurations": {

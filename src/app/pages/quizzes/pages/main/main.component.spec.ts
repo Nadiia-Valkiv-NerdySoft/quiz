@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainComponent } from './main.component';
-import { UiButtonComponent } from '../../shared/ui-kit/ui-button/ui-button.component';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { UiButtonComponent } from '../../../../shared/ui-kit/ui-button/ui-button.component';
 
 describe('MainComponent', () => {
   let component: MainComponent;

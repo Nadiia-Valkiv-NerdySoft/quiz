@@ -1,27 +1,24 @@
 import { Routes } from '@angular/router';
-import { QuizPageGuard } from './pages/quiz/quiz-page.guard';
+import { quizzesRoutes } from './pages/quizzes/quizzes.routes';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/main/main.component').then(c => c.MainComponent),
-    pathMatch: 'full',
+    loadComponent: () => import('./pages/quizzes/quizzes.component').then(
+      c => c.QuizzesComponent,
+    ),
+    children: quizzesRoutes,
   },
   {
-    path: 'catalog',
-    loadComponent: () => import('./pages/catalog/catalog.component').then(
-      c => c.CatalogComponent,
+    path: 'admin',
+    loadComponent: () => import('./pages/admin-panel/admin-panel.component').then(
+      c => c.AdminPanelComponent,
     ),
   },
   {
-    path: 'quiz/:id/:questions',
-    loadComponent: () => import('./pages/quiz/quiz.component').then(c => c.QuizComponent),
-    canDeactivate: [QuizPageGuard],
-  },
-  {
-    path: 'statistics',
-    loadComponent: () => import('./pages/statistics/statistics.component').then(
-      c => c.StatisticsComponent,
-    ),
+    path: 'admin/:id',
+    loadComponent: () => import(
+      './pages/admin-panel/components/user-information/user-information.component'
+    ).then(c => c.UserInformationComponent),
   },
 ];

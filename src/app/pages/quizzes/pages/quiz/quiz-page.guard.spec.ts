@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { QuizPageGuard } from './quiz-page.guard';
 import { Observable, Subject } from 'rxjs';
-import { DialogState } from '../../shared/ui-kit/ui-navigation-confirm-dialog/dialog-state.interface';
-import { DialogService } from '../../services/dialog-service/dialog.service';
+import { DialogService } from '../../../../services/dialog-service/dialog.service';
+import { DialogState } from '../../../../shared/ui-kit/ui-navigation-confirm-dialog/dialog-state.interface';
 
 describe('QuizPageGuard', () => {
   let guard: QuizPageGuard;

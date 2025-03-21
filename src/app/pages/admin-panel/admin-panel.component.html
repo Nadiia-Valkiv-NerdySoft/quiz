@@ -1,0 +1,32 @@
+<h2 class="py-5 text-center text-6xl">List of users</h2>
+
+<div class="p-6">
+  <div
+    (click)="toggleForm()"
+    class="mb-4 ml-7 flex max-w-fit cursor-pointer items-center justify-center gap-2 rounded px-4 py-2 text-bright underline"
+  >
+    <span>Add New User</span>
+    <svg-icon
+      [src]="'assets/icons/chevron-left.svg'"
+      [svgClass]="
+        'h-6 w-6 text-shade ' +
+        (isFormVisible() ? 'rotate-90' : '-rotate-90') +
+        ' stroke-[2] transition-transform'
+      "
+      [applyClass]="true"
+    ></svg-icon>
+  </div>
+
+  @if (isFormVisible()) {
+    <quiz-add-user
+      (userSaved)="onUserSaved($event)"
+      (toggleForm)="toggleForm()"
+    ></quiz-add-user>
+  }
+
+  <quiz-users-list
+    [users]="users()"
+    (updatedUser)="updateUser($event)"
+    (deleteUserId)="onDeleteUser($event)"
+  ></quiz-users-list>
+</div>
