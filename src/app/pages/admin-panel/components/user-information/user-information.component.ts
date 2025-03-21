@@ -8,11 +8,17 @@ import { UserStatisticsAdmin } from '../../../../shared/models/user-statistics-a
 import { UiDonutChartComponent } from '../../../../shared/ui-kit/ui-donut-chart/ui-donut-chart.component';
 import { TimeFormatPipe } from '../../../../shared/ui-kit/ui-quiz-feedback/time-format.pipe';
 import { UiButtonComponent } from '../../../../shared/ui-kit/ui-button/ui-button.component';
+import { FormatDatePipe } from '../../format-date.pipe';
 
 @Component({
   selector: 'quiz-user-information',
   templateUrl: './user-information.component.html',
-  imports: [ UiDonutChartComponent, UiButtonComponent, TimeFormatPipe ],
+  imports: [
+    UiDonutChartComponent,
+    UiButtonComponent,
+    TimeFormatPipe,
+    FormatDatePipe,
+  ],
 })
 export class UserInformationComponent implements OnInit {
   private userService = inject(UserService);
@@ -39,7 +45,9 @@ export class UserInformationComponent implements OnInit {
     .subscribe({
       next: (user) => {
         this.user.set(user);
-        this.transformDataForChart(user);
+        if (user.statistics) {
+          this.transformDataForChart(user);
+        }
       },
     });
   }

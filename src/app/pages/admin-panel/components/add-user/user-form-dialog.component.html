@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit user' : 'Create user' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name" />
+      @if (userForm.get('first_name')?.hasError('required')) {
+        <mat-error class="text-error">First Name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name" />
+      @if (userForm.get('last_name')?.hasError('required')) {
+        <mat-error class="text-error">Last Name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+      @if (userForm.get('email')?.hasError('required')) {
+        <mat-error class="text-error">Email is required</mat-error>
+      }
+      @if (userForm.get('email')?.hasError('email')) {
+        <mat-error class="text-error">Invalid email</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dob" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (userForm.get('dob')?.hasError('required')) {
+        <mat-error class="text-error">Date of Birth is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Interests</mat-label>
+      <input matInput formControlName="interests" />
+      @if (userForm.get('interests')?.hasError('required')) {
+        <mat-error class="text-error">Interests are required</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-button
+    [disabled]="userForm.invalid"
+    color="primary"
+    (click)="onSubmit()"
+  >
+    {{ isEditMode ? 'Update' : 'Save' }}
+  </button>
+</mat-dialog-actions>
