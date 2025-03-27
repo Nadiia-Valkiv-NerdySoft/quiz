@@ -1,13 +1,12 @@
-<div class="login-container"></div>
 <mat-card appearance="outlined" class="login-card">
   <mat-card-header>
     <mat-card-title>Enter your email and password to login</mat-card-title>
   </mat-card-header>
-  <mat-card-content class="login-card-content">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" class="input-field" />
+        <input matInput formControlName="email" />
         @if (loginForm.get('email')?.hasError('required')) {
           <mat-error>Email is required</mat-error>
         }
@@ -17,12 +16,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input
-          matInput
-          formControlName="password"
-          type="password"
-          class="input-field"
-        />
+        <input matInput formControlName="password" type="password" />
         @if (loginForm.get('password')?.hasError('required')) {
           <mat-error>Password is required</mat-error>
         }
