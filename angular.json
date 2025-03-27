@@ -27,8 +27,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss",
-              "src/styles/fonts.scss",
-              "primeicons/primeicons.css"
+              "src/styles/fonts.scss"
             ],
             "scripts": []
           },
