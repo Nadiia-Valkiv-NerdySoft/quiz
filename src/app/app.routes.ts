@@ -21,4 +21,10 @@ export const routes: Routes = [
       './pages/admin-panel/components/user-information/user-information.component'
     ).then(c => c.UserInformationComponent),
   },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login/login.component').then(
+      c => c.LoginComponent,
+    ),
+  },
 ];

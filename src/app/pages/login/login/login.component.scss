@@ -1,0 +1,22 @@
+.login-card {
+  background-color: transparent;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 500px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+
+  .mat-mdc-raised-button {
+    --mdc-filled-button-disabled-container-color: #e0e0e0;
+    --mdc-filled-button-disabled-label-text-color: rgba(0, 0, 0, 38%);
+  }
+}
+
+:host ::ng-deep .mat-mdc-raised-button.mat-mdc-button-disabled {
+  background-color: #f5f5f5; // Custom disabled background for primary buttons
+}
