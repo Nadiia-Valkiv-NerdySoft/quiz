@@ -21,6 +21,9 @@
           <mat-error>Password is required</mat-error>
         }
       </mat-form-field>
+      @if (errorMessage) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
       <button
         mat-raised-button
         [disabled]="loginForm.invalid"
@@ -30,5 +33,8 @@
         Login
       </button>
     </form>
+    @if (successMessage) {
+      <p>{{ successMessage }}</p>
+    }
   </mat-card-content>
 </mat-card>
