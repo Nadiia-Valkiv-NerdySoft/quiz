@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth-service/auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'quiz-login',
@@ -26,29 +28,49 @@ import { AuthService } from '../../../services/auth-service/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private router = inject(Router);
+
+  private subscription!: Subscription;
 
   errorMessage: string | null = null;
   successMessage: string | null = null;
 
-  loginForm: FormGroup = this.fb.group({
-    email: [ '', [ Validators.required, Validators.email ]],
-    password: [ '', Validators.required ],
+  loginForm = new FormGroup({
+    email: new FormControl('', [ Validators.required, Validators.email ]),
+    password: new FormControl('', [Validators.required]),
   });
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
+    if (this.loginForm.invalid) {
+      return;
+    }
 
-      this.authService.login(email, password).subscribe({
-        next: () => {
-          this.successMessage = 'Login successful';
-        },
-        error: (error) => {
-          this.errorMessage = error.code;
-        },
-      });
+    const { email, password } = this.loginForm.getRawValue() as {
+      email: string;
+      password: string;
+    };
+
+    this.subscription = this.authService.login(email, password).subscribe({
+      next: (role) => {
+        this.successMessage = `Login successful as ${role}`;
+        setTimeout(() => {
+          if (role === 'user') {
+            this.router.navigate(['/categories']);
+          } else if (role === 'admin') {
+            this.router.navigate(['/admin']);
+          }
+        }, 3000);
+      },
+      error: (errorMessage) => {
+        this.errorMessage = errorMessage;
+      },
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

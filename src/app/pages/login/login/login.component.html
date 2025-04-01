@@ -2,8 +2,9 @@
   <mat-card-header>
     <mat-card-title>Enter your email and password to login</mat-card-title>
   </mat-card-header>
+
   <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
@@ -14,6 +15,7 @@
           <mat-error>Email is invalid</mat-error>
         }
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input matInput formControlName="password" type="password" />
@@ -21,9 +23,11 @@
           <mat-error>Password is required</mat-error>
         }
       </mat-form-field>
+
       @if (errorMessage) {
         <mat-error>{{ errorMessage }}</mat-error>
       }
+
       <button
         mat-raised-button
         [disabled]="loginForm.invalid"
@@ -34,7 +38,7 @@
       </button>
     </form>
     @if (successMessage) {
-      <p>{{ successMessage }}</p>
+      <p class="bg-yellow-300 text-black">{{ successMessage }}</p>
     }
   </mat-card-content>
 </mat-card>

@@ -12,13 +12,13 @@
   width: 500px;
 }
 
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-top: 16px;
 }
 
-:host ::ng-deep .mat-mdc-raised-button.mat-mdc-button-disabled {
+:host .mat-mdc-raised-button.mat-mdc-button-disabled {
   background-color: #f5f5f5;
 }
