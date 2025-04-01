@@ -54,13 +54,7 @@ export class LoginComponent {
     this.subscription = this.authService.login(email, password).subscribe({
       next: (role) => {
         this.successMessage = `Login successful as ${role}`;
-        setTimeout(() => {
-          if (role === 'user') {
-            this.router.navigate(['/catalog']);
-          } else if (role === 'admin') {
-            this.router.navigate(['/admin']);
-          }
-        }, 3000);
+        setTimeout(() => this.navigateUserAfterLogin(role), 3000);
       },
       error: (errorMessage) => {
         this.errorMessage = errorMessage;
@@ -72,5 +66,9 @@ export class LoginComponent {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  private navigateUserAfterLogin(role: string): void {
+    this.router.navigate(role === 'admin' ? ['/admin'] : ['/catalog']);
   }
 }

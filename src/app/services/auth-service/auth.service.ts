@@ -16,9 +16,8 @@ import {
   of,
   switchMap,
   tap,
-  throwError,
 } from 'rxjs';
-import { FirebaseError } from '@angular/fire/app';
+import { ErrorHandlerService } from '../error-handler-service/error-handler.service';
 
 export type UserRole = 'user' | 'admin' | null;
 
@@ -28,6 +27,7 @@ export type UserRole = 'user' | 'admin' | null;
 export class AuthService {
   private firebaseAuth = inject(Auth);
   private firestore = inject(Firestore);
+  private errorHandlerService = inject(ErrorHandlerService);
 
   private currentUserRoleSubject = new BehaviorSubject<UserRole>(null);
 
@@ -37,34 +37,7 @@ export class AuthService {
     ).pipe(
       switchMap((userCredential: UserCredential) => this.getUserRole(userCredential.user.uid)),
       tap(role => this.currentUserRoleSubject.next(role as UserRole)),
-      catchError((error) => {
-        let errorMessage = 'An unknown error occurred';
-
-        if (error instanceof FirebaseError) {
-          switch (error.code) {
-            case 'auth/user-not-found':
-              errorMessage = 'No user found with this email.';
-              break;
-            case 'auth/wrong-password':
-              errorMessage = 'Incorrect password.';
-              break;
-            case 'auth/invalid-email':
-              errorMessage = 'Invalid email format.';
-              break;
-            case 'auth/user-disabled':
-              errorMessage = 'This user has been disabled.';
-              break;
-            case 'auth/invalid-credential':
-              errorMessage = 'Invalid credentials provided.';
-              break;
-            default:
-              errorMessage
-                = 'An unknown error occurred with Firebase authentication.';
-          }
-        }
-
-        return throwError(() => new Error(errorMessage));
-      }),
+      catchError(this.errorHandlerService.handleAuthError),
     );
   }
 
