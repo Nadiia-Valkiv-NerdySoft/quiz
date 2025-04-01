@@ -15,6 +15,7 @@ import {
   Observable,
   of,
   switchMap,
+  tap,
   throwError,
 } from 'rxjs';
 import { FirebaseError } from '@angular/fire/app';
@@ -35,6 +36,7 @@ export class AuthService {
       signInWithEmailAndPassword(this.firebaseAuth, email, password),
     ).pipe(
       switchMap((userCredential: UserCredential) => this.getUserRole(userCredential.user.uid)),
+      tap(role => this.currentUserRoleSubject.next(role as UserRole)),
       catchError((error) => {
         let errorMessage = 'An unknown error occurred';
 

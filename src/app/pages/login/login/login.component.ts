@@ -56,7 +56,7 @@ export class LoginComponent {
         this.successMessage = `Login successful as ${role}`;
         setTimeout(() => {
           if (role === 'user') {
-            this.router.navigate(['/categories']);
+            this.router.navigate(['/catalog']);
           } else if (role === 'admin') {
             this.router.navigate(['/admin']);
           }

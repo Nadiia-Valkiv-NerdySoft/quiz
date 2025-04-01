@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { quizzesRoutes } from './pages/quizzes/quizzes.routes';
+import { adminAuthGuard } from './pages/admin-panel/admin-auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin-panel/admin-panel.component').then(
       c => c.AdminPanelComponent,
     ),
+    canActivate: [adminAuthGuard],
   },
   {
     path: 'admin/:id',
