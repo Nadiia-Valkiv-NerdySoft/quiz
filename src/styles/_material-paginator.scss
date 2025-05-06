@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.paginator-overrides(
+    (
+      enabled-icon-color: red,
+      form-field-container-height: 24px,
+      form-field-container-vertical-padding: 2px,
+    )
+  );
+}
+
+.mat-mdc-paginator-page-size-label,
+.mat-mdc-paginator-range-label {
+  color: cyan;
+}

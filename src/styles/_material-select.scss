@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+
+:root {
+  --mat-sys-secondary-container: yellow; // Не тільки для селектів. Краще поставити в окремий файл з переписаними константами
+
+  @include mat.select-overrides(
+    (
+      panel-background-color: green,
+      enabled-trigger-text-color: red,
+      trigger-text-font: monotype,
+      enabled-arrow-color: yellowgreen,
+    )
+  );
+
+  // Те саме - глобальний клас
+  .mat-mdc-option {
+    min-height: 24px;
+  }
+}
